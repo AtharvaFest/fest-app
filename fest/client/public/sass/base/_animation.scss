@@ -1,0 +1,77 @@
+//////////////////////////////////////
+///HEADER
+@keyframes top-bottom {
+    0%{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes bottom-top {
+    0%{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+// ///////////////////////////////////////
+////// ABOUT
+
+@keyframes leftright {
+    0%{
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    80%{
+        transform: translateX(10%);
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes rightleft {
+     0%{
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    80%{
+        transform: translateX(-10%);
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+
+////////////////////////////////////
+//////  SPONSOR
+
+@keyframes visible {
+    0%{
+        transform: scale(0);
+    }
+
+    80%{
+        transform: scale(1.05);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}

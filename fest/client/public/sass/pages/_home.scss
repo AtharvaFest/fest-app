@@ -1,0 +1,21 @@
+.about{
+    font-size: 1.6rem;
+    padding: 10rem 0;
+    background-color: $color-white--3;
+    
+}
+
+
+.sponsors-container{
+    background-image: linear-gradient(to bottom ,rgba(#3c3c3c, 0.7), rgba(#3c3c3c, 0.7));
+    position: relative;
+    padding: 10rem 5rem;  
+    
+    @include respond(tab-port){
+        padding: 10rem 3rem;
+    }
+
+}
+
+
+

@@ -1,0 +1,39 @@
+.header{
+    background-image: linear-gradient(to bottom ,rgba($color-primary, 0.808), rgba($color-primary-dark, 0.808)),url(../../img/head--1.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: $color-white--2;
+
+    display: grid;
+    justify-items: center;
+}
+
+.header__heading{
+    
+    backface-visibility: hidden;
+    align-self: center;
+    &--1{
+        line-height: 1;
+
+        animation-name: top-bottom;
+        animation-duration: 2s;
+        backface-visibility: hidden;
+        transition-timing-function: cubic-bezier(.58,.08,1,.43);
+    }
+
+    &--2{
+        display: grid;
+        justify-items: center;
+
+        animation-name: bottom-top;
+        animation-duration: 2s;
+        backface-visibility: hidden;
+        transition-timing-function: cubic-bezier(.58,.08,1,.43);
+    }
+    
+}
+
+
+
+
