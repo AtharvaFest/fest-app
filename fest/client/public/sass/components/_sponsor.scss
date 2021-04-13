@@ -36,6 +36,9 @@
     @include respond(odd-device){
         grid-template-columns: repeat(2,1fr);
         grid-template-rows: repeat(3,30rem);
+        
+    }
+    @include respond(phone){
         grid-row-gap:0;
     }
 }
@@ -47,7 +50,7 @@
         width: 30rem;
     }
 
-    & > * {
+    & > * { // APPLY STYLE OF ALL CHILD ELEMENT
             @include respond(tab-land){
             width: 30rem;
             }
@@ -62,7 +65,7 @@
     }
 
 }
-
+// APPLY ANIMATION
 .sponsor-visible{
     animation-name: visible;
     animation-duration: 2s;

@@ -1,4 +1,5 @@
 import React from 'react'
+import Login from '../forms/Login';
 import About from './About';
 import Footer from './Footer';
 import Header from './Header';
@@ -7,7 +8,7 @@ import Sponsor from './Sponsor';
 
 
 
-const Main = function() {
+const Home = function() {
 
     return(
         <div>
@@ -16,9 +17,10 @@ const Main = function() {
             <About />  
             <Sponsor />
             <Footer />
+            <Login />
         </div>
     );
 
 }
 
-export default Main
+export default Home

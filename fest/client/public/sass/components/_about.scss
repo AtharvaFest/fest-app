@@ -1,4 +1,4 @@
-%event-grid{
+%event-grid{ 
     display: grid;
     grid-column-gap:10rem;
     justify-content: center;
@@ -7,7 +7,7 @@
 }
 
 .about{
-    &__rhythm{
+    &__rhythm{ // OUTER MOST DIV ELEMENT
         @extend %event-grid;
         grid-template-columns: 40rem 1fr;
         
@@ -18,11 +18,10 @@
             padding-top: 3rem;
             justify-content: center;
         }
-    
-        
+  
     }
 
-    &__ieee{
+    &__ieee{ // OUTER MOST DIV ELEMENT
         grid-template-columns: 1fr 40rem;
         @extend %event-grid;
         @include respond(odd-device){
@@ -44,6 +43,7 @@
     box-shadow: 0 1rem 4rem $color-black-dark;
     opacity: 0;
     transition: transform 3s;
+
     &:hover{
         transform: scale(1.05);
     }

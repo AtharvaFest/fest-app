@@ -57,7 +57,7 @@ html{
 
 }
 
-::selection {
+::selection {  // style for selection/copy
     background-color: $color-primary-light;
     color: $color-white--1;
 }

@@ -5,7 +5,7 @@ import React,{useEffect} from 'react'
 const About = function() {
     
 
-    useEffect(()=>{
+    useEffect(()=>{ // REVEL ANIMATION ON VIEW PORT
         
         const sections = document.querySelectorAll('.photo-container');
         function isInViewport(element) {

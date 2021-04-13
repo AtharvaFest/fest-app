@@ -57,6 +57,14 @@ body{
 
 }
 
+.heading--4{
+    font-size: 3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+///H3 ELEMENT (HOME --> (about/sponsor)) 
 .heading--container{
     display:grid;
     text-align: center;
@@ -65,6 +73,7 @@ body{
     overflow: hidden;
 }
 
+///H3 ELEMENT (HOME-->(about/sponsor))
 .section-heading{ 
     background-image:linear-gradient(to bottom right,rgba($color-primary, 0.808), rgba($color-primary-dark, 0.808));
     background-clip: text;
@@ -80,18 +89,25 @@ body{
         transform: scale(1.05) skewY(-2deg);
     }
 
-    &::after {
+    &::after {  // bottom border
         content: " ";
         height: 2px;
         background-color: $color-primary;
         justify-self: stretch;
         margin-top: 30px;
+
+        @include respond(tab-port){
+            margin-top: 20px;
+        }
     }
 
     @include respond(tab-port){
         padding: 3rem 0;
     }
 }
+
+
+
 
 .paragraph{
     text-align: justify;
@@ -103,7 +119,4 @@ body{
         font-size: 1.4rem;
     }
 
-    // @include respond(odd-device){
-    //     font-size: 1.6rem;
-    // }
 }
