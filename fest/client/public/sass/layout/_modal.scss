@@ -4,6 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    bottom: 10px;
     background-color: rgba(#000, .8);
     z-index: 2000;
     opacity: 0;
@@ -13,105 +14,38 @@
     justify-content: center;
     align-content: center;
     font-size: 10rem;
-
-    &__container{
-        height: 90vh;
-        width: 80vw;
-        background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
-        display: grid;
-        justify-content: center;
-        align-content: center;
-        border-radius: .5rem;
-
-        @include respond(tab-port) {
-            height: 80vh;
-        }
-
-        @include respond(phone){
-            height: 60vh;
-            width: 70vw;
-        }
-
-        &--content{
-            height: 70vh;
-            width: 40vw;
-            background-color: $color-white--3;
-            border-radius: .8rem;
-            box-shadow: 0 1rem 4rem $color-black-dark;
-
-            @include respond(tab-port) {
-                height: 60vh;
-                width: 60vw;
-            }
-            
-            @include respond(phone){
-                height: 60vh;
-                width: 70vw;
-            }
-        }        
-
-    }
-
-
-    &__form{
-        font-size: 1.6rem;
-        padding: 0 3rem;
-        margin-top: 5rem;
-
-        @include respond(tab-port){
-            margin-top: 8rem;
-        }
-
-        @include respond(phone){
-            margin-top: 10rem;
-        }
-    }
-
-
+    padding: 5rem 0;
 }
 
-.visible{
-    opacity: 1;
-    visibility: visible;
+.form__heading{
+    background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
+    background-clip:text;
+    -webkit-background-clip:text;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid $color-grey-2;
 }
 
+%modal-container {
+    background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    border-radius: .5rem;
+   
+}
+
+%modal-container-content {
+    background-color: $color-white--3;
+    border-radius: .8rem;
+    box-shadow: 0 1rem 4rem $color-black-dark;
+    display: grid;
+}
 
 
 .form{
-
-    &__group:not(:last-child) {
-        margin-bottom: 2rem;
-    }
-
-    &__input{
-        padding: 1.5rem 2rem;
-        width: 100%;
-        border:none;
-        border-radius: .5rem;
-        font-size: 1.5rem;
-        border-bottom: 3px solid transparent;
-        color: inherit;
-        display: block;
-        transition: all .3s;
-
-        &:focus{
-            outline: none;
-            box-shadow: 0 1rem 2rem rgba($color-black-dark,.2);
-            border-bottom: 3px solid $color-primary;
-        }
-
-        &:focus:invalid{
-            border-bottom: 3px solid #e3301e;
-        }
-
-        
-    }
-
-    &__input:placeholder-shown + &__label{
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-4rem);
-    }
 
     &__label{
         font-size: 1.2rem;
@@ -123,6 +57,7 @@
     }
 
     &__button{
+        text-transform: uppercase;
         border: 2px solid $color-primary;
         width: 100%;
         padding: 2rem;
@@ -133,17 +68,274 @@
         &:focus{
             outline: none;
         }
+
+        &:hover{
+            background-color: $color-primary;
+            color: $color-white--1;
+        }
     }
 }
 
+.visible{
+    opacity: 1;
+    visibility: visible;
+}
 
-.login__heading{
+//ICON
+.visible__eye-icon{
+    margin-left: -2.5rem;
+    font-size: 2rem;
+}
+
+.eye-icon{
+    display: inline-block;
+    margin-bottom: -.5rem;
+}
+
+.invisible__eye-icon{
+    margin-left: -2rem;
+    font-size: 2rem;
+}
+
+.eye-off-icon{
+    display: inline-block;
+    margin-bottom: -.5rem;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+//////////////////////////////////////////////
+///// LOGIN
+
+.modal{
+
+    &__form--login{
+        font-size: 1.6rem;
+        padding:3rem;
+        border-bottom: 1px solid $color-grey-2;
+        
+        @include respond(tab-port){
+            margin: 2rem 0;
+        }
+
+        @include respond(phone){
+            margin: 2rem 0;
+        }
+    }
+    
+    &__container--login{
+        width: 70vw;
+        padding: 4rem 0;
+        @extend %modal-container;
+
+        @include respond(tab-port) {
+            width: 70vw;
+        }
+
+        @include respond(phone){
+            width: 70vw;
+            padding: 0;
+        }
+
+    }
+
+    &__container--content-login{
+        width: 40vw;
+        max-height: calc(100vh - 20px);
+        overflow-y: auto;
+        @extend %modal-container-content;
+
+        @include respond(tab-port) {
+            width: 60vw;
+        }
+        
+        @include respond(phone){
+            width: 70vw;
+        }
+    } 
+
+}
+
+
+.form {
+    &__group--login:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input--login{
+        padding: 1.5rem 2.5rem;
+        width: 100%;
+        border:none;
+        border-radius: .5rem;
+        font-size: 1.5rem;
+        border-bottom: 3px solid transparent;
+        color: inherit;
+        display: inline;
+        transition: all .3s;
+
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black-dark,.2);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid{
+            border-bottom: 3px solid #e3301e;
+        }
+        
+    }
+
+    &__input--login:placeholder-shown ~ &__label{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+}
+
+.forgot-password{
+    text-decoration: none;
+    margin-top: 1rem;
+    display: inline-block;
+    line-height: 1.5rem;
+    &:link,
+    &:visited
+    {
+        color: $color-primary;
+        border-bottom: 1px solid transparent;
+    }
+
+    &:active{
+        color: $color-primary-light;
+    }
+
+    &:hover{
+        border-bottom: 1px solid $color-primary;
+    }
+    
+}
+
+.sign__btn--container {
+    font-size: 1.6rem;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.sign__btn {
+    text-decoration: none;
+    text-transform: uppercase;
+    background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
+    color: $color-white--1;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: .5rem;
+}
+
+
+
+
+
+//////////////////////////////////////////////////
+///// SIGN UP
+
+.modal{
+
+    &__form--sign{
+        font-size: 1.6rem;
+        padding: 0 3rem;
+        margin: 1rem 0;
+        
+    
+        @include respond(tab-port){
+            margin: 2rem 0;
+        }
+    
+        @include respond(phone){
+            margin: 2rem 0;
+        }
+    }
+    
+    &__container--sign{
+        position: relative;
+        width: 70vw;
+        padding: 4rem 0;
+        @extend %modal-container;
+
+        @include respond(tab-port) {
+            width: 70vw;
+            margin: 0;
+        }
+
+        @include respond(phone){
+            padding: 0;
+            width: 70vw;
+
+        }
+
+    }
+
+    &__container--content-sign{
+        width: 40vw;
+        padding-bottom:1rem ;
+        max-height: calc(100vh - 21px);
+        overflow-y: auto;
+        @extend %modal-container-content;
+
+        @include respond(tab-port) {
+            width: 60vw;
+        }
+        
+        @include respond(phone){
+            width: 70vw;
+        }
+    } 
+
+}
+
+.form {
+    &__group--sign:not(:last-child) {
+        margin-bottom: .5rem;
+    }
+
+    &__input--sign{
+        padding: 1.2rem 2.5rem;
+        width: 100%;
+        border:none;
+        border-radius: .5rem;
+        font-size: 1.5rem;
+        border-bottom: 3px solid transparent;
+        color: inherit;
+        display: inline;
+        transition: all .3s;
+
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black-dark,.2);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid{
+            border-bottom: 3px solid #e3301e;
+        }
+        
+    }
+
+    &__input--sign:placeholder-shown ~ &__label{
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+}
+
+.form__heading--sign{
     background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
     background-clip:text;
     -webkit-background-clip:text;
     color: transparent;
     display: flex;
     justify-content: center;
-    padding: 1rem 0;
     border-bottom: 1px solid $color-grey-2;
 }
+

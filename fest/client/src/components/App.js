@@ -21,6 +21,18 @@ import Profile from './user/profile'
 ///// OTHER SECTION
 import history from  '../history'
 
+
+// axios.interceptors.response.use(function (response) {
+//     // axios.interceptors.response.use( response => {
+//         // console.log();
+//         console.log(response);
+//         return response;
+//     }, function (error) {
+//         // Do something with response error
+//         console.log(error.response);
+//         return Promise.reject(error);
+//       });
+
 const App = function() {
 
     return(

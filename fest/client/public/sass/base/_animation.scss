@@ -75,3 +75,21 @@
         transform: scale(1);
     }
 }
+
+
+////////////////////////////////////
+/////ALERT POPUP
+
+@keyframes show_slide {
+    0%{
+      margin-left: -100%;
+    }
+
+    80%{
+        margin-left: 3rem;
+      }
+    
+    100%{
+        margin-left: 0;
+    }
+  }

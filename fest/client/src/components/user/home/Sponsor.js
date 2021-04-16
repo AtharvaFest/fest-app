@@ -3,7 +3,7 @@ import React,{useEffect} from 'react'
 
 const Sponsor = function() {
 
-    useEffect(()=>{
+    useEffect(()=>{ // Revel animation on scroll and when present on screen.
         
         const section = document.querySelector('.sponsors--box');
         const subSections = document.querySelectorAll('.sponsor');

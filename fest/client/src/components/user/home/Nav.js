@@ -1,10 +1,14 @@
 import React,{useRef,useState} from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from  'react-redux'
+
+import Logout from '../forms/Logout'
 
 const Nav = function() {
     const dropdownContainer = useRef();
     const [toggleMenu,setToggleMenu] = useState(true);
 
+    // on event click, toggle bettween sub option inside event menu
     const showMenu = (e) => {
         const flag = !toggleMenu;
         setToggleMenu(flag);
@@ -17,9 +21,18 @@ const Nav = function() {
         
     }
 
-    const displayLogin = () => {
-        const modal = document.querySelector('#modal-login');
+    //display login modal on login click
+    const displayLogin = (e) => {
+        const modal = document.querySelector(`#modal-login`);
         modal.classList.add('visible');
+    }
+
+    //LOGIN OR LOGOUT OPTION
+    const loginOrLogout = () => {
+        if(!localStorage.getItem('token'))
+            return <a href="#modal-login" onClick={(e) => displayLogin(e)}  className="nav__link">login</a>
+
+        return <Logout />
     }
 
 
@@ -40,24 +53,21 @@ const Nav = function() {
                             <Link to="/" className="nav__link" >
                                 home
                             </Link>
-                            {/* <a href="#"  className="nav__link">home</a> */}
                         </li>
                         <li className="nav__item">
                             <Link to="/gallery" className="nav__link" >
                                 gallery
                             </Link>
-                            {/* <a href="#"  className="nav__link">gallery</a> */}
                         </li>
                         <li className="nav__item">
                             <Link to="" onClick={(e) => showMenu(e)}  className="nav__link dropdown__btn">
                                 event
                             </Link>
-                            {/* <a href="#" onClick={(e) => showMenu(e)}  className="nav__link dropdown__btn">event</a> */}
                             <div className="dropdown__container disappear" ref={dropdownContainer}>
                                 <div className="dropdown__menu">
-                                    <a href="#" className="dropdown__menu--list">event registration</a>
-                                    <a href="#" className="dropdown__menu--list">event dashboard</a>
-                                    <a href="#" className="dropdown__menu--list">event notice</a>
+                                    <a href="/register" className="dropdown__menu--list">event registration</a>
+                                    <a href="/dashboard" className="dropdown__menu--list">event dashboard</a>
+                                    <a href="/notice" className="dropdown__menu--list">event notice</a>
                                 </div>
                             </div>
                         </li>
@@ -65,16 +75,14 @@ const Nav = function() {
                             <Link to="/about" className="nav__link" >
                                 about us
                             </Link>
-                            {/* <a href="#"  className="nav__link">about us</a> */}
                         </li>
                         <li className="nav__item">
                             <Link to="/contact" className="nav__link" >
                                 contact us
                             </Link>
-                            {/* <a href="#"  className="nav__link">contact</a> */}
                         </li>
                         <li className="nav__item">
-                            <a href="#modal-login" onClick={displayLogin}  className="nav__link">login</a>
+                            {loginOrLogout()}
                         </li>
                     </ul>
                 </nav>
@@ -83,4 +91,8 @@ const Nav = function() {
 
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+    return state.authReducer
+}
+
+export default connect(mapStateToProps)(Nav)
