@@ -2,15 +2,26 @@ const express = require('express');
 const cors = require('cors');
 
 require('./db/mongoose')
-const userRouter = require('./routers/user')
+
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
-app.use(userRouter);
 
+////////////////////////////
+//// USER ROUTES
+const userAuthRouter = require('./routers/user/userAuth');
+
+app.use(userAuthRouter);
+
+
+//////////////////////////////
+///// ADMIN ROUTES
+const adminAuthRouter = require('./routers/admin/adminAuth');
+
+app.use(adminAuthRouter);
 
 app.listen(port,() => {
     console.log(`Server is up on port ${port}`);

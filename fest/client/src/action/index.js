@@ -1,12 +1,15 @@
 import axios from 'axios'
-
 import {
     SIGN_UP,
     LOG_IN,
-    LOG_OUT
+    LOG_OUT,
+    ADMIN_LOGIN,
+    // ADMIN_LOGOUT
+    ADMIN_ALL_USERS
 } from './type'
 
-
+///////////////////////////////////////////////
+////USER ACTION
 export const signUpAction = (formValue) => {
     return async (dispatch) => {
         const response = await axios.post('/signup',{...formValue});
@@ -30,4 +33,23 @@ export const logoutAction = () => {
         dispatch({type:LOG_OUT})
     }
 }
+
+///////////////////////////////////////////////
+////ADMIN ACTION
+
+export const adminLoginAction = (formValue) => {
+    return async (dispatch) => {
+        const response = await axios.post('/adminlogin',{...formValue});
+        localStorage.setItem('adminToken',response.data.token);
+        dispatch({type:ADMIN_LOGIN,payload:response.data});
+    }
+}
+
+export const adminAllUsersAction = (formValue) => {
+    return async (dispatch) => {
+        const response = await axios.get('/users');
+        dispatch({type:ADMIN_ALL_USERS,payload:response.data});
+    }
+}
+
 

@@ -1,0 +1,14 @@
+.admin-panel{
+
+    &__container{
+        // display: grid;
+        // grid-auto-flow: column;
+        // grid-template-columns: 25rem 1fr;
+        background-color: $color-white--2;
+        
+    }
+    &__section{
+        margin-left: 25rem;
+    }
+
+}

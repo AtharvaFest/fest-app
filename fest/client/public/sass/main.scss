@@ -2,18 +2,35 @@
 @import './abstract/mixin';
 @import './abstract/variables';
 
+
 @import './base/animation';
 @import './base/base';
 @import './base/typography';
 @import './base/utilities';
 
-@import "./components/about";
-@import  './components/sponsor';
-@import './components/alert';
 
-@import './layout/header';
-@import './layout/footer';
-@import './layout/navigation';
-@import './layout/modal';
+////////////////////////////////////////////////////////
+//// USER
 
-@import './pages/home';
+@import "./components/user/about";
+@import './components/user/alert';
+@import  './components/user/sponsor';
+
+@import './layout/user/footer';
+@import './layout/user/header';
+@import './layout/user/modal';
+@import './layout/user/navigation';
+
+@import './pages/user/home';
+
+
+
+////////////////////////////////////////////////////////
+//// ADMIN
+
+@import './layout/admin/sidebar';
+
+@import './pages/admin/adminpanel';
+@import './pages/admin/login';
+@import './pages/admin/user';
+

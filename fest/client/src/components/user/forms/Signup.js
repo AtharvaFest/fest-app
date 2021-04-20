@@ -4,7 +4,7 @@ import {Field,reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {signUpAction} from '../../../action'
-import Alert from '../Alert'
+import {Alert} from '../../Alert'
 
 class Sign extends React.Component {
 
@@ -66,23 +66,27 @@ class Sign extends React.Component {
         this.eyeRef.current.classList.remove('hide');
     }
 
+    // Set error state variable to empty
+    emptyError = () => {
+        this.setState({
+            errMobileNo:"",
+            errPassword:"",
+            errEmail:"",
+            errUserName:""
+        });
+    }
+
     onSubmit = (formValue) => {
         this.props.signUpAction(formValue).then((value) => {
-            this.setState({alertInfo:true});
-            const alert = document.querySelector('#alert-signup');
-            alert.classList.remove('hide-alert'); //Removing hide property
-            this.setState({
-                errMobileNo:"",
-                errPassword:"",
-                errEmail:"",
-                errUserName:""
-            });
+            this.setState({alertInfo:true,alertErr:false});
+            this.emptyError();
             for(const value in formValue){
                 formValue[value] = "";
             }
             this.hideModal();
         }).catch((err) => {
             if(err?.response?.data){//Show error message
+                this.emptyError();
                 err.response.data.errors.forEach((value)=>{
                     if(value.param === "mobileNumber"){
                         this.setState({errMobileNo:value.msg});
@@ -99,9 +103,7 @@ class Sign extends React.Component {
                     
                 })
             }else{
-                this.setState({alertErr:true});
-                const alert = document.querySelector('#alert-signup');
-                alert.classList.remove('hide-alert');
+                this.setState({alertInfo:false,alertErr:true});
             }
 
         })
@@ -112,12 +114,12 @@ class Sign extends React.Component {
     alertPopup=(alertInfo,alertErr)=>{
         if(alertInfo){
             return(
-                <div id="alert-signup"><Alert message="Sign up successful" containerId="#alert-signup" alertType={"info"} /></div>
+                <Alert message="Sign up successful" containerId="alert-signup" alertType={"info"} />
             );
         }
         if(alertErr){
             return(
-            <div id="alert-signup"><Alert message="Something went wrong!" containerId="#alert-signup" alertType={"error"} /></div>
+            <Alert message="Something went wrong!" containerId="alert-signup" alertType={"error"} />
             );
         }
 
@@ -135,14 +137,19 @@ class Sign extends React.Component {
                         <div className="modal__form--sign">
                             <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <Field name="name" type="text" component={this.renderInput} label="Name" />
-                                <div>{this.state.errMobileNo}</div>
+
+                                <div className="error_msg">{this.state.errMobileNo}</div>
                                 <Field name="mobileNumber" type="text" component={this.renderInput} label="Mobile No." />
-                                <div>{this.state.errUserName}</div>
+                                
+                                <div className="error_msg">{this.state.errUserName}</div>
                                 <Field name="username" type="text" component={this.renderInput} label="Username" />
-                                <div>{this.state.errEmail}</div>
+                                
+                                <div className="error_msg">{this.state.errEmail}</div>
                                 <Field name="email" type="email" component={this.renderInput} label="Email" />
-                                <div>{this.state.errPassword}</div>
+                                
+                                <div className="error_msg">{this.state.errPassword}</div>
                                 <Field name="password" type={this.state.passwordStateSign} component={this.renderPassword} label="Password" />
+                                
                                 <button className="form__button" >sign up</button>
                             </form>
                         </div>

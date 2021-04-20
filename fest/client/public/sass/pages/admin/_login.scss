@@ -1,0 +1,148 @@
+.admin-login {
+    &__background{
+        height: 100vh;
+        // background-image: linear-gradient(to right bottom,$color-primary-light 0%,$colo);
+        // background-image: linear-gradient(120deg,$color-primary-light,$color-primary-dark);
+        background-color: $color-white--3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &--inner{
+            height: 100vh;
+            top: 20rem;
+            left: 0;
+            background-image: linear-gradient(to right,$color-primary-dark-1,$color-primary-dark-1);
+            z-index: 20;
+            color: white;
+            clip-path: circle(50% at 50% 50%);
+        }
+    }
+
+    &__container{
+        width: 80rem;
+        height: 50rem;
+        background-image: linear-gradient(120deg,rgba($color-white--1,0.5) 56%,transparent 50%), linear-gradient(to right,$color-primary-dark 50%,$color-primary-dark 50%);
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        border-radius: .5rem;
+    }
+
+    &__title{
+        display: grid;
+        justify-content: center;
+        align-items:center ;
+        color: $color-white--1;
+    }
+
+
+    
+
+}
+
+.from__group--admin{
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.admin-login{
+
+        &__form{
+            justify-self: center;
+            align-self: center;
+            width: 100%;
+            padding: 0 3rem;
+            margin-top: -6rem;
+        }
+
+        &__input{
+            padding: 1.5rem 2.5rem;
+            width: 100%;
+            border:none;
+            border-radius: .5rem;
+            font-size: 1.5rem;
+            border-bottom: 3px solid transparent;
+            color: inherit;
+            display: inline;
+            transition: all .3s;
+
+
+            &:focus{
+                outline: none;
+                box-shadow: 0 1rem 2rem rgba($color-black-dark,.2);
+                border-bottom: 3px solid $color-primary;
+            }
+
+            &:required {
+                box-shadow:none;
+            }
+    
+            &:focus:invalid{
+                outline: none;
+                border-bottom: 3px solid #e3301e;
+            }
+        }
+
+        &__input:placeholder-shown ~ &__label{
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-4rem);
+        }
+
+        &__label{
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-left: 2rem;
+            margin-top: .7rem;
+            display: block;
+            transition: all .3s;
+        }
+
+        &__btn{
+            width: 100%;
+            background-color: $color-primary;
+            font-size: 1.6rem;  
+            border: none;
+            padding: 2rem;
+            color: $color-white--1;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 50rem;
+            &:focus{
+                outline: none;
+            }
+    
+            &:hover{
+                background-color: $color-primary-dark;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+    &__heading{
+        display: grid;
+        margin-top: 14rem;
+        
+    }
+
+    &__heading--1{
+        font-size: 4rem;
+        text-transform: uppercase;
+        justify-self: center;
+        font-weight: 400;  
+        letter-spacing: .3rem;
+    }
+    &__heading--2{
+        justify-self: center;
+        text-transform: uppercase;
+        font-weight: 400;  
+        letter-spacing: .3rem;
+    }
+}

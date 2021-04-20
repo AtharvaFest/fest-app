@@ -1,4 +1,10 @@
-import {SIGN_UP,LOG_IN,LOG_OUT} from '../action/type'
+import {
+    SIGN_UP,
+    LOG_IN,
+    LOG_OUT,
+    ADMIN_LOGIN,
+    ADMIN_LOGOUT
+} from '../action/type'
 
 const INITIAL_STATE ={
     isLogin:null,
@@ -6,7 +12,7 @@ const INITIAL_STATE ={
 }
 
 
-const signUpReducer = (state=INITIAL_STATE,action) => {
+export const userAuthReducer = (state=INITIAL_STATE,action) => {
 
     switch(action.type){
         case SIGN_UP:
@@ -20,4 +26,14 @@ const signUpReducer = (state=INITIAL_STATE,action) => {
     }
 }
 
-export default signUpReducer
+export const adminAuthReducer = (state=INITIAL_STATE,action) => {
+
+    switch(action.type){
+        case ADMIN_LOGIN:
+            return {...state,isLogin:true,userData:action.payload}
+        case ADMIN_LOGOUT:
+            return {...state,isLogin:false,userData:null}
+        default:
+            return state
+    }
+}

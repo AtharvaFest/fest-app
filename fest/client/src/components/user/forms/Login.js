@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
 import {Field,reduxForm} from 'redux-form'
-import Alert from '../Alert'
+import {Alert} from '../../Alert'
 
 import {loginAction} from '../../../action'
 
@@ -65,22 +65,21 @@ class Login extends React.Component {
 
     //On eye click making password filed 'text' type.
     showPass = (e) => {
-        this.setState({passwordState:"text"})
+        this.setState({passwordState:"text"});
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }
 
     onSubmit = formValue => {
         this.props.loginAction(formValue).then((value) => {
-                this.setState({alertInfo:true});
-                const alert = document.querySelector('#alert-login');
-                alert.classList.remove('hide-alert');
+                this.setState({alertInfo:true,alertErr:false});
+                for(const value in formValue){
+                    formValue[value] = "";
+                }
                 this.hideModal();
             }).catch((err) => {
                 if(err?.response?.status === 401){
-                    this.setState({alertErr:true});
-                    const alert = document.querySelector('#alert-login');
-                    alert.classList.remove('hide-alert');
+                    this.setState({alertErr:true,alertInfo:false});
                 }
             });
     }
@@ -89,12 +88,12 @@ class Login extends React.Component {
      alertPopup=(alertInfo,alertErr)=>{
         if(alertInfo){
             return(
-                <div id="alert-login"><Alert message="Login successful" containerId="#alert-login" alertType={"info"} /></div>
+                <Alert message="Login successful" containerId="alert-login" alertType={"info"} />
             );
         }
         if(alertErr){
             return(
-                <div id="alert-login"><Alert message="Unable to login" containerId="#alert-login" alertType={"error"} /></div>
+                <Alert message="Unable to login" containerId="alert-login" alertType={"error"} />
             );
         }
 
@@ -111,7 +110,7 @@ class Login extends React.Component {
                             <h4 className="heading--4 form__heading">login</h4>
                             <div className="modal__form--login">
                                 <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                                    <Field name="email" type="email" component={this.renderEmail} label="Email" />
+                                    <Field name="usernameOrEmail" type="text" component={this.renderEmail} label="Username/Email" />
                                     <Field name="password" type={this.state.passwordState} component={this.renderPassword} label="Password" />
                                     <button className="form__button" >login</button>
                                 </form>
@@ -134,6 +133,8 @@ class Login extends React.Component {
     }
 
 }
+
+
 
 
 export default reduxForm({

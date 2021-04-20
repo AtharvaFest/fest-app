@@ -181,7 +181,12 @@
             border-bottom: 3px solid $color-primary;
         }
 
+        &:required {
+            box-shadow:none;
+        }
+
         &:focus:invalid{
+            outline: none;
             border-bottom: 3px solid #e3301e;
         }
         
@@ -327,6 +332,10 @@
         visibility: hidden;
         transform: translateY(-4rem);
     }
+}
+
+.error_msg{
+    color:$color-err-msg;
 }
 
 .form__heading--sign{

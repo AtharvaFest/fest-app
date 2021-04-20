@@ -1,5 +1,5 @@
 import React from 'react'
-import {Router,Route} from 'react-router-dom'
+import {Router,Switch,Route} from 'react-router-dom'
 
 
 
@@ -14,36 +14,38 @@ import Profile from './user/profile'
 
 ////////////////////////////////
 ///// ADMIN SECTION
-
-
+import Login from './admin/auth/Login'
+import AdminPanel from './admin/adminpanel/AdminPanel'
+import Users from './admin/users/User'
 
 //////////////////////////////////
 ///// OTHER SECTION
 import history from  '../history'
+import {ProtectedRoute,ProtectedAdminRoute} from '../protectedRoute/protected.route'
 
 
-// axios.interceptors.response.use(function (response) {
-//     // axios.interceptors.response.use( response => {
-//         // console.log();
-//         console.log(response);
-//         return response;
-//     }, function (error) {
-//         // Do something with response error
-//         console.log(error.response);
-//         return Promise.reject(error);
-//       });
 
 const App = function() {
 
     return(
         <div>
             <Router history={history}>
-                <Route path='/' exact component={Home}  />
-                <Route path='/gallery' exact component={Gallery}  />
-                <Route path='/event' exact component={Event}  />
-                <Route path='/about' exact component={About}  />
-                <Route path='/contact' exact component={Contact}  />
-                <Route path='/profile' exact component={Profile}  />
+                <Switch >
+                    {/* User Routes */}
+                    <Route path='/home' exact component={Home}  />
+                    <Route path='/gallery' exact component={Gallery}  />
+                    <ProtectedRoute path='/event/register' exact component={Event}/>
+                    <Route path='/about' exact component={About}  />
+                    <Route path='/contact' exact component={Contact}  />
+                    <ProtectedRoute path='/profile' exact component={Profile}  />
+
+                    {/* Admin Routes */}
+                    <Route path='/adminlogin' exact component={Login}  />
+                    <Route path='/' exact component={Users}  />
+                    {/* <ProtectedAdminRoute path="/admin" exact component={AdminPanel} /> */}
+
+                    <Route path='*' exact component={()=>"404 Page not found"}  />
+                </Switch>
             </Router>
         </div>
     );
