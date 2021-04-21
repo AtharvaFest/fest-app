@@ -42,10 +42,10 @@ class Sign extends React.Component {
             
             <div className="form__group--sign">
                 <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
-                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePassSign}>
+                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
                     <ion-icon name="eye" class="eye-icon"></ion-icon>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPassSign}>
+                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPass}>
                     <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
@@ -54,17 +54,20 @@ class Sign extends React.Component {
         );
     }
 
-    hidePassSign = (e) => { //On eye click making password filed 'password' type.
-        this.setState({passwordStateSign:"password"})
+     //On eye click making password filed 'password' type.
+     hidePass = (e) => {
+        this.setState({passwordStateSign:"password"});
         this.eyeRef.current.classList.add('hide');
         this.eyeOffRef.current.classList.remove('hide');
     }
 
-    showPassSign = (e) => { //On eye click making password filed 'text' type.
-        this.setState({passwordStateSign:"text"})
+    //On eye click making password filed 'text' type.
+    showPass = (e) => {
+        this.setState({passwordStateSign:"text"});
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }
+
 
     // Set error state variable to empty
     emptyError = () => {

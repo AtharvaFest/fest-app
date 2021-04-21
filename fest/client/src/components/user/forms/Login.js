@@ -13,8 +13,11 @@ class Login extends React.Component {
         alertInfo:false,
         alertErr:false,
     }
+
     eyeRef = React.createRef()
     eyeOffRef = React.createRef()
+
+   
 
     //on submit hide login form
     hideModal = () => {
@@ -48,7 +51,7 @@ class Login extends React.Component {
                 <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
                     <ion-icon name="eye" class="eye-icon"></ion-icon>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={(e) => this.showPass(e)}>
+                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPass}>
                     <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
@@ -69,6 +72,8 @@ class Login extends React.Component {
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }
+
+    
 
     onSubmit = formValue => {
         this.props.loginAction(formValue).then((value) => {

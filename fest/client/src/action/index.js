@@ -5,7 +5,8 @@ import {
     LOG_OUT,
     ADMIN_LOGIN,
     // ADMIN_LOGOUT
-    ADMIN_ALL_USERS
+    ADMIN_ALL_USERS,
+    USER_DELETE
 } from './type'
 
 ///////////////////////////////////////////////
@@ -45,11 +46,17 @@ export const adminLoginAction = (formValue) => {
     }
 }
 
-export const adminAllUsersAction = (formValue) => {
+export const adminAllUsersAction = () => {
     return async (dispatch) => {
         const response = await axios.get('/users');
         dispatch({type:ADMIN_ALL_USERS,payload:response.data});
     }
 }
 
+export const deleteUserAction = (id) => {
+    return async (dispatch) => {
+        const response = await axios.delete(`/user/${id}`);
+        dispatch({type:USER_DELETE,payload:response.data});
+    }
+}
 

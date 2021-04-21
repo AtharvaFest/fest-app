@@ -19,29 +19,19 @@ router.post('/adminlogin',async (req,res)=>{
     
 });
 
-router.get('/users',async(req,res)=>{
-
-    try{
-        const users = await User.find();
-        res.send(users)
-    }catch(e){
-
-    }
-
-});
 
 router.get('/adminLogout',adminAuth,async (req,res)=>{
 
-    // try{
+    try{
         req.user.adminTokens = req.user.adminTokens.filter((token)=>{
             return token.token !== req.token;
         })
         await req.user.save();
     
         res.send();
-    // } catch(e) {
-    //     res.status(500).send()
-    // }
+    } catch(e) {
+        res.status(500).send()
+    }
     
 })
 

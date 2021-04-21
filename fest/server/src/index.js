@@ -20,8 +20,10 @@ app.use(userAuthRouter);
 //////////////////////////////
 ///// ADMIN ROUTES
 const adminAuthRouter = require('./routers/admin/adminAuth');
+const crudUsersRouter = require('./routers/admin/crudUsers');
 
 app.use(adminAuthRouter);
+app.use(crudUsersRouter);
 
 app.listen(port,() => {
     console.log(`Server is up on port ${port}`);
