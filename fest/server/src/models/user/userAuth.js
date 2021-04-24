@@ -103,7 +103,7 @@ userSchema.statics.findByAdminCredentials = async (usernameOrEmail,password) => 
     }
 
     const isAdmin = user.isAdmin;
-    console.log(!isAdmin);
+
     if(!isAdmin){
         throw new Error('Unable to login');
     }

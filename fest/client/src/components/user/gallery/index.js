@@ -1,11 +1,15 @@
 import React from 'react'
 
+import Nav from '../nav'
 
 const Gallery = function() {
 
     return(
         <div>
-            Gallery
+            <Nav />
+            <div className="after-navigation"> {/*Styled in _navigation.scss*/}
+                Gallery
+            </div>
         </div>
     );
 }

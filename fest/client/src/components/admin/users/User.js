@@ -2,16 +2,42 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from '../sidebar/Sidebar'
 import {adminAllUsersAction,deleteUserAction} from '../../../action'
+import EditUser from './EditUser'
 
 class User extends React.Component{
+    deleteCount = 0;
+    state = {editUserData:{}}
+
+    //on signup click, display signUp form and hide login form
+    displayEditUser = () => {
+        const modalEditUser = document.querySelector(`#modal-editUser`);
+        modalEditUser.classList.add('visible');
+    }
+
+    showEditUserModal = () => {
+        return <EditUser editUserData={this.state.editUserData} />
+    }
+
+    editUser = (user) => {
+        this.setState({editUserData:user});
+        this.displayEditUser();
+    }
 
     deleteUser = (id) => {
-        this.props.deleteUserAction(id);
+        this.deleteCount += 1;
+        if(this.deleteCount < 4){
+            if(window.confirm("Delete user?")){
+                this.props.deleteUserAction(id);
+            }
+        }else{
+            this.props.deleteUserAction(id);
+        }
+        
     }
 
     getAllUsersData = () =>{
         if(this.props.allUsers === null) {
-            return (<div>Loading...</div>);
+            return (<div className="no-content">Loading...</div>);
         }
 
         if(this.props.allUsers.length === 0) {
@@ -42,7 +68,7 @@ class User extends React.Component{
                                 <td>{user.email}</td>
                                 <td>{user.isAdmin.toString()}</td>
                                 <td>
-                                    <span className="edit-btn">
+                                    <span className="edit-btn" onClick={()=>this.editUser(user)}>
                                         <ion-icon name="create-outline"></ion-icon>
                                     </span>
                                 </td>
@@ -68,7 +94,6 @@ class User extends React.Component{
     render(){
         return(
             <>
-                
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
@@ -86,13 +111,15 @@ class User extends React.Component{
                         </div>
                     </div>
                 </div>
+                
+                {this.showEditUserModal()}
             </>
         );
     }
 }
 
 const mapStatetoProps = (state) => {
-    return state.adminAllUsersReducer
+    return state.adminCRUDUserReducer
 }
 
  

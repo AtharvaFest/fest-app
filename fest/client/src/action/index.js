@@ -6,7 +6,8 @@ import {
     ADMIN_LOGIN,
     // ADMIN_LOGOUT
     ADMIN_ALL_USERS,
-    USER_DELETE
+    USER_DELETE,
+    USER_EDIT
 } from './type'
 
 ///////////////////////////////////////////////
@@ -57,6 +58,13 @@ export const deleteUserAction = (id) => {
     return async (dispatch) => {
         const response = await axios.delete(`/user/${id}`);
         dispatch({type:USER_DELETE,payload:response.data});
+    }
+}
+
+export const editUserAction = (formValue,id) => {
+    return async (dispatch) => {
+        const response = await axios.patch(`/user/${id}`,{...formValue});
+        dispatch({type:USER_EDIT,payload:response.data});
     }
 }
 

@@ -15,7 +15,6 @@ import Profile from './user/profile'
 ////////////////////////////////
 ///// ADMIN SECTION
 import Login from './admin/auth/Login'
-import AdminPanel from './admin/adminpanel/AdminPanel'
 import Users from './admin/users/User'
 
 //////////////////////////////////
@@ -33,7 +32,7 @@ const App = function() {
                 <Switch >
                     {/* User Routes */}
                     <Route path='/home' exact component={Home}  />
-                    <Route path='/gallery' exact component={Gallery}  />
+                    <Route path='/' exact component={Gallery}  />
                     <ProtectedRoute path='/event/register' exact component={Event}/>
                     <Route path='/about' exact component={About}  />
                     <Route path='/contact' exact component={Contact}  />
@@ -41,8 +40,8 @@ const App = function() {
 
                     {/* Admin Routes */}
                     <Route path='/adminlogin' exact component={Login}  />
-                    <Route path='/' exact component={Users}  />
-                    {/* <ProtectedAdminRoute path="/admin" exact component={AdminPanel} /> */}
+                    {/* <Route path='/admin' exact component={Users}  /> */}
+                    <ProtectedAdminRoute path="/admin" exact component={Users} />
 
                     <Route path='*' exact component={()=>"404 Page not found"}  />
                 </Switch>

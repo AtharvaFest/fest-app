@@ -27,7 +27,7 @@ router.post('/signup',[
       
       if (isNaN(value)) {
         throw new Error('Mobile number is not a number.')
-      } else if (value.length != 10) {
+      } else if (value.toString().length != 10) {
         throw new Error('Mobile number must be 10 digit.')
       } else {
         return true
@@ -67,10 +67,6 @@ router.post('/login' ,async (req,res) => {
 
 });
 
-// router.get('/test',auth,async (req,res)=> {
-//     console.log(req.token,req.user.tokens);
-//     res.send({});
-// });
 
 router.get('/logout',auth,async (req,res)=>{
 

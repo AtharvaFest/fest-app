@@ -1,0 +1,56 @@
+.form{
+    &__checkbox{
+        width: 5.5rem;
+        height: 2.6rem;
+        cursor: pointer;
+        z-index: 1;
+        margin-right: -4px;
+        -webkit-appearance: none;
+        appearance: none;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &_checkbox-label{
+        margin-right: 1rem;
+        align-self:center ;
+    }
+
+    &__checkbox:checked + &__push-toggle .push-toggle--inner-circle{
+        transform: translateX(2.9rem);
+    }
+    &__checkbox:checked + &__push-toggle {
+        background-color: $color-primary;
+    }
+
+    &__group--checkbox{
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    &__push-toggle{
+        width: 5.5rem;
+        height: 2.6rem;
+        background-color: $color-grey-1;
+        border-radius: 50rem;
+        position: relative;
+        margin-left: -5rem;
+        transition: all .3s;
+    }
+
+}
+
+
+.push-toggle--inner-circle{
+    position: absolute;
+    background-color: white;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius:50%;
+    overflow: hidden;
+    transition: all .2s;
+}

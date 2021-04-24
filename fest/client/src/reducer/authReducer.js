@@ -11,7 +11,7 @@ const INITIAL_STATE ={
     userData:null
 }
 
-
+// Reducer to store USER data of loggedin,signup and loggout
 export const userAuthReducer = (state=INITIAL_STATE,action) => {
 
     switch(action.type){
@@ -26,6 +26,7 @@ export const userAuthReducer = (state=INITIAL_STATE,action) => {
     }
 }
 
+//Reducer to store ADMIN auth data
 export const adminAuthReducer = (state=INITIAL_STATE,action) => {
 
     switch(action.type){

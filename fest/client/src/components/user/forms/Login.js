@@ -62,6 +62,7 @@ class Login extends React.Component {
     //On eye click making password filed 'password' type.
     hidePass = (e) => {
         this.setState({passwordState:"password"});
+        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
         this.eyeRef.current.classList.add('hide');
         this.eyeOffRef.current.classList.remove('hide');
     }
@@ -69,6 +70,7 @@ class Login extends React.Component {
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordState:"text"});
+        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }
@@ -133,7 +135,7 @@ class Login extends React.Component {
                 {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
 
             </>
-            ,document.querySelector('#login')
+            ,document.querySelector('#auth')
         );
     }
 
@@ -142,6 +144,7 @@ class Login extends React.Component {
 
 
 
-export default reduxForm({
+export default connect(null,{loginAction})(reduxForm({
     form:'loginForm',
-})(connect(null,{loginAction})(Login));
+})(Login));
+

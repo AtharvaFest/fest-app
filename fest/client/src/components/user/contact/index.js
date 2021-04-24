@@ -1,11 +1,14 @@
 import React from 'react'
-
+import Nav from '../nav'
 
 const Contact = function() {
 
     return(
         <div>
-            Contact
+            <Nav />
+            <div className="after-navigation"> {/*Styled in _navigation.scss*/}
+                Contact
+            </div>
         </div>
     );
 }

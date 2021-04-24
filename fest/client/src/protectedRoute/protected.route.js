@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Redirect} from 'react-router-dom'
 import auth from '../auth'
 
-
+// MiddleWare, checks authorized user before entering in restricted area.
 export class ProtectedRoute extends React.Component{
     constructor({component: Component,...rest}){
         super();
@@ -44,7 +44,7 @@ export class ProtectedRoute extends React.Component{
 }
 
 
-
+// MiddleWare, check is admin or not before entring in admin panel
 export class ProtectedAdminRoute extends React.Component{
     constructor({component: Component,...rest}){
         super();

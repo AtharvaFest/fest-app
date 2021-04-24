@@ -1,201 +1,144 @@
-.navigation{
-    // USE TO CONTROL BACKGROUND OF NAV
-    &__checkbox{
-        display: none;
-    }
+.horizontal-nav {
 
-    // THREE DASH BACKGROUND
-    &__button{
-        height: 7rem;
-        width: 7rem;
-        border-radius: 50%;
-        background-color: $color-white--1;
+    &__container{
         position: fixed;
-        top: 5rem;
-        right: 5rem;
-        text-align: center;
-        cursor: pointer;
-        z-index: 1500;
+        width: 100vw;
+        min-height: 8vh;
+        background-color: $color-primary-dark;
+        color: $color-white--1;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        top: 0;
     }
 
-    &__background{
-        height: 6rem;
-        width: 6rem;
-        border-radius: 50%;
-        background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
-        position: fixed;
-        top: 5.5rem;
-        right: 5.5rem;
-        z-index: 900;
-        transition: all .5s;
+    &__left{
+        // margin-left: -2rem;
     }
 
-    //FUNCTIONALITY
-    &__checkbox:checked ~ &__background {
-        transform: scale(80);
+    &__right{
+        margin-right: -8rem;
+        @include respond(tab-port){
+            background-color: $color-primary-dark;
+            position: absolute;
+            top:8vh;
+            right: 8rem;
+            height:92vh;
+            width: 50%;
+            display: grid;
+            align-items: center;
+            transform: translateX(100%);
+            transition: all .5s;
+        }
     }
 
-    &__checkbox:checked ~ .nav {
-        opacity: 1;
-        width: 100%;
-        margin-left: 0;
+    &__items{
+        display: flex;
+        @include respond(tab-port){
+            // display: block;
+            display: grid;
+            row-gap: 2rem;
+        }
     }
 
-    // ICON
-    &__icon{
-        position: relative;
-        margin-top: 3.3rem;
-
-        &,
-        &::before,
-        &::after{
-            height: 2px;
-            display: inline-block;
-            width: 3rem;
+    &__item{
+        &:not(:last-child){
+            margin-right: 2rem;
+        }
+        list-style: none;
+        transition: all .2s;
+        &:hover{
             background-color: $color-primary;
         }
 
-        &::before,
-        &::after{
-            content: "";
-            position: absolute;
-            left: 0;
-            transition: all .2s;
-        }
-
-        &::before {
-            margin-top: -.8rem;
-        }
-        &::after{
-            margin-top: .8rem;
+        @include respond(tab-port){
+            &:not(:last-child){
+                margin-right: 0rem;
+            }
         }
         
     }
 
-    &__button:hover &__icon::before {
-        top: -.1rem;
-    }
-
-    &__button:hover &__icon::after {
-        top: .1rem;
-    }
-
-    &__checkbox:checked + &__button &__icon {
-        background-color: transparent;
-    }
-
-    &__checkbox:checked + &__button &__icon::before {
-        top: .8rem;
-        transform: rotate(135deg);
-    }
-
-    &__checkbox:checked + &__button &__icon::after {
-        top: -.8rem;
-        transform: rotate(-135deg);
-    }
-}
-
-// NAV ITEMS
-.nav{
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        margin-left: -100%;
-        opacity: 1;
-        width: 0;
-        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    &__item{
-        font-size: 2.5rem;
-        font-weight: 300;
-        list-style: none;
-        text-transform: uppercase;
-        text-align: center;
-
-        &:not(:last-child){
-            margin-bottom: 2rem;
-        }
-    }
-
-    &__list {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        letter-spacing: .2rem;
-        transform: translate(-50%,-50%);
-        list-style: none;
-        text-align: center;
-        width: 100%;
-        transition: all 2s;
-    }
 
     &__link{
-        &:link,
-        &:visited{
-            display: inline-block;
-            color: $color-white--1;
-            padding: 1rem 3rem;
-            text-decoration: none;
-            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white--1 50%);
-            background-size: 227%;
-            transition: all .4s;
-
-            &:hover,
-            &:active{
-                background-position: 100%;
-                color: $color-primary;
-                transform: translateX(1rem);
-            }
-        }
-    }
-    
-}
-
-
-////////////////
-// DROPDOWN
-
-.dropdown{
-    
-    &__container{
-        display: none;
-        margin-left: 2rem;
+        display: inline-block;
+        text-decoration: none;
         font-size: 1.6rem;
-    }
-
-    &__menu{
-        background-color: white;
-        width: 100%;
-        display: grid;
-        padding: 1rem 1rem;
-
-        &--list{
-            &:link,
-            &:visited{
-            padding: .3rem 0;
-            text-decoration: none;
-            display: grid;
-            border-bottom: 2px solid transparent;
-            transition: border-bottom .3s; 
-            }
-
-            &:active{
-                color: $color-primary-light;
-            }
-
-            &:hover {
-                border-bottom: 2px solid currentColor;
-            }
+        text-transform: uppercase;
+        color: inherit;
+        padding: 2rem .8rem;
+        letter-spacing: 1.5px;
+        @include respond(tab-port){
+            display: flex;
+            justify-content: center;
+            font-size: 2rem;
         }
     }
 
+    &--sub-menu{
+        display: none; 
+        text-transform: uppercase;
+        &__item{
+            display: inline-block;
+            width: 100%;
+            font-size: 1.6rem;
+            text-decoration: none;
+            color: $color-white--1;
+            padding: 1rem 2rem;
+            @include respond(tab-port){
+                font-size: 2rem;
+            }
+            &:hover{
+                background-color: $color-primary;
+            }
+    }
+    }
+
+    
 }
 
-.show{
-    display: inline-block;
-    animation: visible .3s;
+.right-menu__visible{
+    transform: translateX(0%);
 }
 
+.sub-menu__visible{
+        display: block;
+        position: absolute;
+        background-color: $color-primary-dark;
+        margin-left: 1.5rem;
+        list-style: none;
+        @include respond(tab-port){
+            display: grid;
+            margin-left: -24.5rem;
+        }
+    
+       
+}
+
+.burger{
+    display: none;
+    cursor: pointer;
+    &__lines{
+        width: 3rem;
+        height: 2px;
+        background-color: $color-white--1;
+        &:not(:last-child){
+            margin-bottom: .5rem;
+        }
+    }
+    
+    @include respond(tab-port){
+        display: block;
+    }
+
+}
+
+
+.after-navigation{
+    margin-top: 6.4rem;
+    background-color: lawngreen;
+    @include respond(phone){
+        top: 7rem;
+    }
+}
 

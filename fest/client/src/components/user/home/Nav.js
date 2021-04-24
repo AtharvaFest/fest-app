@@ -10,18 +10,10 @@ import {Alert} from '../../Alert'
 class Nav extends React.Component{
 
     dropdownContainer = React.createRef()
-    state={toggleMenu:true};
 
     // on event click, toggle bettween sub option inside event menu
     showMenu = (e) => {
-        const flag = !this.state.toggleMenu;
-        this.setState({toggleMenu:flag});
-       
-        if(this.state.toggleMenu){
-            this.dropdownContainer.current.classList.add('show');
-            return;
-        }
-        this.dropdownContainer.current.classList.remove('show');
+        this.dropdownContainer.current.classList.toggle('show');
         
     }
 
@@ -84,7 +76,7 @@ class Nav extends React.Component{
                                 </Link>
                             </li>
                             <li className="nav__item">
-                                <Link to="" onClick={(e) => this.showMenu(e)}  className="nav__link dropdown__btn">
+                                <Link to="#" onClick={(e) => this.showMenu(e)}  className="nav__link dropdown__btn">
                                     event
                                 </Link>
                                 <div className="dropdown__container disappear" ref={this.dropdownContainer}>

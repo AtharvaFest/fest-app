@@ -18,16 +18,20 @@
 
 @import './layout/user/footer';
 @import './layout/user/header';
+@import './layout/user/homenavigation';
 @import './layout/user/modal';
 @import './layout/user/navigation';
 
+@import './pages/user/gallery';
 @import './pages/user/home';
+
 
 
 
 ////////////////////////////////////////////////////////
 //// ADMIN
 
+@import './layout/admin/modal';
 @import './layout/admin/sidebar';
 
 @import './pages/admin/adminpanel';

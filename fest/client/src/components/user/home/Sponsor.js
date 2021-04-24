@@ -76,7 +76,7 @@ const Sponsor = function() {
                     <img src="../../../img/sponsor-sting.jpeg" alt="Sting Logo" className="sponsor__img--4" /> 
                 </div>
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-union.png" alt="union Bank Logo" className="sponsor__img--5" />
+                    <img src="../../../img/sponsor-union.png" alt="Union Bank Logo" className="sponsor__img--5" />
                 </div>
                 <div className="sponsor">
                     <img src="../../../img/sponsor-vh1.jpg" alt="VH1 Logo" className="sponsor__img--6"/>

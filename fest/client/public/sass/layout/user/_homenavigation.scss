@@ -1,0 +1,201 @@
+.navigation{
+    // USE TO CONTROL BACKGROUND OF NAV
+    &__checkbox{
+        display: none;
+    }
+
+    // THREE DASH BACKGROUND
+    &__button{
+        height: 7rem;
+        width: 7rem;
+        border-radius: 50%;
+        background-color: $color-white--1;
+        position: fixed;
+        top: 5rem;
+        right: 5rem;
+        text-align: center;
+        cursor: pointer;
+        z-index: 1500;
+    }
+
+    &__background{
+        height: 6rem;
+        width: 6rem;
+        border-radius: 50%;
+        background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
+        position: fixed;
+        top: 5.5rem;
+        right: 5.5rem;
+        z-index: 900;
+        transition: all .5s;
+    }
+
+    //FUNCTIONALITY
+    &__checkbox:checked ~ &__background {
+        transform: scale(80);
+    }
+
+    &__checkbox:checked ~ .nav {
+        opacity: 1;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    // ICON
+    &__icon{
+        position: relative;
+        margin-top: 3.3rem;
+
+        &,
+        &::before,
+        &::after{
+            height: 2px;
+            display: inline-block;
+            width: 3rem;
+            background-color: $color-primary;
+        }
+
+        &::before,
+        &::after{
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all .2s;
+        }
+
+        &::before {
+            margin-top: -.8rem;
+        }
+        &::after{
+            margin-top: .8rem;
+        }
+        
+    }
+
+    &__button:hover &__icon::before {
+        top: -.1rem;
+    }
+
+    &__button:hover &__icon::after {
+        top: .1rem;
+    }
+
+    &__checkbox:checked + &__button &__icon {
+        background-color: transparent;
+    }
+
+    &__checkbox:checked + &__button &__icon::before {
+        top: .8rem;
+        transform: rotate(135deg);
+    }
+
+    &__checkbox:checked + &__button &__icon::after {
+        top: -.8rem;
+        transform: rotate(-135deg);
+    }
+}
+
+// NAV ITEMS
+.nav{
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        margin-left: -100%;
+        opacity: 1;
+        width: 0;
+        transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    &__item{
+        font-size: 2.5rem;
+        font-weight: 300;
+        list-style: none;
+        text-transform: uppercase;
+        text-align: center;
+
+        &:not(:last-child){
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        letter-spacing: .2rem;
+        transform: translate(-50%,-50%);
+        list-style: none;
+        text-align: center;
+        width: 100%;
+        transition: all 2s;
+    }
+
+    &__link{
+        &:link,
+        &:visited{
+            display: inline-block;
+            color: $color-white--1;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, $color-white--1 50%);
+            background-size: 227%;
+            transition: all .4s;
+
+            &:hover,
+            &:active{
+                background-position: 100%;
+                color: $color-primary;
+                transform: translateX(1rem);
+            }
+        }
+    }
+    
+}
+
+
+////////////////
+// DROPDOWN
+
+.dropdown{
+    
+    &__container{
+        display: none;
+        margin-left: 2rem;
+        font-size: 1.6rem;
+    }
+
+    &__menu{
+        background-color: white;
+        width: 100%;
+        display: grid;
+        padding: 1rem 1rem;
+
+        &--list{
+            &:link,
+            &:visited{
+            padding: .3rem 0;
+            text-decoration: none;
+            display: grid;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom .3s; 
+            }
+
+            &:active{
+                color: $color-primary-light;
+            }
+
+            &:hover {
+                border-bottom: 2px solid currentColor;
+            }
+        }
+    }
+
+}
+
+.show{
+    display: inline-block;
+    animation: visible .3s;
+}
+
+
