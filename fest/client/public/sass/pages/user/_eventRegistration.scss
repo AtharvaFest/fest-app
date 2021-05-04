@@ -1,0 +1,43 @@
+.event-reg{
+    &__container{
+        padding: 10rem;
+        @include respond(tab-port){
+            padding:1rem;
+        }
+    }
+
+    &__content{
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        width: 100%;
+        // margin: 0 15rem;
+        overflow: auto;
+        background-color: $color-white--1;
+        padding: 4rem;
+        box-shadow: 0 1rem 3rem rgba($color-black-dark, .5);
+        height: 100vh;
+        
+        
+    }
+
+    &__table{
+        font-size: 1.6rem;
+        width: 100%;
+        border-collapse: collapse;
+        
+        thead th{
+            border-bottom: 1px solid $color-grey-2;
+            text-align: start;
+            padding: 1rem 0;
+            padding-right: 3rem;
+        }
+
+        tbody td{
+            border-bottom: 1px solid $color-grey-2;
+            padding: .5rem 0;
+            padding-right: 3rem;
+        }
+    }
+
+}

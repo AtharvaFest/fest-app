@@ -20,6 +20,7 @@ class Login extends React.Component{
     //On eye click making password filed 'password' type.
     hidePass = (e) => {
         this.setState({passwordState:"password"});
+        this.setState({alertErr:false,alertInfo:false});
         this.eyeRef.current.classList.add('hide');
         this.eyeOffRef.current.classList.remove('hide');
     }
@@ -27,6 +28,7 @@ class Login extends React.Component{
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordState:"text"});
+        this.setState({alertErr:false,alertInfo:false});
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }

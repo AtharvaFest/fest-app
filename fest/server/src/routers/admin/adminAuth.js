@@ -6,7 +6,7 @@ const router = new express.Router();
 
 
 
-router.post('/adminlogin',async (req,res)=>{
+router.post('/admin/login',async (req,res)=>{
     try{
         const user = await User.findByAdminCredentials(req.body.usernameOrEmail, req.body.password);
         const token = await user.generateAdminAuthToken();
@@ -20,7 +20,7 @@ router.post('/adminlogin',async (req,res)=>{
 });
 
 
-router.get('/adminLogout',adminAuth,async (req,res)=>{
+router.get('/admin/logout',adminAuth,async (req,res)=>{
 
     try{
         req.user.adminTokens = req.user.adminTokens.filter((token)=>{

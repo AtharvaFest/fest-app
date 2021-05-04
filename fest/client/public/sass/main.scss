@@ -14,6 +14,7 @@
 
 @import "./components/user/about";
 @import './components/user/alert';
+@import './components/user/eventcarousel';
 @import  './components/user/sponsor';
 
 @import './layout/user/footer';
@@ -22,14 +23,18 @@
 @import './layout/user/modal';
 @import './layout/user/navigation';
 
+@import './pages/user/emailActivation';
+@import './pages/user/eventRegistration';
 @import './pages/user/gallery';
 @import './pages/user/home';
-
-
+@import './pages/user/profile';
+@import './pages/user/resetPassword';
 
 
 ////////////////////////////////////////////////////////
 //// ADMIN
+
+@import './components/admin/logout';
 
 @import './layout/admin/modal';
 @import './layout/admin/sidebar';

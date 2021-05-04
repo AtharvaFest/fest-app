@@ -1,6 +1,7 @@
 import {
     ADMIN_ALL_USERS,
     USER_DELETE,
+    USER_DELETE_ALL,
     USER_EDIT
 } from '../action/type'
 
@@ -14,6 +15,8 @@ export const adminCRUDUserReducer = (state=INITIAL_STATE,action) => {
         case USER_DELETE:
                 const allUsers = state.allUsers.filter(user =>user._id !== action.payload.user._id);
                 return {...state,allUsers}
+        case USER_DELETE_ALL:
+                return {...state,allUsers:''}
         case USER_EDIT:
                 const filteredUsers = state.allUsers.map(user =>{
                     if(user._id !== action.payload._id){

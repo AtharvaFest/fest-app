@@ -9,7 +9,7 @@ class Gallery extends React.Component{
             <>
                 <div className="admin-panel__container">
                     <Sidebar />
-                    <div className="">
+                    <div className="admin-panel__section">
                         Gallery
                     </div>
                 </div>

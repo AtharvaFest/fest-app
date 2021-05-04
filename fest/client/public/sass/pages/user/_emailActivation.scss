@@ -1,0 +1,42 @@
+%btn{
+    text-transform: uppercase;
+    color: $color-white--1;
+    border: none;
+    border-radius: 50rem;
+    box-shadow: 0 .5rem 1rem rgba($color-black-dark,0.5);
+    cursor: pointer;
+    transform: scale(1.01);
+    margin-bottom: 2.5rem;
+    &:active{
+        box-shadow: 0 .5rem .5rem rgba($color-black-dark,0.5);
+        transform: scale(1);
+    }
+    &:focus{
+        outline: none;
+    }
+}
+
+.email-activation{
+
+    &__container{
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    &__btn{
+        background-color: $color-primary;        
+        padding: 1.5rem;        
+        @extend %btn        
+    }
+
+}
+
+.home__btn{
+    background-color: $color-green;
+    padding: 1.5rem;
+    @extend %btn
+}
+

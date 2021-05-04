@@ -10,6 +10,7 @@
         align-items: center;
         justify-content: space-around;
         top: 0;
+        z-index: 200;
     }
 
     &__left{
@@ -35,7 +36,6 @@
     &__items{
         display: flex;
         @include respond(tab-port){
-            // display: block;
             display: grid;
             row-gap: 2rem;
         }
@@ -68,6 +68,7 @@
         color: inherit;
         padding: 2rem .8rem;
         letter-spacing: 1.5px;
+        
         @include respond(tab-port){
             display: flex;
             justify-content: center;
@@ -97,11 +98,15 @@
     
 }
 
+.active__item{
+    background-color: $color-primary;
+}
+
 .right-menu__visible{
     transform: translateX(0%);
 }
 
-.sub-menu__visible{
+.event-sub-menu__visible{
         display: block;
         position: absolute;
         background-color: $color-primary-dark;
@@ -110,9 +115,25 @@
         @include respond(tab-port){
             display: grid;
             margin-left: -24.5rem;
+            margin-top: -2rem;
         }
     
        
+}
+
+.account-sub-menu__visible{
+    display: block;
+    position: absolute;
+    background-color: $color-primary-dark;
+    margin-left: 1.5rem;
+    list-style: none;
+    @include respond(tab-port){
+        display: grid;
+        margin-left: -10.5rem;
+        margin-top: -2rem;
+    }
+
+   
 }
 
 .burger{
@@ -134,9 +155,14 @@
 }
 
 
+//////////////////////////////////////////
+//////Main section after horizontal navigation
+
 .after-navigation{
-    margin-top: 6.4rem;
-    background-color: lawngreen;
+    padding-top: 6.4rem;
+    // top: 6rem;
+    background-color: $color-white--2;
+    // height: 100vh;  // remove this line after styling pages
     @include respond(phone){
         top: 7rem;
     }

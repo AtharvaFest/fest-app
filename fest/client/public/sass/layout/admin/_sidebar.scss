@@ -1,10 +1,19 @@
 .admin-panel__heading{
-    display: grid;
-    margin-top: 1.5rem;
-    text-transform: uppercase;
-    @include respond(tab-port){
-        display: none;
+    &--container{
+        margin-top: 2rem;
+        @include respond(tab-port){
+            grid-row-start: 2;
+            align-self: end;
+            margin-top: 0;
+            margin-bottom: 4rem;
+        }
     }
+    &--content{
+        display: grid;
+        text-transform: uppercase;
+        
+    }
+    
     
     &--1{
         
@@ -47,6 +56,9 @@
 .sidebar{
 
     &__container{
+        display: grid;
+        grid-template-rows: max-content max-content;
+        grid-row-gap:6rem;
         position: fixed;
         background-color: $color-primary;
         width: 25rem;
@@ -56,6 +68,8 @@
         left: 0;
         z-index: 100;
         @include respond(tab-port){
+            grid-template-rows:unset;
+            grid-row-gap:0;
             transform: translateX(-100%);
             transition: all .3s;
         }
@@ -65,17 +79,19 @@
         font-size: 2.3rem;
         text-transform: uppercase;
         font-weight: 300;
-        margin-top: 4rem;
         @include respond(tab-port){
             margin-top: 7rem;
         }
-
         &--items{
             letter-spacing: .1rem;
             padding: 1rem;
             
             &:not(:last-child){
                 margin-bottom: 1rem;
+            }
+            
+            &:last-child{
+                margin-top: 1rem;
             }
 
             position: relative;
@@ -100,9 +116,43 @@
             }
 
         }
+
         
     }
 
+}
+
+.event-item{
+    cursor: pointer;
+    margin-bottom: 0 !important;
+
+    &--sub-menu{
+        max-height: 0;
+        overflow: hidden;
+        background-color: $color-primary-dark;
+        transition: max-height .5s ;
+
+        &__item{
+            padding: 1rem; 
+            
+            &:last-child{
+                padding-top: 0;
+            }
+
+            a{
+                border-bottom: 1px solid transparent;
+                transition: border-bottom .5s;
+                &:hover{
+                    border-bottom: 1px solid $color-white--1;
+                }
+            }
+        }
+    }
+
+    &__sub-menu-visible{
+        max-height: 50rem; 
+        transition: max-height 1s ;
+    }
 }
 
 .item{

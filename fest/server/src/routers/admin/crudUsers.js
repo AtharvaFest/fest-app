@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator'); // It is middle
 
 
 // retrive all users
-router.get('/users',async(req,res)=>{
+router.get('/admin/users',adminAuth,async(req,res)=>{
     try{
         const users = await User.find();
         res.send(users)
@@ -20,7 +20,7 @@ router.get('/users',async(req,res)=>{
 
 
 // delete user
-router.delete('/user/:id',async(req,res)=>{
+router.delete('/admin/user/:id',adminAuth,async(req,res)=>{
     try{
         const user = await User.findByIdAndDelete(req.params.id)
         if (!user) {
@@ -33,8 +33,22 @@ router.delete('/user/:id',async(req,res)=>{
 
 });
 
+// delete ALL user
+router.delete('/admin/allUser',async(req,res)=>{
+    try{
+        const user = await User.deleteMany();
+        if (!user) {
+            res.status(404).send()
+        }
+        res.send();
+    }catch(e){
+        res.status(500).send()
+    }
+
+});
+
 //update user
-router.patch('/user/:id',[
+router.patch('/admin/user/:id',[
     body('email').isEmail().withMessage('Invalid Email.'),
     body('mobileNumber').custom(value => {
       
@@ -46,7 +60,7 @@ router.patch('/user/:id',[
           return true
         }
       })  
-  ],async(req,res)=>{
+  ],adminAuth,async(req,res)=>{
     const errors = validationResult(req);
     try{
 

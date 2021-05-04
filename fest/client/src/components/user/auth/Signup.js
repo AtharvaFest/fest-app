@@ -19,6 +19,7 @@ class Sign extends React.Component {
     }
     eyeRef = React.createRef()
     eyeOffRef = React.createRef()
+    showAlert = false
 
     //Hiding Sign up modal on sucessful signup/submit form
     hideModal = () => {
@@ -49,7 +50,7 @@ class Sign extends React.Component {
                     <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
-                
+                <div className="password__instruction">Password must be 5 characters long.</div>
             </div>
         );
     }
@@ -82,8 +83,10 @@ class Sign extends React.Component {
     }
 
     onSubmit = (formValue) => {
-        this.props.signUpAction(formValue).then((value) => {
-            this.setState({alertInfo:true,alertErr:false});
+        this.showAlert = true;
+        this.setState({alertInfo:true,alertErr:false});
+        this.props.signUpAction(formValue).then(() => {
+            alert("Check your email to activate email account");
             this.emptyError();
             for(const value in formValue){
                 formValue[value] = "";
@@ -91,6 +94,7 @@ class Sign extends React.Component {
             this.hideModal();
         }).catch((err) => {
             if(err?.response?.status !== 200){
+                this.showAlert = true;
                 this.setState({alertInfo:false,alertErr:true});
             }
 
@@ -112,6 +116,7 @@ class Sign extends React.Component {
                     
                 })
             }else{
+                this.showAlert = true;
                 this.setState({alertInfo:false,alertErr:true});
             }
 
@@ -122,11 +127,13 @@ class Sign extends React.Component {
     // TOGGLE BETWEEN INFO AND ERROR ALERTS
     alertPopup=(alertInfo,alertErr)=>{
         if(alertInfo){
+            this.showAlert = false;
             return(
-                <Alert message="Sign up successful" containerId="alert-signup" alertType={"info"} />
+                <Alert message="Sign up in the process..." containerId="alert-signup" alertType={"info"} />
             );
         }
         if(alertErr){
+            this.showAlert = false;
             return(
             <Alert message="Something went wrong!" containerId="alert-signup" alertType={"error"} />
             );
@@ -140,8 +147,8 @@ class Sign extends React.Component {
         return ReactDOM.createPortal(
         <>
             <div className="modal" id="modal-signup" onClick={this.hideModal}>
-                <div className="modal__container--sign" >
-                    <div className="modal__container--content-sign" onClick={(e) => e.stopPropagation()}>
+                <div className="modal__container--sign" onClick={(e) => e.stopPropagation()}>
+                    <div className="modal__container--content-sign" >
                         <h4 className="heading--4 form__heading--sign">sign up</h4>
                         <div className="modal__form--sign">
                             <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>

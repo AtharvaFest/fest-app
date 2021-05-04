@@ -76,7 +76,7 @@ const About = function() {
             </div>
             <div className="about__rhythm">
                 <div className="photo-container" data-event-name="rhythm">
-                    <img src="../../../img/head--2.jpg" alt="Rhythm" className="photo" />
+                    <img src="../../../img/head--2.webp" alt="Rhythm" className="photo" />
                 </div>
                 <div className="rhythm__content">
                     <p className="paragraph ">
@@ -111,7 +111,7 @@ const About = function() {
                     </p>
                 </div>
                 <div className="photo-container" data-event-name="ieee">
-                    <img src="../../../img/head--3.jpg" alt="IEEE" className="photo"/>
+                    <img src="../../../img/head--3.webp" alt="IEEE" className="photo"/>
                 </div>
             </div>
         </section>

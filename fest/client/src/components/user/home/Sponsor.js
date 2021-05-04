@@ -64,22 +64,22 @@ const Sponsor = function() {
             </div>
             <div className="sponsors--box">
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-lenskart.jpg" alt="Lenskart Logo" className="sponsor__img--1"/>
+                    <img src="../../../img/sponsor-lenskart.webp" alt="Lenskart Logo" className="sponsor__img--1"/>
                 </div>
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-md.png" alt="Lacdonald Logo" className="sponsor__img--2" />
+                    <img src="../../../img/sponsor-md.webp" alt="Lacdonald Logo" className="sponsor__img--2" />
                 </div>
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-oppo.jpg" alt="Oppo Logo" className="sponsor__img--3" />
+                    <img src="../../../img/sponsor-oppo.webp" alt="Oppo Logo" className="sponsor__img--3" />
                 </div>
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-sting.jpeg" alt="Sting Logo" className="sponsor__img--4" /> 
+                    <img src="../../../img/sponsor-sting.webp" alt="Sting Logo" className="sponsor__img--4" /> 
                 </div>
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-union.png" alt="Union Bank Logo" className="sponsor__img--5" />
+                    <img src="../../../img/sponsor-union.webp" alt="Union Bank Logo" className="sponsor__img--5" />
                 </div>
                 <div className="sponsor">
-                    <img src="../../../img/sponsor-vh1.jpg" alt="VH1 Logo" className="sponsor__img--6"/>
+                    <img src="../../../img/sponsor-vh1.webp" alt="VH1 Logo" className="sponsor__img--6"/>
                 </div>
             </div>
         </section>

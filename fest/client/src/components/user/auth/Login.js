@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import {Field,reduxForm} from 'redux-form'
 import {Alert} from '../../Alert'
 
-import {loginAction} from '../../../action'
+import {loginAction,forgotPasswordAction} from '../../../action'
 
-class Login extends React.Component {
+class Login extends React.PureComponent {
 
     state = {
         passwordState:"password",
@@ -16,7 +16,7 @@ class Login extends React.Component {
 
     eyeRef = React.createRef()
     eyeOffRef = React.createRef()
-
+    showAlert = false
    
 
     //on submit hide login form
@@ -26,8 +26,16 @@ class Login extends React.Component {
     }
 
     //on signup click, display signUp form and hide login form
-    displayLogin = (e) => {
+    displaySignup = (e) => {
         const modalSign = document.querySelector(`#modal-signup`);
+        const modalLogin = document.querySelector(`#modal-login`);
+        modalSign.classList.add('visible');
+        modalLogin.classList.remove('visible')
+    }
+
+     //on forgotPassword click, display forgot password form
+     displayForgotPassword = (e) => {
+        const modalSign = document.querySelector(`#modal-forgot-password`);
         const modalLogin = document.querySelector(`#modal-login`);
         modalSign.classList.add('visible');
         modalLogin.classList.remove('visible')
@@ -75,18 +83,20 @@ class Login extends React.Component {
         this.eyeRef.current.classList.remove('hide');
     }
 
-    
+       
 
     onSubmit = formValue => {
         this.props.loginAction(formValue).then((value) => {
-                this.setState({alertInfo:true,alertErr:false});
+                this.showAlert = true
+                this.setState({alertInfo:true,alertErr:false});                
                 for(const value in formValue){
                     formValue[value] = "";
                 }
                 this.hideModal();
             }).catch((err) => {
                 if(err?.response?.status === 401){
-                    this.setState({alertErr:true,alertInfo:false});
+                    this.showAlert = true
+                    this.setState({alertErr:true,alertInfo:false});                    
                 }
             });
     }
@@ -94,11 +104,13 @@ class Login extends React.Component {
      // TOGGLE BETWEEN INFO AND ERROR ALERTS
      alertPopup=(alertInfo,alertErr)=>{
         if(alertInfo){
+            this.showAlert = false
             return(
                 <Alert message="Login successful" containerId="alert-login" alertType={"info"} />
             );
         }
         if(alertErr){
+            this.showAlert = false
             return(
                 <Alert message="Unable to login" containerId="alert-login" alertType={"error"} />
             );
@@ -112,8 +124,8 @@ class Login extends React.Component {
         return ReactDOM.createPortal(
             <>
                 <div className="modal" id="modal-login" onClick={this.hideModal}>
-                    <div className="modal__container--login" >
-                        <div className="modal__container--content-login" onClick={(e) => e.stopPropagation()}>
+                    <div className="modal__container--login" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal__container--content-login" >
                             <h4 className="heading--4 form__heading">login</h4>
                             <div className="modal__form--login">
                                 <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -121,11 +133,11 @@ class Login extends React.Component {
                                     <Field name="password" type={this.state.passwordState} component={this.renderPassword} label="Password" />
                                     <button className="form__button" >login</button>
                                 </form>
-                                <a href="/forgot-password" className="forgot-password">Forgot password?</a>
+                                <a href="#modal-forgot-password" onClick={(e) => this.displayForgotPassword(e)} className="forgot-password" >Forgot password?</a>
                             </div>
                             
                             <div className="sign__btn--container">
-                                <a href="#modal-signup" onClick={(e) => this.displayLogin(e)}  className="sign__btn">signup</a>
+                                <a href="#modal-signup" onClick={(e) => this.displaySignup(e)}  className="sign__btn">signup</a>
                             </div>
 
                         </div>
@@ -144,7 +156,7 @@ class Login extends React.Component {
 
 
 
-export default connect(null,{loginAction})(reduxForm({
+export default connect(null,{loginAction,forgotPasswordAction})(reduxForm({
     form:'loginForm',
 })(Login));
 

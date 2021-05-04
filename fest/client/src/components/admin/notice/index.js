@@ -1,5 +1,5 @@
 import React from 'react'
-
+// import {withRouter} from 'react-router-dom'
 import Sidebar from '../sidebar/Sidebar'
 
 class Notice extends React.Component{
@@ -9,7 +9,7 @@ class Notice extends React.Component{
             <>
                 <div className="admin-panel__container">
                     <Sidebar />
-                    <div className="">
+                    <div className="admin-panel__section">
                         Notice
                     </div>
                 </div>

@@ -1,8 +1,6 @@
 import React from 'react'
-import Login from '../forms/Login';
-import Signup from '../forms/Signup';
 import About from './About';
-import Footer from './Footer';
+import Footer from '../footer';
 import Header from './Header';
 import Nav from './Nav';
 import Sponsor from './Sponsor';
@@ -18,8 +16,6 @@ const Home = function() {
             <About />  
             <Sponsor />
             <Footer />
-            <Login />
-            <Signup />
         </div>
     );
 

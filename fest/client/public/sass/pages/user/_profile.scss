@@ -1,0 +1,29 @@
+.profile{
+
+    &__section{
+        margin: 0 20rem;
+        
+    }
+
+    &__student-details{
+        margin-top: 4rem;
+        &--content{
+            margin-top: 2rem;
+        }
+    }
+
+}
+
+.details__heading{
+    border-bottom: 1px solid $color-grey-2;
+}
+
+.details__table{
+    width: 100%;
+    font-size: 1.6rem;
+    tbody{
+        td{
+            padding-bottom: 1rem;
+        }
+    }
+}

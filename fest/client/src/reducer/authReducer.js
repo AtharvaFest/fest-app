@@ -1,5 +1,5 @@
 import {
-    SIGN_UP,
+    EMAIL_ACTIVATE,
     LOG_IN,
     LOG_OUT,
     ADMIN_LOGIN,
@@ -15,7 +15,7 @@ const INITIAL_STATE ={
 export const userAuthReducer = (state=INITIAL_STATE,action) => {
 
     switch(action.type){
-        case SIGN_UP:
+        case EMAIL_ACTIVATE:
             return {...state,isLogin:true,userData:action.payload}
         case LOG_IN:
             return {...state,isLogin:true,userData:action.payload}

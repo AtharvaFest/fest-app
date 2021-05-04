@@ -28,6 +28,8 @@
     border-bottom: 1px solid $color-grey-2;
 }
 
+
+
 %modal-container {
     background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
     display: grid;
@@ -204,16 +206,9 @@
     margin-top: 1rem;
     display: inline-block;
     line-height: 1.5rem;
-    &:link,
-    &:visited
-    {
-        color: $color-primary;
-        border-bottom: 1px solid transparent;
-    }
-
-    &:active{
-        color: $color-primary-light;
-    }
+    color: $color-primary;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
 
     &:hover{
         border-bottom: 1px solid $color-primary;
@@ -302,7 +297,9 @@
 .form {
     &__group--sign:not(:last-child) {
         margin-bottom: .5rem;
+        position: relative;
     }
+
 
     &__input--sign{
         padding: 1.2rem 2.5rem;
@@ -348,3 +345,9 @@
     border-bottom: 1px solid $color-grey-2;
 }
 
+.password__instruction{
+    position: absolute;
+    right: 0;
+    top: 4.8rem;
+    font-size: 1.2rem;
+}

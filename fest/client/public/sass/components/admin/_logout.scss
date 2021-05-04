@@ -1,0 +1,25 @@
+.logout{
+
+
+    &__btn{
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        border: 1.8px solid $color-primary;
+        border-radius: 50rem;
+        text-decoration: none;
+        padding: .8rem 1.8rem;
+        letter-spacing: 1px;
+        cursor: pointer;
+        color: $color-primary;
+
+        &:focus{
+            outline: none;
+        }
+
+        &:hover{
+            background-color: $color-primary;
+            color: $color-white--1;
+        }
+    }
+
+}

@@ -1,13 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Sidebar from '../sidebar/Sidebar'
-import {adminAllUsersAction,deleteUserAction} from '../../../action'
+import {adminAllUsersAction,deleteUserAction,deleteAllUserAction} from '../../../action'
 import EditUser from './EditUser'
+import Logout from '../auth/Logout'
+import history from '../../../history'
 
 class User extends React.Component{
     deleteCount = 0;
-    state = {editUserData:{}}
-
+    state = {editUserData:{},search:'',prePropsAllUsers:'',allUsers:''}
+    
     //on signup click, display signUp form and hide login form
     displayEditUser = () => {
         const modalEditUser = document.querySelector(`#modal-editUser`);
@@ -27,7 +29,11 @@ class User extends React.Component{
         this.deleteCount += 1;
         if(this.deleteCount < 4){
             if(window.confirm("Delete user?")){
-                this.props.deleteUserAction(id);
+                this.props.deleteUserAction(id).then(()=>{
+
+                }).catch((err) =>{
+                    history.push('/adminlogin')
+                })
             }
         }else{
             this.props.deleteUserAction(id);
@@ -35,13 +41,23 @@ class User extends React.Component{
         
     }
 
+    deleteAllUser = (id) => {
+        if(window.confirm("Delete all user?")){
+            this.props.deleteAllUserAction().then(()=>{
+
+            }).catch((err) =>{
+                history.push('/adminlogin')
+            })
+        }
+    }
+
     getAllUsersData = () =>{
-        if(this.props.allUsers === null) {
+        if(this.state.allUsers === null) {
             return (<div className="no-content">Loading...</div>);
         }
 
-        if(this.props.allUsers.length === 0) {
-            return (<div className="no-content">no registered users</div>);
+        if(this.state.allUsers.length === 0) {
+            return (<div className="no-content">no user found</div>);
         }
 
         return(
@@ -52,20 +68,22 @@ class User extends React.Component{
                         <th>name</th>
                         <th>username</th>
                         <th>email</th>
+                        <th>Mobile No.</th>
                         <th>admin</th>
                         <th>edit</th>
-                        <th>delete</th>
+                        <th><span onClick={this.deleteAllUser} className="delete__all-user">delete all</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                    this.props.allUsers.map((user,index)=>{
+                    this.state.allUsers.map((user,index)=>{
                         return(
                             <tr key={user._id}>
                                 <td>{index+1}</td>
                                 <td>{user.name}</td>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
+                                <td>{user.mobileNumber}</td>
                                 <td>{user.isAdmin.toString()}</td>
                                 <td>
                                     <span className="edit-btn" onClick={()=>this.editUser(user)}>
@@ -87,9 +105,50 @@ class User extends React.Component{
         );
     }
 
-    componentDidMount(){
-        this.props.adminAllUsersAction();
+    enterPressed = (event) => {
+        var code = event.keyCode || event.which;
+        if(code === 13) { //13 is the enter keycode
+            this.searchHandler()
+        } 
     }
+
+    searchHandler = () => {
+        const allUsers = this.state.prePropsAllUsers;
+        const searchedUsers = allUsers.filter((user)=>{
+            let userStatus = false;
+            const userKeys = Object.keys(user);
+            
+            userKeys.forEach((value)=>{
+                if(value === '_id') return
+
+                if(user[value].toString().toLowerCase().includes(this.state.search.toString().trim().toLowerCase())){
+                    userStatus = true
+                }
+            })
+            return userStatus === true
+        })
+        this.setState({allUsers:searchedUsers})
+    }
+
+    componentDidMount(){
+        this.props.adminAllUsersAction()
+        .then(()=>{
+            this.setState({allUsers:this.props.allUsers})
+        })
+        .catch(()=>{history.push('/adminlogin')})
+    }
+
+    static getDerivedStateFromProps(props, state){
+        // the state only changes when props value get change with respect to previous props,
+        // and prop value only gets changes when 'user' is edited.
+       if(props.allUsers !== state.prePropsAllUsers){
+           return {
+               prePropsAllUsers:props.allUsers,allUsers:props.allUsers
+            }
+       }
+       return null
+    }
+
 
     render(){
         return(
@@ -98,7 +157,16 @@ class User extends React.Component{
                     <Sidebar />
                     <div className="admin-panel__section">
                         <div className="user__section">
-                            <h4 className="heading--4 user__heading">user</h4>
+                            <div className="user__header-section">
+                                <h4 className="heading--4 user__heading">user</h4>
+                                <div className="search__container">   
+                                    <input  type="text" placeholder="Search" value={this.state.search} onChange={(e)=>this.setState({search:e.target.value})} onKeyPress={this.enterPressed} className="search__box" />
+                                    <span className="search__icon" onClick={this.searchHandler} >
+                                        <ion-icon name="search-outline" ></ion-icon>
+                                    </span>
+                                </div>
+                                <Logout />
+                            </div>                 
                             <div className="user__container">
                                     <div id="shadow_overlay_top"></div>
                                     <div id="shadow_overlay_left"></div>
@@ -123,4 +191,4 @@ const mapStatetoProps = (state) => {
 }
 
  
-export default connect(mapStatetoProps,{adminAllUsersAction,deleteUserAction})(User)
+export default connect(mapStatetoProps,{adminAllUsersAction,deleteUserAction,deleteAllUserAction})(User)

@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    resetLink:{
+        data:String,
+        default:''    
+    },
     tokens:[{
         token:{
             type:String,
@@ -55,6 +59,7 @@ userSchema.methods.toJSON = function () {
     delete userObject.password;
     delete userObject.tokens;
     delete userObject.adminTokens;
+    delete userObject.resetLink;
 
     return userObject
 }
@@ -62,7 +67,7 @@ userSchema.methods.toJSON = function () {
 //Creating token for maintaining user session
 userSchema.methods.generateAdminAuthToken = async function(){
     const user = this;
-    const token = jwt.sign({_id:user._id.toString()}, 'python');
+    const token = jwt.sign({_id:user._id.toString()}, process.env.TOKEN);
 
     user.adminTokens = user.adminTokens.concat({ token });
     await user.save();
@@ -74,7 +79,7 @@ userSchema.methods.generateAdminAuthToken = async function(){
 //Creating token for maintaining user session
 userSchema.methods.generateAuthToken = async function(){
     const user = this;
-    const token = jwt.sign({_id:user._id.toString()}, 'python');
+    const token = jwt.sign({_id:user._id.toString()}, process.env.TOKEN);
 
     user.tokens = user.tokens.concat({ token });
     await user.save();

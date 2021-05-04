@@ -2,18 +2,23 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from  'react-redux'
 
-import Logout from '../forms/Logout'
+import Logout from '../auth/Logout'
 import auth from '../../../auth'
 import {Alert} from '../../Alert'
 
 
 class Nav extends React.Component{
 
-    dropdownContainer = React.createRef()
-
+    dropdownEventContainer = React.createRef()
+    dropdownAccountContainer = React.createRef()
     // on event click, toggle bettween sub option inside event menu
-    showMenu = (e) => {
-        this.dropdownContainer.current.classList.toggle('show');
+    showEventMenu = (e) => {
+        this.dropdownEventContainer.current.classList.toggle('show');
+        
+    }
+    // on event click, toggle bettween sub option inside account menu
+    showAccountMenu = (e) => {
+        this.dropdownAccountContainer.current.classList.toggle('show');
         
     }
 
@@ -29,7 +34,7 @@ class Nav extends React.Component{
         if(!auth.isAuthenticated())
             return <a href="#modal-login" onClick={(e) => this.displayLogin(e)}  className="nav__link">login</a>
 
-        return <Logout />
+        return <Link to="#" onClick={(e) => this.showAccountMenu(e)} className="nav__link dropdown__btn" >Account</Link>
     }
 
     // TOGGLE BETWEEN INFO AND ERROR ALERTS
@@ -76,14 +81,14 @@ class Nav extends React.Component{
                                 </Link>
                             </li>
                             <li className="nav__item">
-                                <Link to="#" onClick={(e) => this.showMenu(e)}  className="nav__link dropdown__btn">
+                                <Link to="#" onClick={(e) => this.showEventMenu(e)}  className="nav__link dropdown__btn">
                                     event
                                 </Link>
-                                <div className="dropdown__container disappear" ref={this.dropdownContainer}>
+                                <div className="dropdown__container disappear" ref={this.dropdownEventContainer}>
                                     <div className="dropdown__menu">
-                                        <a href="/register" className="dropdown__menu--list">event registration</a>
-                                        <a href="/dashboard" className="dropdown__menu--list">event dashboard</a>
-                                        <a href="/notice" className="dropdown__menu--list">event notice</a>
+                                        <Link to="/event/registration" className="dropdown__menu--list">event registration</Link>
+                                        <Link to="/event/dashboard" className="dropdown__menu--list">event dashboard</Link>
+                                        <Link to="/event/notice" className="dropdown__menu--list">event notice</Link>
                                     </div>
                                 </div>
                             </li>
@@ -99,6 +104,12 @@ class Nav extends React.Component{
                             </li>
                             <li className="nav__item">
                                 {this.loginOrLogout()}
+                                <div className="dropdown__container disappear" ref={this.dropdownAccountContainer}>
+                                    <div className="dropdown__menu">
+                                        <Link to="/account/profile" className="dropdown__menu--list">Profile</Link>
+                                        <Logout class_name="dropdown__menu--list" showAccountMenu={() => this.showAccountMenu()} />
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </nav>

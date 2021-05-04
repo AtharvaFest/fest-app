@@ -13,6 +13,10 @@ const store = createStore(reducers,composeEnhancers(applyMiddleware(reduxThunk))
 
 axios.interceptors.request.use( request => {
     request.baseURL = 'http://127.0.0.1:4000';
+    if(request.url.includes('admin')){
+        request.headers.Authorization = `Bearer ${localStorage.getItem('adminToken')}`;
+        return request;
+    }
     request.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     return request;
 });

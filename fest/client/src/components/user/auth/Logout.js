@@ -2,18 +2,19 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {logoutAction} from '../../../action'
 
-
 class Logout extends React.Component{
 
     logout = () => {
-        this.props.logoutAction()
+        this.props.logoutAction().then(()=>{
+            this.props.showAccountMenu();
+        })
     }
 
 
         render(){
             return(
                 <>
-                    <a href="#logout"  onClick={this.logout}   className="nav__link">logout</a>
+                    <a href="#logout" className={this.props.class_name} onClick={this.logout}>Logout</a>
                 </>
             );
         }

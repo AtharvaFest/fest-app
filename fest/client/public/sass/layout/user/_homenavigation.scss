@@ -166,7 +166,7 @@
     }
 
     &__menu{
-        background-color: white;
+        background-color: $color-primary-dark;
         width: 100%;
         display: grid;
         padding: 1rem 1rem;
@@ -176,13 +176,14 @@
             &:visited{
             padding: .3rem 0;
             text-decoration: none;
+            color: $color-white--1;
             display: grid;
             border-bottom: 2px solid transparent;
             transition: border-bottom .3s; 
             }
 
             &:active{
-                color: $color-primary-light;
+                color: $color-white--1;
             }
 
             &:hover {
