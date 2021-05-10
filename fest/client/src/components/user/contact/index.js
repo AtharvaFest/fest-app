@@ -6,9 +6,15 @@ const Contact = function() {
     return(
         <div>
             <Nav />
-            <div className="after-navigation"> {/*Styled in _navigation.scss*/}
-                Contact
-            </div>
+            <div className="contact">
+
+            <div>
+                contact
+            </div> 
+            <div>
+                footer    
+            </div> 
+            </div>          
         </div>
     );
 }

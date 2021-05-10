@@ -43,11 +43,11 @@ class Sign extends React.Component {
             
             <div className="form__group--sign">
                 <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
-                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
-                    <ion-icon name="eye" class="eye-icon"></ion-icon>
+                <span ref={this.eyeRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
+                    <span className="eye__invisible__svg"></span>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPass}>
-                    <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
+                <span  ref={this.eyeOffRef} style={{position:'relative'}} className="" onClick={this.showPass}>
+                    <span className="eye__visible__svg"></span>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
                 <div className="password__instruction">Password must be 5 characters long.</div>

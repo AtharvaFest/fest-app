@@ -1,0 +1,172 @@
+.aboutus__main {
+  width: 100vw;
+}
+
+.aboutdiv__main {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  height: max-content;
+
+  &__image {
+    background-image: url(../img/atharva_logo.png);
+    background-color: $color-primary-light;
+    background-size: 300px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 350px;
+    margin: 20px;
+    box-sizing: border-box;
+
+    @media only screen and (max-width: 900px) {
+      height: 300px;
+    }
+  }
+  &__text {
+    padding: 20px;
+  }
+}
+
+.aboutdiv__main__text__heading {
+  font-size: 40px;
+  font-weight: 600;
+  color: $color-primary-light;
+}
+.aboutdiv__main__text__paragraph {
+  font-size: 18px;
+}
+
+.aboutteam__heading {
+  font-size: 13px;
+  display: block;
+  margin: 20px 0px 5px 0px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutteam__heading2 {
+  font-size: 40px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutteam__card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.aboutteam__card__main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+//Our team.................................
+.aboutteam__card__main__ourTeam {
+  border: 1px solid #dedede;
+  text-align: center;
+  color: $color-primary-light;
+  overflow: hidden;
+  transition: all 0.3s ease 0s;
+}
+.aboutteam__card__main__ourTeam:hover {
+  background: $color-primary-light;
+  color: #fff;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__pic {
+  position: relative;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__pic img {
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease 0s;
+}
+.aboutteam__card__main__ourTeam:hover .aboutteam__card__main__pic img {
+  transform: translateY(-20px);
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__social {
+  width: 20%;
+  height: 100%;
+  background: $color-primary-light;
+  padding: 20px 0;
+  margin: 0;
+  list-style: none;
+  position: absolute;
+  top: 0;
+  left: -50%;
+  transition: all 0.5s ease 0s;
+}
+.aboutteam__card__main__ourTeam:hover .aboutteam__card__main__social {
+  left: 0;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__social li {
+  display: block;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__social li a {
+  display: block;
+  padding: 10px 0;
+  font-size: 20px;
+  color: #fff;
+  transition: all 0.5s ease 0s;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__social li a:hover {
+  color: #ff9b19;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__teamContent {
+  padding: 25px 0;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+}
+.aboutteam__card__main__ourTeam .aboutteam__card__main__post {
+  display: block;
+  font-size: 15px;
+  text-transform: capitalize;
+}
+@media only screen and (max-width: 990px) {
+  .aboutteam__card__main__ourTeam {
+    margin-bottom: 30px;
+  }
+}
+
+.social_icon_facebook {
+  content: url(../img/SVG/facebook.svg);
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 20px 0px;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+}
+.social_icon_instagram {
+  content: url(../img/SVG/instagram.svg);
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+}
+.social_icon_twitter {
+  content: url(../img/SVG/twitter.svg);
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+}
