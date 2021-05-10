@@ -61,6 +61,21 @@ class Nav extends React.Component {
             }
         })
     }
+
+    logoutAlert(){
+        console.log(this.props.isLogin);
+        if(this.props.isLogin){
+            console.log("true");
+        }
+    }
+
+    logoutButton(){
+        return(
+            <Logout class_name="horizontal-nav--sub-menu__item" onClick={this.logoutAlert} showAccountMenu={() => this.showAccountSubMenu()} />
+        )
+    }
+
+    
     
 
     render(){
@@ -107,14 +122,13 @@ class Nav extends React.Component {
                             <Link to="/about" className="horizontal-nav__link nav-link">About</Link>
                         </li>
                         <li className="horizontal-nav__item">
-                            {/* <Link to="/" className="horizontal-nav__link">Login</Link> */}
                                 {this.loginOrLogout()}
                                 <ul ref={this.accountSubMenuRef} className="horizontal-nav--sub-menu">
                                     <li>
                                         <Link to="/account/profile" className="horizontal-nav--sub-menu__item nav-link">Profile</Link>
                                     </li>
                                     <li>
-                                        <Logout class_name="horizontal-nav--sub-menu__item" showAccountMenu={() => this.showAccountSubMenu()} />
+                                        {this.logoutButton()}
                                     </li>
                                 </ul>
                         </li>

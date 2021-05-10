@@ -63,10 +63,10 @@ class ResetPassword extends React.Component{
                 
                 {this.renderError(meta)}
                 <input {...input} type={type} placeholder={label} className="reset-password__input" autoComplete="off" required/>
-                <span   className="visible__eye-icon hide" id={`${id}-eye`} onClick={()=>this.showHidePass(id)}>
+                <span   className="visible__eye-icon" id={`${id}-eye`} onClick={()=>this.showHidePass(id)}>
                     <ion-icon name="eye" class="eye-icon"></ion-icon>
                 </span>
-                <span  className="invisible__eye-icon" id={`${id}-eyeOff`} onClick={()=>this.showHidePass(id)}>
+                <span  className="invisible__eye-icon hide" id={`${id}-eyeOff`} onClick={()=>this.showHidePass(id)}>
                     <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
@@ -136,7 +136,7 @@ class ResetPassword extends React.Component{
                                 <div className="error_msg paragraph">{this.state.errPassword}</div>
                                 <Field name="newPassword" type={this.state.newPasswordState} component={this.renderPassword} label="New Password" id="new-pass" />
                                 <Field name="confirmPassword" type={this.state.confirmPasswordState} component={this.renderPassword} label="Confirm Password" id="confirm-pass" />
-                                <button className="form__button" >Reset Password</button>
+                                <button className="form__button reset-pass__btn" >Reset Password</button>
                             </form>
                         </div>                    
                     </div>

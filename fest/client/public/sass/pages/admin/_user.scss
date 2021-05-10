@@ -1,34 +1,3 @@
-.search{
-    &__container{
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    &__box{
-        align-self: center;
-        width: 100%;
-        padding: 1rem 1.5rem;
-        border: none;
-        border-radius: 50rem;
-        box-shadow: 0 .5rem 1rem rgba(#000,0.1);
-        color: inherit;
-        &:focus{
-            outline: none;
-            
-        }
-    }
-
-    &__icon{
-        margin-left: -2.5rem;
-        background-color: $color-white--1;
-        font-size: 1.6rem;
-        display: inline-block;
-        align-self: center;
-        z-index: 20;
-        cursor: pointer;
-    }
-}
 .user{
     &__header-section{
         border-bottom: 1px solid $color-grey-2;
@@ -40,7 +9,7 @@
 
     &__section{
         padding: 0 5rem;
-        padding-top: 3rem;
+        padding-top: 1rem;
     }
 
     &__heading{

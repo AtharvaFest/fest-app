@@ -55,10 +55,10 @@ class EditUser extends React.Component {
             
             <div className="form__group--sign">
                 <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off"/>
-                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
+                <span ref={this.eyeRef}  className="visible__eye-icon " onClick={this.showPass}>
                     <ion-icon name="eye" class="eye-icon"></ion-icon>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPass}>
+                <span  ref={this.eyeOffRef} className="invisible__eye-icon hide" onClick={this.hidePass}>
                     <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
@@ -68,17 +68,19 @@ class EditUser extends React.Component {
     }
 
      //On eye click making password filed 'password' type.
-     hidePass = (e) => {
+    hidePass = (e) => {
         this.setState({passwordStateSign:"password"});
-        this.eyeRef.current.classList.add('hide');
-        this.eyeOffRef.current.classList.remove('hide');
+        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
+        this.eyeOffRef.current.classList.add('hide');
+        this.eyeRef.current.classList.remove('hide');
     }
 
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordStateSign:"text"});
-        this.eyeOffRef.current.classList.add('hide');
-        this.eyeRef.current.classList.remove('hide');
+        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
+        this.eyeRef.current.classList.add('hide');
+        this.eyeOffRef.current.classList.remove('hide');
     }
 
 

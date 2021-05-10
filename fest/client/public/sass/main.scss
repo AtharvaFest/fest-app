@@ -35,11 +35,13 @@
 //// ADMIN
 
 @import './components/admin/logout';
+@import './components/admin/search';
 
 @import './layout/admin/modal';
 @import './layout/admin/sidebar';
 
 @import './pages/admin/adminpanel';
+@import './pages/admin/event';
 @import './pages/admin/login';
 @import './pages/admin/user';
 

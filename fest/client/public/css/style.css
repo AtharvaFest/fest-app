@@ -913,7 +913,7 @@ body {
 .horizontal-nav__container {
   position: fixed;
   width: 100vw;
-  min-height: 8vh;
+  min-height: 6rem;
   background-color: #422168;
   color: #fff;
   display: flex;
@@ -928,7 +928,7 @@ body {
     .horizontal-nav__right {
       background-color: #422168;
       position: absolute;
-      top: 8vh;
+      top: 5.8rem;
       right: 8rem;
       height: 92vh;
       width: 50%;
@@ -1029,7 +1029,8 @@ body {
       display: block; } }
 
 .after-navigation {
-  padding-top: 6.4rem;
+  top: 6rem;
+  position: absolute;
   background-color: #f7f7f7; }
   @media only screen and (max-width: 37.5em) {
     .after-navigation {
@@ -1169,13 +1170,16 @@ body {
   visibility: hidden;
   transform: translateY(-4rem); }
 
+.reset-pass__btn {
+  font-size: 1.6rem; }
+
 .logout__btn {
   text-transform: uppercase;
   font-size: 1.6rem;
   border: 1.8px solid #6b35a9;
   border-radius: 50rem;
   text-decoration: none;
-  padding: .8rem 1.8rem;
+  padding: .5rem 1.5rem;
   letter-spacing: 1px;
   cursor: pointer;
   color: #6b35a9; }
@@ -1184,6 +1188,32 @@ body {
   .logout__btn:hover {
     background-color: #6b35a9;
     color: #fff; }
+
+.search__container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.search__box {
+  align-self: center;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 50rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  color: inherit; }
+  .search__box:focus {
+    outline: none; }
+
+.search__icon {
+  margin-left: -2.5rem;
+  background-color: #fff;
+  font-size: 1.6rem;
+  display: inline-block;
+  align-self: center;
+  z-index: 20;
+  cursor: pointer; }
 
 .form__checkbox {
   width: 5.5rem;
@@ -1399,6 +1429,32 @@ body {
     .admin-panel__section {
       margin-left: 0; } }
 
+.admin-panel__navbar {
+  display: grid;
+  align-content: center;
+  padding-bottom: .5rem;
+  grid-auto-flow: column; }
+
+.admin-panel__navbar-left {
+  justify-self: start; }
+
+.admin-panel__navbar-right {
+  justify-self: end; }
+
+.add-event {
+  text-transform: uppercase;
+  font-size: 1.6rem;
+  border: 1.8px solid #6b35a9;
+  border-radius: 50rem;
+  background-color: #6b35a9;
+  text-decoration: none;
+  padding: .5rem 1.5rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: #fff; }
+  .add-event:focus {
+    outline: none; }
+
 .admin-login__background {
   height: 100vh;
   background-color: #eee;
@@ -1503,32 +1559,6 @@ body {
   font-weight: 400;
   letter-spacing: .3rem; }
 
-.search__container {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.search__box {
-  align-self: center;
-  width: 100%;
-  padding: 1rem 1.5rem;
-  border: none;
-  border-radius: 50rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-  color: inherit; }
-  .search__box:focus {
-    outline: none; }
-
-.search__icon {
-  margin-left: -2.5rem;
-  background-color: #fff;
-  font-size: 1.6rem;
-  display: inline-block;
-  align-self: center;
-  z-index: 20;
-  cursor: pointer; }
-
 .user__header-section {
   border-bottom: 1px solid #bbb;
   display: flex;
@@ -1538,7 +1568,7 @@ body {
 
 .user__section {
   padding: 0 5rem;
-  padding-top: 3rem; }
+  padding-top: 1rem; }
 
 .user__heading {
   color: #6b35a9;

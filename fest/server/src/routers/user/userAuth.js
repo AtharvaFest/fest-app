@@ -8,7 +8,7 @@ const sgMail = require('../../sendgrid/index')
 const { body, validationResult } = require('express-validator'); // It is middleware use to validate the date eg (email,mobile no. etc)
 const router = new express.Router();
 
-router.post('/signuptest',async (req,res) => { // hyaala delete ka raicha aahe
+router.post('/signuptest',async (req,res) => { // hyaala delete karaicha aahe
   try{
 
       const user = await User({...req.body});
@@ -119,7 +119,6 @@ router.get('/logout',auth,async (req,res)=>{
             return token.token !== req.token;
         })
         await req.user.save();
-    
         res.send();
     } catch(e) {
         res.status(500).send()

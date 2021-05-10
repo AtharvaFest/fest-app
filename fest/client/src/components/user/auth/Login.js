@@ -56,11 +56,11 @@ class Login extends React.PureComponent {
         return(
             <div className="form__group--login">
                 <input {...input} type={type} placeholder={label} className="form__input--login" autoComplete="off" required/>
-                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
+                <span ref={this.eyeRef}  className="visible__eye-icon" onClick={this.showPass}>
                     <ion-icon name="eye" class="eye-icon"></ion-icon>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPass}>
-                    <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
+                <span  ref={this.eyeOffRef} className="invisible__eye-icon hide" onClick={this.hidePass}>
+                    <ion-icon name="eye-off" class="eye-off-icon "></ion-icon>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
             </div>
@@ -71,16 +71,16 @@ class Login extends React.PureComponent {
     hidePass = (e) => {
         this.setState({passwordState:"password"});
         this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
-        this.eyeRef.current.classList.add('hide');
-        this.eyeOffRef.current.classList.remove('hide');
+        this.eyeOffRef.current.classList.add('hide');
+        this.eyeRef.current.classList.remove('hide');
     }
 
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordState:"text"});
         this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
-        this.eyeOffRef.current.classList.add('hide');
-        this.eyeRef.current.classList.remove('hide');
+        this.eyeRef.current.classList.add('hide');
+        this.eyeOffRef.current.classList.remove('hide');
     }
 
        
@@ -88,7 +88,8 @@ class Login extends React.PureComponent {
     onSubmit = formValue => {
         this.props.loginAction(formValue).then((value) => {
                 this.showAlert = true
-                this.setState({alertInfo:true,alertErr:false});                
+                this.setState({alertInfo:false,alertErr:false});  
+                this.setState({alertInfo:true,alertErr:false});        
                 for(const value in formValue){
                     formValue[value] = "";
                 }
@@ -96,20 +97,22 @@ class Login extends React.PureComponent {
             }).catch((err) => {
                 if(err?.response?.status === 401){
                     this.showAlert = true
-                    this.setState({alertErr:true,alertInfo:false});                    
+                     
+                    this.setState({alertInfo:false,alertErr:false});   
+                    this.setState({alertErr:true,alertInfo:false});                   
                 }
             });
     }
 
      // TOGGLE BETWEEN INFO AND ERROR ALERTS
      alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo){
+        if(alertInfo && this.showAlert){
             this.showAlert = false
             return(
                 <Alert message="Login successful" containerId="alert-login" alertType={"info"} />
             );
         }
-        if(alertErr){
+        if(alertErr && this.showAlert){
             this.showAlert = false
             return(
                 <Alert message="Unable to login" containerId="alert-login" alertType={"error"} />
@@ -143,7 +146,6 @@ class Login extends React.PureComponent {
                         </div>
                     </div>
                 </div>
-
                 {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
 
             </>

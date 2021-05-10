@@ -15,9 +15,7 @@ class Logout extends Component {
 
     render(){
         return(
-            <div className="logout__container">
                 <button className="logout__btn" onClick={this.logoutHandler}>Logout</button>
-            </div>
         );
     }
 }

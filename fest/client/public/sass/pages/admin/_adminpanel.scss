@@ -12,4 +12,20 @@
         }
     }
 
+    &__navbar{
+        display: grid;
+        align-content: center;
+        padding-bottom: .5rem;
+        grid-auto-flow: column;
+    }
+
+    &__navbar-left{
+        justify-self: start;
+    }
+
+    &__navbar-right{
+        justify-self: end;
+    }
+
 }
+

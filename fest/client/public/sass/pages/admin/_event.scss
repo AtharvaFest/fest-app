@@ -1,0 +1,16 @@
+.add-event{
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    border: 1.8px solid $color-primary;
+    border-radius: 50rem;
+    background-color:$color-primary;
+    text-decoration: none;
+    padding: .5rem 1.5rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    color: $color-white--1;
+
+    &:focus{
+        outline: none;
+    }
+}

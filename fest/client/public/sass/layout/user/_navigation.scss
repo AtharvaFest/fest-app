@@ -3,7 +3,7 @@
     &__container{
         position: fixed;
         width: 100vw;
-        min-height: 8vh;
+        min-height: 6rem;
         background-color: $color-primary-dark;
         color: $color-white--1;
         display: flex;
@@ -22,7 +22,8 @@
         @include respond(tab-port){
             background-color: $color-primary-dark;
             position: absolute;
-            top:8vh;
+            top:5.8rem;
+            // min-height: 8rem;
             right: 8rem;
             height:92vh;
             width: 50%;
@@ -159,8 +160,9 @@
 //////Main section after horizontal navigation
 
 .after-navigation{
-    padding-top: 6.4rem;
-    // top: 6rem;
+    // padding-top: 6.4rem;
+    top: 6rem;
+    position: absolute;
     background-color: $color-white--2;
     // height: 100vh;  // remove this line after styling pages
     @include respond(phone){

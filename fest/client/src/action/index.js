@@ -8,7 +8,9 @@ import {
     ADMIN_ALL_USERS,
     USER_DELETE,
     USER_DELETE_ALL,
-    USER_EDIT
+    USER_EDIT,
+    READ_EVENT,
+    EVENT_DELETE
 } from './type'
 
 ///////////////////////////////////////////////
@@ -62,6 +64,7 @@ export const resetPasswordAction = (formValue) => {
 ///////////////////////////////////////////////
 ////ADMIN ACTION
 
+//Auth action
 export const adminLoginAction = (formValue) => {
     return async (dispatch) => {
         const response = await axios.post('/admin/login',{...formValue});
@@ -78,6 +81,7 @@ export const adminLogoutAction = () => {
     }
 }
 
+//USER ACTIONS
 export const adminAllUsersAction = () => {
     return async (dispatch) => {
         const response = await axios.get('/admin/users');
@@ -103,6 +107,21 @@ export const editUserAction = (formValue,id) => {
     return async (dispatch) => {
         const response = await axios.patch(`/admin/user/${id}`,{...formValue});
         dispatch({type:USER_EDIT,payload:response.data});
+    }
+}
+
+//EVENT ACTIONS 
+export const readEventsAction = () => {
+    return async (dispatch) => {
+        const response = await axios.get('/event/read');
+        dispatch({type:READ_EVENT,payload:response.data});
+    }
+}
+
+export const deleteEventAction = (id) => {
+    return async (dispatch) => {
+        const response = await axios.delete(`/event/delete/${id}`);
+        dispatch({type:EVENT_DELETE,payload:response.data});
     }
 }
 

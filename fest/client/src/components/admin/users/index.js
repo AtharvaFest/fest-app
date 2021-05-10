@@ -29,11 +29,7 @@ class User extends React.Component{
         this.deleteCount += 1;
         if(this.deleteCount < 4){
             if(window.confirm("Delete user?")){
-                this.props.deleteUserAction(id).then(()=>{
-
-                }).catch((err) =>{
-                    history.push('/adminlogin')
-                })
+                this.props.deleteUserAction(id);
             }
         }else{
             this.props.deleteUserAction(id);
@@ -43,11 +39,7 @@ class User extends React.Component{
 
     deleteAllUser = (id) => {
         if(window.confirm("Delete all user?")){
-            this.props.deleteAllUserAction().then(()=>{
-
-            }).catch((err) =>{
-                history.push('/adminlogin')
-            })
+            this.props.deleteAllUserAction();
         }
     }
 
@@ -156,7 +148,12 @@ class User extends React.Component{
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
-                        <div className="user__section">
+                        <div className="user__section">  
+                            <div className="admin-panel__navbar">
+                                <div className="admin-panel__navbar-right">
+                                    <Logout />
+                                </div>  
+                            </div>                        
                             <div className="user__header-section">
                                 <h4 className="heading--4 user__heading">user</h4>
                                 <div className="search__container">   
@@ -165,8 +162,8 @@ class User extends React.Component{
                                         <ion-icon name="search-outline" ></ion-icon>
                                     </span>
                                 </div>
-                                <Logout />
-                            </div>                 
+                            </div>  
+                                        
                             <div className="user__container">
                                     <div id="shadow_overlay_top"></div>
                                     <div id="shadow_overlay_left"></div>

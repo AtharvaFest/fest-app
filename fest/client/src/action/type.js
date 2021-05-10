@@ -13,3 +13,5 @@ export const ADMIN_ALL_USERS = "ADMIN_ALL_USERS";
 export const USER_DELETE = "USER_DELETE";
 export const USER_DELETE_ALL = "USER_DELETE_ALL";
 export const USER_EDIT = "USER_EDIT";
+export const READ_EVENT = "READ_EVENT";
+export const EVENT_DELETE = "EVENT_DELETE";
