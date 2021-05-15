@@ -1,33 +1,25 @@
-.aboutus__main {
-  width: 100vw;
-}
+//AboutDiv Starts here
+.aboutdiv__main{
+  display: grid;
+  grid-template-columns: 4fr 8fr;
 
-.aboutdiv__main {
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  height: max-content;
-
-  &__image {
-    background-image: url(../img/atharva_logo.png);
-    background-color: $color-primary-light;
-    background-size: 300px;
-    border-radius: 20px;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 350px;
-    margin: 20px;
-    box-sizing: border-box;
-
-    @media only screen and (max-width: 900px) {
-      height: 300px;
-    }
-  }
-  &__text {
-    padding: 20px;
+  @media screen and (max-width: 650px){
+    grid-template-columns: auto;
   }
 }
 
+.aboutdiv__main_pic_style{
+  background-color: $color-primary-light;
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.aboutdiv__main_text{
+  padding: 20px;
+}
 .aboutdiv__main__text__heading {
   font-size: 40px;
   font-weight: 600;
@@ -37,9 +29,10 @@
   font-size: 18px;
 }
 
+
+//AboutTeam Starts here
 .aboutteam__heading {
   font-size: 13px;
-  display: block;
   margin: 20px 0px 5px 0px;
   color: rgba(0, 0, 0, 0.3);
   font-weight: 600;
@@ -59,114 +52,121 @@
   align-items: center;
 }
 
-.aboutteam__card {
-  display: flex;
-  flex-wrap: wrap;
-}
 
-.aboutteam__card__main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-}
+//AboutTeamCard starts here
+.aboutteam__card{
+  display: grid;
+  grid-template-columns: auto auto auto;
 
-//Our team.................................
-.aboutteam__card__main__ourTeam {
-  border: 1px solid #dedede;
-  text-align: center;
-  color: $color-primary-light;
-  overflow: hidden;
-  transition: all 0.3s ease 0s;
-}
-.aboutteam__card__main__ourTeam:hover {
-  background: $color-primary-light;
-  color: #fff;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__pic {
-  position: relative;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__pic img {
-  width: 100%;
-  height: auto;
-  transition: all 0.3s ease 0s;
-}
-.aboutteam__card__main__ourTeam:hover .aboutteam__card__main__pic img {
-  transform: translateY(-20px);
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__social {
-  width: 20%;
-  height: 100%;
-  background: $color-primary-light;
-  padding: 20px 0;
-  margin: 0;
-  list-style: none;
-  position: absolute;
-  top: 0;
-  left: -50%;
-  transition: all 0.5s ease 0s;
-}
-.aboutteam__card__main__ourTeam:hover .aboutteam__card__main__social {
-  left: 0;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__social li {
-  display: block;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__social li a {
-  display: block;
-  padding: 10px 0;
-  font-size: 20px;
-  color: #fff;
-  transition: all 0.5s ease 0s;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__social li a:hover {
-  color: #ff9b19;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__teamContent {
-  padding: 25px 0;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__title {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 0 0 10px 0;
-}
-.aboutteam__card__main__ourTeam .aboutteam__card__main__post {
-  display: block;
-  font-size: 15px;
-  text-transform: capitalize;
-}
-@media only screen and (max-width: 990px) {
-  .aboutteam__card__main__ourTeam {
-    margin-bottom: 30px;
+  @media screen and (max-width: 966px) {
+    grid-template-columns: auto auto;
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: auto;
   }
 }
 
-.social_icon_facebook {
-  content: url(../img/SVG/facebook.svg);
+.aboutteam__card__main{
+  position: relative;
+  box-shadow: 2px 6px 9px #888888;
+  height: 380px;
+  margin: 20px;
   display: flex;
   justify-content: center;
-  margin: 10px 0px 20px 0px;
   align-items: center;
-  width: 100%;
-  height: 20px;
+  flex-direction: column;
+  text-align: center;
+  overflow-y: hidden;
+
+  @media screen and (max-width: 800px) {
+    margin: 20px 23%;
+  }
+  @media screen and (max-width: 600px) {
+    margin: 20px 20%;
+    height: 340px;
+  }
+  @media screen and (max-width: 500px) {
+    margin: 20px 16%;
+  }
+  @media screen and (max-width: 400px) {
+    margin: 20px 7%;
+  }
+
+  &:hover{
+    .aboutteam__card__main_photo_style{
+      transform: scale(0.8);
+      transition: all 1.3s ease 0s;
+    }
+
+    .aboutteam__card__main_socialicons{
+      bottom: 0;  
+      transition: all 0.3s ease 0s;
+    }
+  }
 }
-.social_icon_instagram {
-  content: url(../img/SVG/instagram.svg);
+
+.aboutteam__card__main_socialicons{
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  bottom: -30px;
+  transition: all 0.3s ease 0s;
+  background-color:$color-primary-light;
   display: flex;
   justify-content: center;
-  margin: 20px 0px;
   align-items: center;
-  width: 100%;
-  height: 20px;
+
+  & > div{
+    margin: 0 5px;
+    width: 30px;
+    height: 100%;
+  }
 }
-.social_icon_twitter {
-  content: url(../img/SVG/twitter.svg);
-  display: flex;
-  justify-content: center;
-  margin: 20px 0px;
-  align-items: center;
+
+.aboutteam__card__main_socialicons_singleicon{
+  padding: 5px 0;
+  width: 30px;
+  height: 100%;
+  fill: #fff;
+}
+.aboutteam__card__main_socialicons_singleicon:hover{
+  background-color: #fff;
+  fill: $color-primary-light;
+  cursor: pointer;
+}
+
+.aboutteam__card__main_photo{
+  margin: 20px;
+  height: 240px;
+  width: 240px;
+  @media screen and (max-width: 800px) {
+    height: 200px;
+    width: 200px;
+  }
+  @media screen and (max-width: 600px) {
+    height: 180px;
+    width: 180px;
+  }
+}
+.aboutteam__card__main_photo_style{
+  height: 100%;
   width: 100%;
-  height: 20px;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 1.3s ease 0s;
+}
+
+.aboutteam__card__main__developer_info{
+  margin-bottom: 20px;
+}
+.aboutteam__card__main__developer_name{
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.aboutteam__card__main__developer_role{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0.8;
+  margin-bottom: 10px;
 }

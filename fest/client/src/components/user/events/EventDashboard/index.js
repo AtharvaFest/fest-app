@@ -1,22 +1,22 @@
 import React from "react";
 
-import Nav from "../nav";
-import Footer from "../footer";
+import Nav from "../../nav";
+import Footer from "../../footer";
 
-const Contact = function () {
+function EventDashboard() {
   return (
     <div>
       <Nav />
       <div className="after-navigation">
         <div className="">
           <div className="">
-            Contact us
+            Event Dashboard
           </div>
         </div>
         <Footer />
       </div>
     </div>
   );
-};
+}
 
-export default Contact;
+export default EventDashboard;

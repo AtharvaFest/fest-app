@@ -8,6 +8,8 @@ import {Router,Switch,Route} from 'react-router-dom'
 import Home from './user/home'
 import Gallery from './user/gallery'
 import Event from './user/events/EventRegistration'
+import EventDashboard from './user/events/EventDashboard'
+import EventNotice from './user/events/EventNotice'
 import About from './user/about'
 import Contact from './user/contact'
 import Profile from './user/profile'
@@ -43,7 +45,9 @@ class App extends Component {
                         {/* <Route exact path='/home'  component={Home}  /> */}
                         <Route exact path='/'  component={Home}  />
                         <Route path='/gallery' exact component={Gallery}  />
-                         <ProtectedUserRoute path='/event/registration' exact component={Event}  />
+                        <ProtectedUserRoute path='/event/registration' exact component={Event}  />
+                        <Route path='/event/dashboard' exact component={EventDashboard}  />
+                        <Route path='/event/notice' exact component={EventNotice}  />
                         <Route path='/about' exact component={About}  />
                         <Route path='/contact' exact component={Contact}  />
                         <ProtectedUserRoute path='/account/profile' exact component={Profile}  />

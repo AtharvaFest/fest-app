@@ -1,7 +1,8 @@
 .gallery_main {
-  // width: 100vw;
+  width: 100%;
 }
 
-.gallery_photos {
-  height: 300px; 
+.gallery_photos_body{
+  width: 100%;
+  min-height: 55vh;
 }

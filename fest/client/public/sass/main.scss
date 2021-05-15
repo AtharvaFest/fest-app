@@ -25,12 +25,14 @@
 
 @import './pages/user/emailActivation';
 @import './pages/user/eventRegistration';
+@import './pages/user/eventNotice';
 @import './pages/user/gallery';
 @import './pages/user/home';
 @import './pages/user/profile';
 @import './pages/user/resetPassword';
 @import './pages/user/aboutus';
 @import './pages/user/gallery';
+@import './pages/user/reactImageGallery';
 
 
 ////////////////////////////////////////////////////////
@@ -44,6 +46,4 @@
 @import './pages/admin/adminpanel';
 @import './pages/admin/login';
 @import './pages/admin/user';
-
-
 

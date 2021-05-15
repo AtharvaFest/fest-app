@@ -74,7 +74,7 @@
   display: flex;
   flex-direction: column;
 }
-.footer_categories > a{
+.footer_categories > span{
   font-size: 14px;
   text-decoration: none;
   color: #fff;
@@ -82,10 +82,11 @@
 
   &:hover{
     color: rgba(255, 255, 255, 0.349);
+    cursor: pointer;
   }
 }
 
-.footer_quicklinks > a{
+.footer_quicklinks > span{
   font-size: 14px;
   text-decoration: none;
   color: #fff;
@@ -93,10 +94,11 @@
 
   &:hover{
     color: rgba(255, 255, 255, 0.349);
+    cursor: pointer;
   }
 }
 
-.footer_social > a{
+.footer_social > span{
   display: flex;
   flex-wrap: wrap;
 }
@@ -109,6 +111,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover{
+    cursor: pointer;
+  }
 }
 .footer_social_icon_instagram{
   content: url(../img/SVG/icons8instagram.svg);
@@ -118,6 +124,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover{
+    cursor: pointer;
+  }
 }
 .footer_social_icon_twitter{
   content: url(../img/SVG/icons8twitter.svg);
@@ -127,4 +137,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover{
+    cursor: pointer;
+  }
 }

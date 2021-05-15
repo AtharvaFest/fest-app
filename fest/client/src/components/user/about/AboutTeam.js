@@ -11,9 +11,9 @@ function AboutTeam() {
                 Our Developers
             </div>
             <div className='aboutteam__card'>
-                <div className='col_sm_12 col_md_12 col_lg_4'> <AboutTeamCard /> </div>
-                <div className='col_sm_12 col_md_12 col_lg_4'> <AboutTeamCard /> </div>
-                <div className='col_sm_12 col_md_12 col_lg_4'> <AboutTeamCard /> </div>
+                <div> <AboutTeamCard /> </div>
+                <div> <AboutTeamCard /> </div>
+                <div> <AboutTeamCard /> </div>
             </div>
         </div>
     )
