@@ -3,7 +3,7 @@ import rahul from "../../../assets/image/head--1.webp";
 import { ReactComponent as LogoFb } from '../../../assets/image/logofacebook.svg';
 import { ReactComponent as LogoInsta } from '../../../assets/image/logoinstagram.svg';
 import { ReactComponent as LogoTwitter } from '../../../assets/image/logotwitter.svg';
-import { ReactComponent as LogoLinkedin } from '../../../assets/image/logolinkedin.svg';
+import { ReactComponent as LogoLinkedin } from '../../../assets/image/logolinkedin2.svg';
 
 const openInNewTab = (url) => {
   const newWindow = window.open(url, "_blank", "noopener,noreferrer");
