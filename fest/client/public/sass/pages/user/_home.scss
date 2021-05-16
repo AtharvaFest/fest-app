@@ -12,7 +12,10 @@
 
 // HOME --> SPONSOR
 .sponsors-container{
-    background-image: linear-gradient(to bottom ,rgba(#3c3c3c, 0.7), rgba(#3c3c3c, 0.7));
+    background-image: linear-gradient(to bottom ,rgba($color-primary, 0.808), rgba($color-primary-dark, 0.808)), url(../../img/head--5.webp);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
     position: relative;
     padding: 10rem 5rem;  
     

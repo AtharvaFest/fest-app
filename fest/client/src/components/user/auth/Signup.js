@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Field,reduxForm} from 'redux-form'
+import {Field,reduxForm,reset} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {signUpAction} from '../../../action'
@@ -88,9 +88,6 @@ class Sign extends React.Component {
         this.props.signUpAction(formValue).then(() => {
             alert("Check your email to activate email account");
             this.emptyError();
-            for(const value in formValue){
-                formValue[value] = "";
-            }
             this.hideModal();
         }).catch((err) => {
             if(err?.response?.status !== 200){
@@ -177,9 +174,11 @@ class Sign extends React.Component {
 
 }
 
-
+const  afterSubmit = (_, dispatch) =>
+  dispatch(reset('signForm'));
 
 export default connect(null,{signUpAction})(reduxForm({
     form:'signForm',
+    onSubmitSuccess:afterSubmit
 })(Sign));
 

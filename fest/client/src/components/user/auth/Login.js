@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import {Field,reduxForm} from 'redux-form'
+import {Field,reduxForm,reset} from 'redux-form'
 import {Alert} from '../../Alert'
 
 import {loginAction,forgotPasswordAction} from '../../../action'
@@ -90,14 +90,10 @@ class Login extends React.PureComponent {
                 this.showAlert = true
                 this.setState({alertInfo:false,alertErr:false});  
                 this.setState({alertInfo:true,alertErr:false});        
-                for(const value in formValue){
-                    formValue[value] = "";
-                }
                 this.hideModal();
             }).catch((err) => {
                 if(err?.response?.status === 401){
                     this.showAlert = true
-                     
                     this.setState({alertInfo:false,alertErr:false});   
                     this.setState({alertErr:true,alertInfo:false});                   
                 }
@@ -155,10 +151,12 @@ class Login extends React.PureComponent {
 
 }
 
-
+const  afterSubmit = (_, dispatch) =>
+  dispatch(reset('loginForm'));
 
 
 export default connect(null,{loginAction,forgotPasswordAction})(reduxForm({
     form:'loginForm',
+    onSubmitSuccess:afterSubmit
 })(Login));
 

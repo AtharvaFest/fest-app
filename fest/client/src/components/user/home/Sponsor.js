@@ -60,7 +60,7 @@ const Sponsor = function() {
                 </video>
             </div> */}
             <div className="heading--container">
-                <h3 className="heading--3 section-heading">Sponsors</h3>
+                <h3 className="heading--3 section-heading sponser-header">Sponsors</h3>
             </div>
             <div className="sponsors--box">
                 <div className="sponsor">

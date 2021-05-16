@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import moment from 'moment'
 import Sidebar from '../sidebar/Sidebar'
-import {readEventsAction,deleteEventAction} from '../../../action'
-// import EditUser from './EditUser'
+import {createEventsAction,readEventsAction,deleteEventAction} from '../../../action'
 import Logout from '../auth/Logout'
 import history from '../../../history'
 
@@ -47,6 +47,12 @@ class Event extends React.Component{
     //     }
     // }
 
+    //on addEvent click, display Create event modal
+    // createEventModal = (e) => {
+    //     const modalCreateEvent = document.querySelector(`#modal__create-event`);
+    //     modalCreateEvent.classList.add('visible');
+    // }
+
     getAllEventData = () =>{
         if(this.state.allEvents === null) {
             return (<div className="no-content">Loading...</div>);
@@ -64,7 +70,8 @@ class Event extends React.Component{
                         <th>sr.</th>
                         <th>Event</th>
                         <th>Date</th>
-                        <th>Price</th>
+                        <th>Entry Fee</th>
+                        <th>Prize Worth</th>
                         <th>Discount</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -77,8 +84,9 @@ class Event extends React.Component{
                             <tr key={event._id}>
                                 <td>{index+1}</td>
                                 <td>{event.event}</td>
-                                <td>{event.date}</td>
-                                <td>{event.price}</td>
+                                <td>{moment(event.date).format('LL')}</td>
+                                <td>{event.fee}</td>
+                                <td>{event.prize}</td>
                                 <td>{event.discount}%</td>
                                 <td>
                                     {/* <span className="edit-btn" onClick={()=>this.editUser(user)}>
@@ -157,18 +165,14 @@ class Event extends React.Component{
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
-                        <div className="user__section">
+                        <div className="admin-panel__content">
                             <div className="admin-panel__navbar">
-                                <div className="admin-panel__navbar-left">
-                                    <button className="add-event">Add Event</button>
-                                    {/* <button className="add-event">Add Event</button> */}
-                                </div>
                                 <div className="admin-panel__navbar-right">
                                     <Logout />
                                 </div>  
                             </div>
-                            <div className="user__header-section">
-                                <h4 className="heading--4 user__heading">Event Manage</h4>
+                            <div className="admin-panel__header-section">
+                                <a href="/admin/event/create" className="add-event">Add Event</a>    
                                 <div className="search__container">   
                                     <input  type="text" placeholder="Search" value={this.state.search} onChange={(e)=>this.setState({search:e.target.value})} onKeyPress={this.enterPressed} className="search__box" />
                                     <span className="search__icon" onClick={this.searchHandler} >
@@ -176,12 +180,12 @@ class Event extends React.Component{
                                     </span>
                                 </div>
                             </div>                 
-                            <div className="user__container">
+                            <div className="shadow__container">
                                     <div id="shadow_overlay_top"></div>
                                     <div id="shadow_overlay_left"></div>
                                     <div id="shadow_overlay_right"></div>
                                     <div id="shadow_overlay_bottom"></div>
-                                <div className="user__content">
+                                <div className="table__content">
                                     {this.getAllEventData()}
                                 </div>
                             </div>
@@ -190,6 +194,7 @@ class Event extends React.Component{
                 </div>
                 
                 {/* {this.showEditUserModal()} */}
+                {/* <CreateEvent /> */}
             </>
         );
     }
@@ -200,4 +205,4 @@ const mapStatetoProps = (state) => {
 }
 
  
-export default connect(mapStatetoProps,{readEventsAction,deleteEventAction})(Event)
+export default connect(mapStatetoProps,{createEventsAction,readEventsAction,deleteEventAction})(Event)

@@ -2,20 +2,24 @@ const mongoose = require('mongoose')
 
 
 const eventSchema = mongoose.Schema({
-	event: {
+	event:{
 		type:String,
 		required:true
 
 	},
 	date:{
 		type: Date,
-		ref:'DateEvent'
+		required:true
 	},
-	price: {
+	fee:{
 		type: Number,
 		required:true
 	},
-	discount: {
+	prize:{
+		type: Number,
+		required:true
+	},
+	discount:{
 		type: Number,
 		default: 0
 	}

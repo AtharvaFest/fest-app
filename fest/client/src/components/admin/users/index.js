@@ -148,15 +148,15 @@ class User extends React.Component{
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
-                        <div className="user__section">  
+                        <div className="admin-panel__content">  
                             <div className="admin-panel__navbar">
                                 <div className="admin-panel__navbar-right">
                                     <Logout />
                                 </div>  
                             </div>                        
-                            <div className="user__header-section">
-                                <h4 className="heading--4 user__heading">user</h4>
-                                <div className="search__container">   
+                            <div className="admin-panel__header-section">
+                            {/* <h4 className="heading--4 user__heading">Event Manage</h4>   */}
+                                <div className="search__container"> 
                                     <input  type="text" placeholder="Search" value={this.state.search} onChange={(e)=>this.setState({search:e.target.value})} onKeyPress={this.enterPressed} className="search__box" />
                                     <span className="search__icon" onClick={this.searchHandler} >
                                         <ion-icon name="search-outline" ></ion-icon>
@@ -164,12 +164,12 @@ class User extends React.Component{
                                 </div>
                             </div>  
                                         
-                            <div className="user__container">
+                            <div className="shadow__container">
                                     <div id="shadow_overlay_top"></div>
                                     <div id="shadow_overlay_left"></div>
                                     <div id="shadow_overlay_right"></div>
                                     <div id="shadow_overlay_bottom"></div>
-                                <div className="user__content">
+                                <div className="table__content">
                                     {this.getAllUsersData()}
                                 </div>
                             </div>

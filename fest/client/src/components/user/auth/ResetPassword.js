@@ -1,5 +1,5 @@
 import React from 'react'
-import {Field,reduxForm} from 'redux-form'
+import {Field,reduxForm,reset} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {resetPasswordAction} from '../../../action'
@@ -159,8 +159,11 @@ const validate = formValue => {
     return errors;
   };
 
+const  afterSubmit = (_, dispatch) =>
+  dispatch(reset('resetPassword'));
 
 export default connect(null,{resetPasswordAction})(reduxForm({
     form:'resetPassword',
-    validate
+    validate,
+    onSubmitSuccess:afterSubmit
 })(ResetPassword))

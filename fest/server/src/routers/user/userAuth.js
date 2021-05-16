@@ -5,7 +5,7 @@ const User = require('../../models/user/userAuth');
 const auth = require('../../middleware/auth');
 const sgMail = require('../../sendgrid/index')
 
-const { body, validationResult } = require('express-validator'); // It is middleware use to validate the date eg (email,mobile no. etc)
+const { body, validationResult } = require('express-validator'); // It is middleware use to validate the data eg (email,mobile no. etc)
 const router = new express.Router();
 
 router.post('/signuptest',async (req,res) => { // hyaala delete karaicha aahe
