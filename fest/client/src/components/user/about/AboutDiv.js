@@ -17,11 +17,7 @@ function AboutDiv() {
             lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum
             dolor sit amet, consectetur adipiscing elit lorem ipsum dolor sit
             amet, consectetur adipiscing elit lorem ipsum dolor sit amet,
-            consectetur adipiscing elit lorem ipsum dolor sit amet, consectetur
-            adipiscing elit lorem ipsum dolor sit amet, consectetur adipiscing
-            elit lorem ipsum dolor sit amet, consectetur adipiscing elit lorem
-            ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum dolor
-            sit amet, consectetur adipiscing elit lorem ipsum dolor sit amet,
+            consectetur adipiscing elit lorem ipsum dolor sit amet, consectet
             consectetur adipiscing elit{" "}
           </p>
         </div>

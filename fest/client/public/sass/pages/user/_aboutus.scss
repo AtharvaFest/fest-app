@@ -24,9 +24,15 @@
   font-size: 40px;
   font-weight: 600;
   color: $color-primary-light;
+  @media (max-width:800px) {
+    font-size: 35px;
+  }
 }
 .aboutdiv__main__text__paragraph {
   font-size: 18px;
+  @media (max-width:800px) {
+    font-size: 14px;
+  }
 }
 
 
@@ -52,7 +58,7 @@
   align-items: center;
 }
 
-
+ 
 //AboutTeamCard starts here
 .aboutteam__card{
   display: grid;
@@ -68,7 +74,7 @@
 
 .aboutteam__card__main{
   position: relative;
-  box-shadow: 2px 6px 9px #888888;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   height: 380px;
   margin: 20px;
   display: flex;
@@ -95,12 +101,17 @@
   &:hover{
     .aboutteam__card__main_photo_style{
       transform: scale(0.8);
-      transition: all 1.3s ease 0s;
+      transition: all 0.3s ease 0s;
     }
 
     .aboutteam__card__main_socialicons{
       bottom: 0;  
       transition: all 0.3s ease 0s;
+    }
+
+    .aboutteam__card__main__developer_info{
+      transition: all 0.3s ease 0s;
+      margin-top: -40px;
     }
   }
 }
@@ -153,11 +164,11 @@
   width: 100%;
   border-radius: 50%;
   transform: scale(1);
-  transition: all 1.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 .aboutteam__card__main__developer_info{
-  margin-bottom: 20px;
+  transition: all 0.3s ease 0s;    
 }
 .aboutteam__card__main__developer_name{
   font-size: 32px;
