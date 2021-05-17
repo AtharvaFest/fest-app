@@ -1,16 +1,22 @@
-import React from 'react'
-import Nav from '../nav'
+import React from "react";
 
-const Contact = function() {
+import Nav from "../nav";
+import Footer from "../footer";
 
-    return(
-        <div>
-            <Nav />
-            <div className="after-navigation"> {/*Styled in _navigation.scss*/}
-                Contact
-            </div>
+const Contact = function () {
+  return (
+    <div>
+      <Nav />
+      <div className="after-navigation">
+        <div className="">
+          <div className="">
+            Contact us
+          </div>
         </div>
-    );
-}
+        <Footer />
+      </div>
+    </div>
+  );
+};
 
-export default Contact
+export default Contact;

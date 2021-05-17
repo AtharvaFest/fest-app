@@ -1,17 +1,22 @@
-import React from 'react'
+import React from "react";
 
-import Nav from '../nav'
+import Nav from "../nav";
+import Footer from "../footer";
 
-const Gallery = function() {
+import ReactImageGallery from "./ReactImageGallery";
 
-    return(
-        <div>
-            <Nav />
-            <div className="after-navigation"> {/*Styled in _navigation.scss*/}
-                Gallery
-            </div>
+const Gallery = function () {
+  return (
+    <div>
+      <Nav />
+      <div className="gallery_main after-navigation">
+        <div className="gallery_photos_body">
+          <ReactImageGallery />
         </div>
-    );
-}
+        <Footer />
+      </div>
+    </div>
+  );
+};
 
-export default Gallery
+export default Gallery;

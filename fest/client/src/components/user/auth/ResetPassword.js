@@ -63,11 +63,11 @@ class ResetPassword extends React.Component{
                 
                 {this.renderError(meta)}
                 <input {...input} type={type} placeholder={label} className="reset-password__input" autoComplete="off" required/>
-                <span   className="visible__eye-icon" id={`${id}-eye`} onClick={()=>this.showHidePass(id)}>
-                    <ion-icon name="eye" class="eye-icon"></ion-icon>
+                <span style={{position:'relative'}} className="hide" id={`${id}-eye`} onClick={()=>this.showHidePass(id)}>
+                    <span className="eye__invisible__svg"></span>
                 </span>
-                <span  className="invisible__eye-icon hide" id={`${id}-eyeOff`} onClick={()=>this.showHidePass(id)}>
-                    <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
+                <span style={{position:'relative'}} className="" id={`${id}-eyeOff`} onClick={()=>this.showHidePass(id)}>
+                    <span className="eye__visible__svg"></span>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
             </div>

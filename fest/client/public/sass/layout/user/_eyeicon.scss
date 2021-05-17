@@ -1,0 +1,23 @@
+.eye__visible__svg{
+    content: url(../img/SVG/eye_off.svg);
+    position: absolute;
+    margin-top: 5px;
+    transform: translate(-120%);
+    width: 30px;  
+    height: 40px;
+    @media only screen and (max-width: 620px) {
+        transform: translate(-120%,-15%);
+    }
+}
+
+.eye__invisible__svg{
+    content: url(../img/SVG/eye_on.svg);
+    position: absolute;
+    margin-top: 5px;
+    transform: translate(-120%);
+    width: 30px;  
+    height: 40px;
+    @media only screen and (max-width: 620px) {
+        transform: translate(-120%,-15%);
+    }
+}

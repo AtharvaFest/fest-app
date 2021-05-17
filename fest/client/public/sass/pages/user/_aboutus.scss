@@ -1,0 +1,183 @@
+//AboutDiv Starts here
+.aboutdiv__main{
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+
+  @media screen and (max-width: 650px){
+    grid-template-columns: auto;
+  }
+}
+
+.aboutdiv__main_pic_style{
+  background-color: $color-primary-light;
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.aboutdiv__main_text{
+  padding: 20px;
+}
+.aboutdiv__main__text__heading {
+  font-size: 40px;
+  font-weight: 600;
+  color: $color-primary-light;
+  @media (max-width:800px) {
+    font-size: 35px;
+  }
+}
+.aboutdiv__main__text__paragraph {
+  font-size: 18px;
+  @media (max-width:800px) {
+    font-size: 14px;
+  }
+}
+
+
+//AboutTeam Starts here
+.aboutteam__heading {
+  font-size: 13px;
+  margin: 20px 0px 5px 0px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutteam__heading2 {
+  font-size: 40px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ 
+//AboutTeamCard starts here
+.aboutteam__card{
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  @media screen and (max-width: 966px) {
+    grid-template-columns: auto auto;
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: auto;
+  }
+}
+
+.aboutteam__card__main{
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  height: 380px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  overflow-y: hidden;
+
+  @media screen and (max-width: 800px) {
+    margin: 20px 23%;
+  }
+  @media screen and (max-width: 600px) {
+    margin: 20px 20%;
+    height: 340px;
+  }
+  @media screen and (max-width: 500px) {
+    margin: 20px 16%;
+  }
+  @media screen and (max-width: 400px) {
+    margin: 20px 7%;
+  }
+
+  &:hover{
+    .aboutteam__card__main_photo_style{
+      transform: scale(0.8);
+      transition: all 0.3s ease 0s;
+    }
+
+    .aboutteam__card__main_socialicons{
+      bottom: 0;  
+      transition: all 0.3s ease 0s;
+    }
+
+    .aboutteam__card__main__developer_info{
+      transition: all 0.3s ease 0s;
+      margin-top: -40px;
+    }
+  }
+}
+
+.aboutteam__card__main_socialicons{
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  bottom: -30px;
+  transition: all 0.3s ease 0s;
+  background-color:$color-primary-light;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > div{
+    margin: 0 5px;
+    width: 30px;
+    height: 100%;
+  }
+}
+
+.aboutteam__card__main_socialicons_singleicon{
+  padding: 5px 0;
+  width: 30px;
+  height: 100%;
+  fill: #fff;
+}
+.aboutteam__card__main_socialicons_singleicon:hover{
+  background-color: #fff;
+  fill: $color-primary-light;
+  cursor: pointer;
+}
+
+.aboutteam__card__main_photo{
+  margin: 20px;
+  height: 240px;
+  width: 240px;
+  @media screen and (max-width: 800px) {
+    height: 200px;
+    width: 200px;
+  }
+  @media screen and (max-width: 600px) {
+    height: 180px;
+    width: 180px;
+  }
+}
+.aboutteam__card__main_photo_style{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.3s ease 0s;
+}
+
+.aboutteam__card__main__developer_info{
+  transition: all 0.3s ease 0s;    
+}
+.aboutteam__card__main__developer_name{
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.aboutteam__card__main__developer_role{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0.8;
+  margin-bottom: 10px;
+}
