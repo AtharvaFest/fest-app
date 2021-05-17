@@ -42,10 +42,10 @@ class Sign extends React.Component {
             
             <div className="form__group--sign">
                 <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
-                <span ref={this.eyeRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
+                <span ref={this.eyeRef} style={{position:'relative'}}  onClick={this.showPass}>
                     <span className="eye__invisible__svg"></span>
                 </span>
-                <span  ref={this.eyeOffRef} style={{position:'relative'}} className="" onClick={this.showPass}>
+                <span  ref={this.eyeOffRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
                     <span className="eye__visible__svg"></span>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
