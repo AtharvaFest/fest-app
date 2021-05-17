@@ -113,20 +113,21 @@ export const editUserAction = (formValue,id) => {
 //EVENT ACTIONS 
 export const createEventsAction = (formValue) => {
     return async () => {
-        await axios.post('/event/create',{...formValue});
+        await axios.post('/admin/event/create',{...formValue});
     }
 }
 
 export const readEventsAction = () => {
     return async (dispatch) => {
-        const response = await axios.get('/event/read');
+        
+        const response = await axios.get('/admin/event/read');
         dispatch({type:READ_EVENT,payload:response.data});
     }
 }
 
 export const deleteEventAction = (id) => {
     return async (dispatch) => {
-        const response = await axios.delete(`/event/delete/${id}`);
+        const response = await axios.delete(`/admin/event/delete/${id}`);
         dispatch({type:EVENT_DELETE,payload:response.data});
     }
 }

@@ -28,7 +28,7 @@ class Event extends React.Component{
     deleteEvent = (id) => {
         this.deleteCount += 1;
         if(this.deleteCount < 4){
-            if(window.confirm("Delete user?")){
+            if(window.confirm("Delete event?")){
                 this.props.deleteEventAction(id);
             }
         }else{
@@ -38,7 +38,7 @@ class Event extends React.Component{
     }
 
     // deleteAllUser = (id) => {
-    //     if(window.confirm("Delete all user?")){
+    //     if(window.confirm("Delete all events?")){
     //         this.props.deleteAllUserAction().then(()=>{
 
     //         }).catch((err) =>{
@@ -52,6 +52,14 @@ class Event extends React.Component{
     //     const modalCreateEvent = document.querySelector(`#modal__create-event`);
     //     modalCreateEvent.classList.add('visible');
     // }
+
+    toBase64(arr) {
+        //arr = new Uint8Array(arr) if it's an ArrayBuffer
+        console.log(arr)
+        return btoa(
+          arr.data.reduce((data, byte) => data + String.fromCharCode(byte), "")
+        );
+      }
 
     getAllEventData = () =>{
         if(this.state.allEvents === null) {
@@ -80,6 +88,7 @@ class Event extends React.Component{
                 <tbody>
                     {
                     this.state.allEvents.map((event,index)=>{
+                        console.log(event.image)
                         return(
                             <tr key={event._id}>
                                 <td>{index+1}</td>
@@ -88,6 +97,7 @@ class Event extends React.Component{
                                 <td>{event.fee}</td>
                                 <td>{event.prize}</td>
                                 <td>{event.discount}%</td>
+                                {/* <td><img src={`data:image/jpeg;base64,${this.toBase64(event.image)}`} /></td> */}
                                 <td>
                                     {/* <span className="edit-btn" onClick={()=>this.editUser(user)}>
                                         <ion-icon name="create-outline"></ion-icon>
