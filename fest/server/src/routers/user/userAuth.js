@@ -8,19 +8,6 @@ const sgMail = require('../../sendgrid/index')
 const { body, validationResult } = require('express-validator'); // It is middleware use to validate the data eg (email,mobile no. etc)
 const router = new express.Router();
 
-router.post('/signuptest',async (req,res) => { // hyaala delete karaicha aahe
-  try{
-
-      const user = await User({...req.body});
-      await user.save();
-      const token = await user.generateAuthToken();
-      user.isAdmin = undefined;
-      res.status(201).send({user,token});
-  } catch(e){
-      res.status(400).send({msg:"Something went wrong!"});
-  }
-
-});
 
 router.post('/signup',[
   body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 chars long'),

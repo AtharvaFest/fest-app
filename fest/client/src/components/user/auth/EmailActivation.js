@@ -12,6 +12,7 @@ class EmailActivation extends React.Component{
         alertErr:false,
     }
 
+
     emailActivate = () => {
         this.props.emailActivationAction().then((value)=>{
             this.setState({alertInfo:true,alertErr:false});

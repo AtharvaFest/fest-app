@@ -97,7 +97,6 @@ class Nav extends React.Component{
                     </nav>
                 </div>
 
-                {/* {this.props.isLogin === false?<Alert message="Logout successful" containerId="alert-logout" alertType={"info"} />:""} */}
             </>
         );
     }

@@ -30,50 +30,25 @@ export function base64StringtoFile (base64String, filename) {
   }
   
   // Base64 Image to Canvas with a Crop
-  // export function image64toCanvasRef (canvasRef, image64, pixelCrop) {
-  //   const canvas = canvasRef // document.createElement('canvas');
-  //   canvas.width = pixelCrop.width
-  //   canvas.height = pixelCrop.height
-  //   const ctx = canvas.getContext('2d')
-  //   const image = new Image()
-  //   image.src = image64
-  //   image.onload = function () {
-  //     ctx.drawImage(
-  //       image,
-  //       pixelCrop.x,
-  //       pixelCrop.y,
-  //       pixelCrop.width,
-  //       pixelCrop.height,
-  //       0,
-  //       0,
-  //       pixelCrop.width,
-  //       pixelCrop.height
-  //     )
-  //   }
-  // }
-
-  export function image64toCanvasRef (canvasRef, image64, crop) {
+  export function image64toCanvasRef (canvasRef, image64, pixelCrop) {
     const canvas = canvasRef // document.createElement('canvas');
-    const scaleX = image64.naturalWidth / image64.width;
-    const scaleY = image64.naturalHeight / image64.height;
-    canvas.width = crop.width
-    canvas.height = crop.height
-
-    const ctx = canvas.getContext('2d');
-
+    canvas.width = pixelCrop.width
+    canvas.height = pixelCrop.height
+    const ctx = canvas.getContext('2d')
     const image = new Image()
     image.src = image64
     image.onload = function () {
       ctx.drawImage(
         image,
-        crop.x * scaleX,
-        crop.y * scaleY,
-        crop.width * scaleX,
-        crop.height * scaleY,
+        pixelCrop.x,
+        pixelCrop.y,
+        pixelCrop.width,
+        pixelCrop.height,
         0,
         0,
-        crop.width,
-        crop.height
+        pixelCrop.width,
+        pixelCrop.height
       )
     }
   }
+

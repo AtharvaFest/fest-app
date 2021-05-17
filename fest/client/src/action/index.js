@@ -112,8 +112,9 @@ export const editUserAction = (formValue,id) => {
 
 //EVENT ACTIONS 
 export const createEventsAction = (formValue) => {
-    return async () => {
-        await axios.post('/admin/event/create',{...formValue});
+    return async (dispatch) => {
+        const response = await axios.post('/admin/event/create',{...formValue});
+        dispatch({type:READ_EVENT,payload:response.data});
     }
 }
 

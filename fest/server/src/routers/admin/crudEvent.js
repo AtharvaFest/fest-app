@@ -39,18 +39,16 @@ router.post('/admin/event/create',[
     const errors = validationResult(req);
     try{
         if(!errors.isEmpty()){
-            console.log(errors)
             throw new Error();
         }
         base64arr = req.body.image.split(',')
         var b64string = base64arr[1]
         const buf = Buffer.from(b64string, 'base64')
         
-        const event = await Event({...req.body,image:buf});
-        event.save();
+        const addEvent = await Event({...req.body,image:buf});
+        await addEvent.save();
         const allEvent = await Event.find({});
         res.send(allEvent)
-        res.send()
     }catch(e){
         res.status(400).send(errors);
     }
@@ -59,8 +57,8 @@ router.post('/admin/event/create',[
 
 router.get('/admin/event/read',async (req,res) => {
     try{
-        const event = await Event.find({});
-        res.send(event);
+        const allEvent = await Event.find({});
+        res.send(allEvent);
     }catch(e){
         res.status(500).send()
     }

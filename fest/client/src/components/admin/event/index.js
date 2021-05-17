@@ -54,8 +54,6 @@ class Event extends React.Component{
     // }
 
     toBase64(arr) {
-        //arr = new Uint8Array(arr) if it's an ArrayBuffer
-        console.log(arr)
         return btoa(
           arr.data.reduce((data, byte) => data + String.fromCharCode(byte), "")
         );
@@ -88,7 +86,6 @@ class Event extends React.Component{
                 <tbody>
                     {
                     this.state.allEvents.map((event,index)=>{
-                        console.log(event.image)
                         return(
                             <tr key={event._id}>
                                 <td>{index+1}</td>

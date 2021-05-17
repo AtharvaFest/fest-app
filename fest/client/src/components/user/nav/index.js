@@ -62,16 +62,10 @@ class Nav extends React.Component {
         })
     }
 
-    logoutAlert(){
-        console.log(this.props.isLogin);
-        if(this.props.isLogin){
-            console.log("true");
-        }
-    }
 
     logoutButton(){
         return(
-            <Logout class_name="horizontal-nav--sub-menu__item" onClick={this.logoutAlert} showAccountMenu={() => this.showAccountSubMenu()} />
+            <Logout class_name="horizontal-nav--sub-menu__item"  showAccountMenu={() => this.showAccountSubMenu()} />
         )
     }
 

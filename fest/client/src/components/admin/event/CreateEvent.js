@@ -8,37 +8,39 @@ import ReactCrop from 'react-image-crop';
 
 import {createEventsAction,readEventsAction} from '../../../action'
 import {Alert} from '../../Alert'
-import {base64StringtoFile,
-    downloadBase64File,
-    extractImageFileExtensionFromBase64,
-    image64toCanvasRef} from '../../../utils/imageFileUtils'
+import {extractImageFileExtensionFromBase64} from '../../../utils/imageFileUtils'
 
 import 'react-image-crop/dist/ReactCrop.css'
 
 class CreateEvent extends React.Component {
 
-    imageMaxSize = 1000000 // bytes
+    imageMaxSize = 2000000 // bytes
     acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif, image/webp'
     acceptedFileTypesArray = this.acceptedFileTypes.split(",").map((item) => {return item.trim()})
+    showAlert = false
+    imagePreviewCanvasRef = React.createRef()
 
     state = {
             imageFile: [],
             alertInfo:false,
+            alertUploadImg:false,
             alertEventExist:false,
             alertErr:false,
             imgSrc:null,
             imgSrcExt: null,
+            displayImageBlock: null,
             croppedImageUrl:null,
             croppedImage:null,
             crop: {
-                aspect: 20/12
+                unit: 'px', // default, can be 'px' or '%'
+                width: 200,
+                height: 120,
+                
             }
         }
-    imagePreviewCanvasRef = React.createRef()
     
-
-    showAlert = false
-
+    
+    // Show Error onChange in input fields
     renderError({ error}) {
         if (error) {
           return (
@@ -61,27 +63,6 @@ class CreateEvent extends React.Component {
     }
 
     renderDate = ({input,label,meta}) => {
-        // when form is submited then field become empty and if user try to submit empty form
-        // the date value is set as invalid date and due to which moment function gives error.
-        // that's why we have to check that user don't send empty form.
-        if(input.value.toString() === 'Invalid Date'){
-            return(
-                <div className="create-event__input--group">
-                    {this.renderError(meta)}
-                    <DatePicker 
-                    {...input} 
-                    dateFormat="dd/MM/yyyy"   
-                    placeholderText={label} 
-                    autoComplete="off"
-                    className="create-event__date-input"
-                    calendarClassName="calender"
-                    minDate={new Date()}
-                    required
-                    />
-                    <label htmlFor={label} className="create-event__date-label">{label}</label>
-                </div>
-                );
-        }
         return(
         <div className="create-event__input--group">
             {this.renderError(meta)}
@@ -101,6 +82,7 @@ class CreateEvent extends React.Component {
         );
     }
 
+    // It renders an input field to select image
     renderDropzone = ({input,handleOnDrop}) => {
         return(
             <Dropzone
@@ -130,13 +112,16 @@ class CreateEvent extends React.Component {
         
     }
 
+    //This will verify whether the give image size must be smaller then maxSize
+    //As well as gives alert
     verifyFile = (files) => {
-        if (files && files.length > 0){
-            const currentFile = files[0]
+        if (files[0].errors && files.length > 0){
+            const currentFile = files[0].file
             const currentFileType = currentFile.type
             const currentFileSize = currentFile.size
+          
             if(currentFileSize > this.imageMaxSize) {
-                alert("This file is not allowed. " + currentFileSize + " bytes is too large")
+                alert("More than 2MB file is not allowed")
                 return false
             }
             if (!this.acceptedFileTypesArray.includes(currentFileType)){
@@ -145,12 +130,14 @@ class CreateEvent extends React.Component {
             }
             return true
         }
+        else{
+            return true
+        }
     }
 
-
+    // This function is used to get valid as well as rejected image 
+    // after selecting image by user.
     handleOnDrop = (files,rejectedFiles) => {
-        console.log(files);
-        console.log(rejectedFiles)
         if (rejectedFiles && rejectedFiles.length > 0){
             this.verifyFile(rejectedFiles)
             this.setState({ imageFile: rejectedFiles })
@@ -166,6 +153,7 @@ class CreateEvent extends React.Component {
                 myFileItemReader.addEventListener("load", ()=>{
                     const myResult = myFileItemReader.result
                     this.setState({
+                        displayImageBlock:myResult,
                         imgSrc: myResult,
                         imgSrcExt: extractImageFileExtensionFromBase64(myResult)
                     })
@@ -181,6 +169,8 @@ class CreateEvent extends React.Component {
         
     }
 
+    // Following functions are used to crop image and show preview.
+    //{handleImageLoaded,handleOnCropChange,handleOnCropComplete,getCroppedImg}
     handleImageLoaded = (image) => {
         this.imageRef = image;
     }
@@ -189,12 +179,12 @@ class CreateEvent extends React.Component {
     }
     handleOnCropComplete =  (crop) =>{
         const canvasRef = this.imagePreviewCanvasRef.current
-        const {imgSrc}  = this.state
         this.getCroppedImg(this.imageRef,crop,canvasRef)
-        
+        this.setState({discount:canvasRef.height})
     }
 
-
+    //Here image is cropped and show in image preview 
+    //(canvas html element is used to show preview)
     getCroppedImg(image, crop,canvasRef) {
         const canvas = canvasRef;
         const scaleX = image.naturalWidth / image.width;
@@ -216,75 +206,126 @@ class CreateEvent extends React.Component {
         );
       }
 
-    handleDownloadClick = (event) => {
+    //Here image Main image is removed and only croped image is shown on crop click
+    handleCropClick = (event) => {
         event.preventDefault()
-        if (this.imageRef) {
-            const canvasRef = this.imagePreviewCanvasRef.current
-            console.log(canvasRef);
-        
+        const canvasRef = this.imagePreviewCanvasRef.current
+        if (canvasRef.height > 0) {
             const {imgSrcExt} =  this.state
             const imageData64 = canvasRef.toDataURL('image/' + imgSrcExt)
-            this.setState({ croppedImage:imageData64 });
-            const myFilename = "previewFile." + imgSrcExt
-
-            // file to be uploaded
-            const myNewCroppedFile = base64StringtoFile(imageData64, myFilename)
-            this.setState({ croppedImage:imageData64 });
-            // download file
-            // downloadBase64File(imageData64, myFilename)
+            this.setState({ croppedImage:imageData64,imgSrc:null });
         }
-        
-
+   
     }
 
+    // Here all croped as well as main imaged is cleared and only dropzone is shown
+    handleClearToDefault = event =>{
+        if (event) event.preventDefault()
+        const canvas = this.imagePreviewCanvasRef.current
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+        this.setState({
+            displayImageBlock:null,
+            imgSrc: null,
+            imgSrcExt: null,
+            crop: {
+                unit: 'px', // default, can be 'px' or '%'
+                width: 200,
+                height: 120
+            }
+
+        })
+    }
    
 
 
     onSubmit = formValue => {
-       formValue.image = this.state.croppedImage
-    //    console.log(this.state.croppedImage);
+        formValue.image = this.state.croppedImage;
         let submitFlag = true;
+        if(!formValue.image) {
+            this.showAlert = true;
+            submitFlag = false;
+            this.setState({
+                        alertInfo:false,
+                        alertErr:false,
+                        alertEventExist:false,
+                        alertUploadImg:false
+                    });
+            this.setState({
+                alertErr:false,
+                alertInfo:false,
+                alertEventExist:false,
+                alertUploadImg:true
+            }); 
+            return
+        }
 
-        // this.props.allEvents.forEach((event)=>{
-        //     if(event.event === formValue.event){
-        //         submitFlag = false;
-        //         this.showAlert = true;
-        //         this.setState({alertInfo:false,alertErr:false,alertEventExist:false});
-        //         this.setState({alertErr:false,alertInfo:false,alertEventExist:true});                   
-        //     }
-        // })
-
+        this.handleClearToDefault()
+        
+        this.props.allEvents.forEach((event)=>{
+            if(event.event.toLowerCase() === formValue.event.toLowerCase()){
+                submitFlag = false;
+                this.showAlert = true;
+                this.setState({
+                    alertInfo:false,
+                    alertErr:false,
+                    alertEventExist:false,
+                    alertUploadImg:false
+                });
+                this.setState({
+                    alertErr:false,
+                    alertInfo:false,
+                    alertEventExist:true,
+                    alertUploadImg:false
+                });                   
+            }
+        })
+        
         if(submitFlag){
             // sometimes date value we get in string as dd/mm/yyyy. 
             //therefore to get always date value in date type we are doing following conversion
             formValue.date = moment(formValue.date, "DD MM YYYY")._d;
-            // formData.append("date", moment(formValue.date, "DD MM YYYY")._d);
-
+ 
             this.props.createEventsAction(formValue).then((value) => {
                 this.showAlert = true;
-                this.setState({alertInfo:false,alertErr:false,alertEventExist:false});  
-                this.setState({alertInfo:true,alertErr:false,alertEventExist:false});        
+                this.setState({
+                        alertInfo:false,
+                        alertErr:false,
+                        alertEventExist:false,
+                        alertUploadImg:false
+                    });  
+                this.setState({
+                    alertInfo:true,
+                    alertErr:false,
+                    alertEventExist:false,
+                    alertUploadImg:false
+                });        
             }).catch((err) => {
                 this.showAlert = true;
-                this.setState({alertInfo:false,alertErr:false,alertEventExist:false});
-                this.setState({alertErr:true,alertInfo:false,alertEventExist:false});                   
+                this.setState({
+                        alertInfo:false,
+                        alertErr:false,
+                        alertEventExist:false,
+                        alertUploadImg:false
+                    });
+                this.setState({
+                    alertErr:true,
+                    alertInfo:false,
+                    alertEventExist:false,
+                    alertUploadImg:false
+                });                   
             });
         }
        
     }
 
     // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr,alertEventExist)=>{
+    alertPopup=(alertInfo,alertErr,alertUploadImg,alertEventExist)=>{
         if(alertInfo && this.showAlert){
             this.showAlert = false
             return(
                 <Alert message="Event added" containerId="alert-create-event" alertType={"info"} />
-            );
-        }
-        if(alertEventExist && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="The event has been already added" containerId="alert-create-event" alertType={"error"} />
             );
         }
         if(alertErr && this.showAlert){
@@ -293,6 +334,20 @@ class CreateEvent extends React.Component {
                 <Alert message="Something went wrong!" containerId="alert-create-event" alertType={"error"} />
             );
         }
+        if(alertUploadImg && this.showAlert){
+            this.showAlert = false
+            return(
+                <Alert message="Upload image" containerId="alert-create-event" alertType={"warning"} />
+            );
+        }
+        if(alertEventExist && this.showAlert){
+            this.showAlert = false
+            return(
+                <Alert message="The event has been already added" containerId="alert-create-event" alertType={"warning"} />
+            );
+        }
+        
+        
 
         return<></>;
         
@@ -337,11 +392,7 @@ class CreateEvent extends React.Component {
                                     label="Discount" 
                                     />
                                     {
-                                        this.state.imgSrc ?
-                                        // <div >
-                                        //     <img src={this.state.imgSrc} style={{height:100}}/>
-                                        //20 width, 12 height 
-                                        // </div>
+                                        this.state.displayImageBlock ?
                                         <div className="create-event__form--image-container" >
                                             <div className="create-event__form--image-preview">
                                                 <ReactCrop
@@ -350,11 +401,18 @@ class CreateEvent extends React.Component {
                                                     onImageLoaded={this.handleImageLoaded}
                                                     onComplete={this.handleOnCropComplete}
                                                     onChange={this.handleOnCropChange}
+                                                    minWidth={200}
+                                                    minHeight={120}
+                                                    maxWidth={200}
+                                                    maxHeight={120} 
                                                 />   
                                                 <div>
                                                     <canvas ref={this.imagePreviewCanvasRef}></canvas>  
                                                 </div> 
-                                                <button onClick={this.handleDownloadClick}>Crop</button>                              
+                                                <div className="image_btn--container">
+                                                    <button onClick={this.handleCropClick} className="btn__crop">Crop</button>    
+                                                    <button onClick={this.handleClearToDefault} className="btn__reset-image">Reset Image</button>                           
+                                                </div>
                                             </div>
                                         </div>
                                         :
@@ -369,7 +427,7 @@ class CreateEvent extends React.Component {
                     </div>
                 </div>
             </div>
-            {this.alertPopup(this.state.alertInfo,this.state.alertErr,this.state.alertEventExist)}
+            {this.alertPopup(this.state.alertInfo,this.state.alertErr,this.state.alertUploadImg,this.state.alertEventExist)}
             </>
         );
     }
@@ -395,6 +453,7 @@ const validate = (formValue) => {
     return errors;
   };
 
+// clear all input field after submiting form.
 const  afterSubmit = (_, dispatch) =>
   dispatch(reset('createEventForm'));
 

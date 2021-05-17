@@ -2808,6 +2808,20 @@ body {
   font-size: 1.4rem;
   transition: all .3s; }
 
+.image_btn--container {
+  margin: 1rem 0; }
+
+.btn__crop, .btn__reset-image {
+  border-radius: 50rem;
+  border: 1px solid #6b35a9;
+  color: #6b35a9;
+  background-color: inherit;
+  text-transform: uppercase;
+  padding: .5rem 1rem;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  cursor: pointer; }
+
 .calender {
   width: 25rem;
   font-size: 1.4rem !important;
