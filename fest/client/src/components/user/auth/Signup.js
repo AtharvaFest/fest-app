@@ -6,7 +6,10 @@ import {connect} from 'react-redux'
 import {signUpAction} from '../../../action'
 import {Alert} from '../../Alert'
 
+//Bug we get error msg after every onChange event on field
+
 class Sign extends React.Component {
+
 
     state = {
         passwordStateSign:"password",
@@ -27,7 +30,7 @@ class Sign extends React.Component {
     }
 
     //creating input field for Redux form Field component
-    renderInput = ({input,label,type,meta}) => {
+    renderInput = ({input,label,type}) => {
         return(
             <div className="form__group--sign">
                 <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
@@ -37,7 +40,7 @@ class Sign extends React.Component {
     }
 
     //creating input field for Redux form Field component
-    renderPassword = ({input,label,type,meta}) => {
+    renderPassword = ({input,label,type}) => {
         return(
             
             <div className="form__group--sign">
@@ -122,11 +125,13 @@ class Sign extends React.Component {
     // TOGGLE BETWEEN INFO AND ERROR ALERTS
     alertPopup=(alertInfo,alertErr)=>{
         if(alertInfo){
+            this.showAlert = false
             return(
                 <Alert message="Sign up in the process..." containerId="alert-signup" alertType={"info"} />
             );
         }
         if(alertErr){
+            this.showAlert = false
             return(
                 <Alert message="Something went wrong!" containerId="alert-signup" alertType={"error"} />
             );

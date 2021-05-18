@@ -5,16 +5,16 @@ import { ReactComponent as LogoInsta } from '../../../assets/image/logoinstagram
 import { ReactComponent as LogoTwitter } from '../../../assets/image/logotwitter.svg';
 import { ReactComponent as LogoLinkedin } from '../../../assets/image/logolinkedin2.svg';
 
-const openInNewTab = (url) => {
-  const newWindow = window.open(url, "_blank", "noopener,noreferrer");
-  if (newWindow) newWindow.opener = null;
-};
+// const openInNewTab = (url) => {
+//   const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+//   if (newWindow) newWindow.opener = null;
+// };
 
 function AboutTeamCard() {
   return (
     <div className="aboutteam__card__main">
       <div className="aboutteam__card__main_photo">
-        <img src={rahul} className="aboutteam__card__main_photo_style" alt="developers image"></img>
+        <img src={rahul} className="aboutteam__card__main_photo_style" alt="developers pic"></img>
       </div>
       <div className="aboutteam__card__main__developer_info">
         <h1 className="aboutteam__card__main__developer_name"> Rahul Gupta </h1>

@@ -11,6 +11,7 @@ function EventCards() {
             <img
               src={eventCardImg}
               className="event__card__main_img_style"
+              alt="event cards"
             ></img>
           </div>
           <div className="event_game_name">Game : Valorant</div>

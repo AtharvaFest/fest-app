@@ -1197,7 +1197,7 @@ body {
   margin-right: -8rem; }
   @media only screen and (max-width: 56.25em) {
     .horizontal-nav__right {
-      background-image: linear-gradient(to bottom right, #6b35a9, #422168);
+      background-color: #422168;
       position: absolute;
       top: 5.8rem;
       right: 8rem;
@@ -1300,12 +1300,8 @@ body {
       display: block; } }
 
 .after-navigation {
-  top: 6rem;
-  position: absolute;
+  padding-top: 10rem;
   background-color: #f7f7f7; }
-  @media only screen and (max-width: 37.5em) {
-    .after-navigation {
-      top: 7rem; } }
 
 .email-activation__btn, .home__btn {
   text-transform: uppercase;
@@ -1618,6 +1614,9 @@ body {
   visibility: hidden;
   transform: translateY(-4rem); }
 
+.reset-pass__btn {
+  font-size: 1.6rem; }
+
 .aboutdiv__main {
   display: grid;
   grid-template-columns: 4fr 8fr; }
@@ -1637,12 +1636,20 @@ body {
   padding: 20px; }
 
 .aboutdiv__main__text__heading {
-  font-size: 40px;
-  font-weight: 600;
-  color: #9664cf; }
-  @media (max-width: 800px) {
-    .aboutdiv__main__text__heading {
-      font-size: 35px; } }
+  background-image: linear-gradient(to bottom right, rgba(107, 53, 169, 0.808), rgba(66, 33, 104, 0.808));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: grid; }
+  .aboutdiv__main__text__heading::after {
+    content: "";
+    height: 1px;
+    background-color: #6b35a9;
+    justify-self: stretch; }
 
 .aboutdiv__main__text__paragraph {
   font-size: 18px; }
@@ -1650,23 +1657,28 @@ body {
     .aboutdiv__main__text__paragraph {
       font-size: 14px; } }
 
-.aboutteam__heading {
-  font-size: 13px;
-  margin: 20px 0px 5px 0px;
-  color: rgba(0, 0, 0, 0.3);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
+.about-team__section {
+  padding-top: 5rem; }
 
 .aboutteam__heading2 {
-  font-size: 40px;
-  font-weight: 500;
   display: flex;
+  text-transform: uppercase;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  transition: all 3s; }
+  .aboutteam__heading2--content {
+    font-size: 3.5rem;
+    background-image: linear-gradient(to bottom right, rgba(107, 53, 169, 0.808), rgba(66, 33, 104, 0.808));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: grid;
+    line-height: 1.2; }
+    .aboutteam__heading2--content::after {
+      content: "";
+      height: 2px;
+      background-color: #6b35a9;
+      justify-self: stretch; }
 
 .aboutteam__card {
   display: grid;
@@ -1762,9 +1774,10 @@ body {
   transition: all 0.3s ease 0s; }
 
 .aboutteam__card__main__developer_name {
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.2; }
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase; }
 
 .aboutteam__card__main__developer_role {
   font-size: 14px;

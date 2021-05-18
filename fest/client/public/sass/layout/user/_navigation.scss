@@ -3,7 +3,7 @@
     position: fixed;
     width: 100vw;
     min-height: 6rem;
-    background-color: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
+    background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
     color: $color-white--1;
     display: flex;
     align-items: center;
@@ -104,7 +104,7 @@
 .event-sub-menu__visible {
   display: block;
   position: absolute;
-  background-color: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
+  background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
   margin-left: 1.5rem;
   list-style: none;
   @include respond(tab-port) {
@@ -145,24 +145,8 @@
 }
 
 .after-navigation {
-  margin-top: 100px;
-  // padding-top: 6.4rem;
-  // top: 6rem;
-  // position: absolute;
-  // background-color: $color-white--2;
-  // // height: 100vh;  // remove this line after styling pages
-  // @include respond(phone){
-  //     top: 7rem;
-  // }
-  @media only screen and (min-width: 10px) {
-    // top: 43px; 
-  }
-  @media only screen and (min-width: 901px) {
-    // top: 63px;
-  }
-  @media only screen and (min-width: 1800px) {
-    // top: 77px;
-  }
+  padding-top: 10rem;
+  background-color: $color-white--2;
 }
 
 
