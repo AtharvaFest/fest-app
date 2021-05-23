@@ -9,7 +9,7 @@ import {Alert} from '../../Alert'
 //Bug we get error msg after every onChange event on field
 
 class Sign extends React.Component {
-
+    showAlert = false
 
     state = {
         passwordStateSign:"password",
@@ -87,34 +87,40 @@ class Sign extends React.Component {
     }
 
     onSubmit = (formValue) => {
+        this.showAlert=true
         this.setState({alertInfo:true,alertErr:false});
+        this.emptyError();
         this.props.signUpAction(formValue).then(() => {
             alert("Check your email to activate email account");
-            this.emptyError();
             this.hideModal();
         }).catch((err) => {
             if(err?.response?.status !== 200){
+                this.showAlert=true
                 this.setState({alertInfo:false,alertErr:true});
             }
 
             if(err?.response?.data){//Show error message
-                this.emptyError();
                 err.response.data.errors.forEach((value)=>{
                     if(value.param === "mobileNumber"){
+                        this.showAlert=true
                         this.setState({errMobileNo:value.msg});
                     }
                     if(value.param === "password"){
+                        this.showAlert=true
                         this.setState({errPassword:value.msg});
                     }
                     if(value.param === "email"){
+                        this.showAlert=true
                         this.setState({errEmail:value.msg});
                     }
                     if(value.param === "username"){
+                        this.showAlert=true
                         this.setState({errUserName:value.msg});
                     }
                     
                 })
             }else{
+                this.showAlert=true
                 this.setState({alertInfo:false,alertErr:true});
             }
 
@@ -124,13 +130,13 @@ class Sign extends React.Component {
 
     // TOGGLE BETWEEN INFO AND ERROR ALERTS
     alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo){
+        if(alertInfo && this.showAlert){
             this.showAlert = false
             return(
                 <Alert message="Sign up in the process..." containerId="alert-signup" alertType={"info"} />
             );
         }
-        if(alertErr){
+        if(alertErr && this.showAlert){
             this.showAlert = false
             return(
                 <Alert message="Something went wrong!" containerId="alert-signup" alertType={"error"} />
