@@ -1,10 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {Field,reduxForm,reset} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {signUpAction} from '../../../action'
 import {Alert} from '../../Alert'
+import Nav from "../nav";
+import Footer from "../footer";
+import AuthInstructions from './AuthInstructions';
 
 //Bug we get error msg after every onChange event on field
 
@@ -23,17 +25,12 @@ class Sign extends React.Component {
     eyeRef = React.createRef()
     eyeOffRef = React.createRef()
 
-    //Hiding Sign up modal on sucessful signup/submit form
-    hideModal = () => {
-        const modal = document.querySelector('#modal-signup');
-        modal.classList.remove('visible')
-    }
 
     //creating input field for Redux form Field component
     renderInput = ({input,label,type}) => {
         return(
-            <div className="form__group--sign">
-                <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
+            <div className="form__group">
+                <input {...input} type={type} placeholder={label} className="form__input" autoComplete="off" required/>
                 <label htmlFor={label} className="form__label">{label}</label>
             </div>
         );
@@ -43,8 +40,8 @@ class Sign extends React.Component {
     renderPassword = ({input,label,type}) => {
         return(
             
-            <div className="form__group--sign">
-                <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
+            <div className="form__group">
+                <input {...input} type={type} placeholder={label} className="form__input" autoComplete="off" required/>
                 <span ref={this.eyeRef} style={{position:'relative'}}  onClick={this.showPass}>
                     <span className="eye__invisible__svg"></span>
                 </span>
@@ -73,6 +70,11 @@ class Sign extends React.Component {
         this.eyeOffRef.current.classList.remove('hide');
     }
 
+     //on Instructions click, display Instruction model
+     displayInstructions = (e) => {
+        const modalInstruction = document.querySelector(`#checkout-instruction`);
+        modalInstruction.classList.add('visible');
+    }
     
 
 
@@ -92,7 +94,6 @@ class Sign extends React.Component {
         this.emptyError();
         this.props.signUpAction(formValue).then(() => {
             alert("Check your email to activate email account");
-            this.hideModal();
         }).catch((err) => {
             if(err?.response?.status !== 200){
                 this.showAlert=true
@@ -148,38 +149,65 @@ class Sign extends React.Component {
     }
 
     render(){
-        return ReactDOM.createPortal(
+        return (
         <>
-            <div className="modal" id="modal-signup" onClick={this.hideModal}>
-                <div className="modal__container--sign" onClick={(e) => e.stopPropagation()}>
-                    <div className="modal__container--content-sign" >
-                        <h4 className="heading--4 form__heading--sign">sign up</h4>
-                        <div className="modal__form--sign">
-                            <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                                <Field name="name" type="text" component={this.renderInput} label="Name" />
+            <Nav />
+            <div className="after-navigation">
+                <div className="form__section" >
+                    <div className="intruction__model">
+                        <a href="#checkout-instruction" onClick={(e) => this.displayInstructions(e)}>
+                            Checkout Instructions
+                        </a>
+                    </div>
+                    <div className="form__main">
+                        <div className="form__container--form" >
+                                <div className="form__content">
+                                    <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                                        <Field name="name" type="text" component={this.renderInput} label="Name" />
 
-                                <div className="error_msg">{this.state.errMobileNo}</div>
-                                <Field name="mobileNumber" type="text" component={this.renderInput} label="Mobile No." />
+                                        <div className="error_msg">{this.state.errMobileNo}</div>
+                                        <Field name="mobileNumber" type="text" component={this.renderInput} label="Mobile No." />
+                                        
+                                        <div className="error_msg">{this.state.errUserName}</div>
+                                        <Field name="username" type="text" component={this.renderInput} label="Username" />
+                                        
+                                        <div className="error_msg">{this.state.errEmail}</div>
+                                        <Field name="email" type="email" component={this.renderInput} label="Email" />
+                                        
+                                        <div className="error_msg">{this.state.errPassword}</div>
+                                        <Field name="password" type={this.state.passwordStateSign} component={this.renderPassword} label="Password" />
+                                        
+                                        <button className="form__btn" >sign up</button>
+                                    </form>
+                                </div>
+                        </div>
+                        <div className="form__container--instructions">
+                            <div className="form__signup--instructions-background">
+
+                            </div>  
+                            <div className="form__signup--instructions">
                                 
-                                <div className="error_msg">{this.state.errUserName}</div>
-                                <Field name="username" type="text" component={this.renderInput} label="Username" />
-                                
-                                <div className="error_msg">{this.state.errEmail}</div>
-                                <Field name="email" type="email" component={this.renderInput} label="Email" />
-                                
-                                <div className="error_msg">{this.state.errPassword}</div>
-                                <Field name="password" type={this.state.passwordStateSign} component={this.renderPassword} label="Password" />
-                                
-                                <button className="form__button" >sign up</button>
-                            </form>
+                                <ul className="instruction__list">
+                                    <p>Instructions</p>
+                                    <li>
+                                        The students that are from Atharva college register using Atharva G-suit id
+                                    </li>
+                                    <li>
+                                        Students registered using Atharva email id will only be allowed to play intra-college events.
+                                    </li>
+                                    <li>Instruction for signup 1</li>
+                                    <li>Instruction for signup 1</li>
+                                </ul>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+            <Footer />
+            <AuthInstructions />
             {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
             </>
-            ,
-            document.querySelector('#auth')
         );
     }
 

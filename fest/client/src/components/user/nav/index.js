@@ -38,7 +38,7 @@ class Nav extends React.Component {
     loginOrLogout = () => {
         
         if(!auth.isAuthenticated())
-            return <a href="#modal-login" onClick={(e) => this.displayLogin(e)}  className="horizontal-nav__link">Login</a>
+            return <Link to="/login" className="horizontal-nav__link">Login</Link>
 
         return <a href="#account" ref={this.accountItemRef} onClick={this.showAccountSubMenu} className="horizontal-nav__link nav-link" >
                     Account

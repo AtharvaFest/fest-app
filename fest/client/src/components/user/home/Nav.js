@@ -31,7 +31,8 @@ class Nav extends React.Component{
     loginOrLogout = () => {
         
         if(!auth.isAuthenticated())
-            return <a href="#modal-login" onClick={(e) => this.displayLogin(e)}  className="nav__link">login</a>
+            return <Link to="/login" className="nav__link">Login</Link>
+
 
         return <Link to="#" onClick={(e) => this.showAccountMenu(e)} className="nav__link dropdown__btn" >Account</Link>
     }

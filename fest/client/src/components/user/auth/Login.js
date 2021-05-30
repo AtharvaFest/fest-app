@@ -1,10 +1,14 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import {Field,reduxForm,reset} from 'redux-form'
-import {Alert} from '../../Alert'
 
+import {Alert} from '../../Alert'
+import Nav from "../nav";
+import Footer from "../footer";
+import AuthInstructions from './AuthInstructions'
 import {loginAction,forgotPasswordAction} from '../../../action'
+import history from  '../../../history'
 
 class Login extends React.PureComponent {
 
@@ -19,33 +23,24 @@ class Login extends React.PureComponent {
     showAlert = false
    
 
-    //on submit hide login form
-    hideModal = () => {
-        const modal = document.querySelector('#modal-login');
-        modal.classList.remove('visible')
+    //on forgotPassword click, display forgot password form
+    displayForgotPassword = (e) => {
+        const modalForgotPass = document.querySelector(`#modal-forgot-password`);
+        modalForgotPass.classList.add('visible');
     }
 
-    //on signup click, display signUp form and hide login form
-    displaySignup = (e) => {
-        const modalSign = document.querySelector(`#modal-signup`);
-        const modalLogin = document.querySelector(`#modal-login`);
-        modalSign.classList.add('visible');
-        modalLogin.classList.remove('visible')
-    }
 
-     //on forgotPassword click, display forgot password form
-     displayForgotPassword = (e) => {
-        const modalSign = document.querySelector(`#modal-forgot-password`);
-        const modalLogin = document.querySelector(`#modal-login`);
-        modalSign.classList.add('visible');
-        modalLogin.classList.remove('visible')
+     //on Instructions click, display Instruction model
+     displayInstructions = (e) => {
+        const modalInstruction = document.querySelector(`#checkout-instruction`);
+        modalInstruction.classList.add('visible');
     }
 
     //creating input field for Redux form Field component
     renderEmail = ({input,label,type,meta}) => {
         return(
-            <div className="form__group--login">
-                <input {...input} type={type} placeholder={label} className="form__input--login" autoComplete="off" required/>
+            <div className="form__group">
+                <input {...input} type={type} placeholder={label} className="form__input" autoComplete="off" required/>
                 <label htmlFor={label} className="form__label">{label}</label>
             </div>
         );
@@ -54,8 +49,8 @@ class Login extends React.PureComponent {
     //creating input field for Redux form Field component
     renderPassword = ({input,label,type,meta}) => {
         return(
-            <div className="form__group--login">
-                <input {...input} type={type} placeholder={label} className="form__input--login" autoComplete="off" required/>
+            <div className="form__group">
+                <input {...input} type={type} placeholder={label} className="form__input" autoComplete="off" required/>
                 <span ref={this.eyeRef} style={{position:'relative'}}  onClick={this.showPass}>
                     <span className="eye__invisible__svg"></span>
                 </span>
@@ -89,8 +84,9 @@ class Login extends React.PureComponent {
         this.props.loginAction(formValue).then((value) => {
                 this.showAlert = true
                 this.setState({alertInfo:false,alertErr:false});  
-                this.setState({alertInfo:true,alertErr:false});        
-                this.hideModal();
+                this.setState({alertInfo:true,alertErr:false}); 
+                alert("You are successfully loggedin.\nKnow you can register the events");
+                history.push("/event/registration")     
             }).catch((err) => {
                 if(err?.response?.status === 401){
                     this.showAlert = true
@@ -120,32 +116,61 @@ class Login extends React.PureComponent {
     }
 
     render(){
-        return ReactDOM.createPortal(
+        return(
             <>
-                <div className="modal" id="modal-login" onClick={this.hideModal}>
-                    <div className="modal__container--login" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal__container--content-login" >
-                            <h4 className="heading--4 form__heading">login</h4>
-                            <div className="modal__form--login">
-                                <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                                    <Field name="usernameOrEmail" type="text" component={this.renderEmail} label="Username/Email" />
-                                    <Field name="password" type={this.state.passwordState} component={this.renderPassword} label="Password" />
-                                    <button className="form__button" >login</button>
-                                </form>
-                                <a href="#modal-forgot-password" onClick={(e) => this.displayForgotPassword(e)} className="forgot-password" >Forgot password?</a>
+            <Nav />
+            <div className="after-navigation">
+                <div className="form__section" >
+                    <div className="intruction__model">
+                        <a href="#checkout-instruction" onClick={(e) => this.displayInstructions(e)}>
+                            Checkout Instructions
+                        </a>
+                    </div>
+                    <div className="form__main" >
+                        <div className="form__container--form">
+                            <div className="form__content" >
+                                <div className="form--login">
+                                    <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                                        <Field name="usernameOrEmail" type="text" component={this.renderEmail} label="Username/Email" />
+                                        <Field name="password" type={this.state.passwordState} component={this.renderPassword} label="Password" />
+                                        <button className="form__btn" >login</button>
+                                    </form>
+                                    <a href="#modal-forgot-password" onClick={(e) => this.displayForgotPassword(e)} className="forgot-password" >Forgot password?</a>
+                                </div>
+                                
+                                <div className="sign__btn--container">
+                                    <Link to="signup" className="sign__btn">Signup</Link>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="form__container--instructions">
+                            <div className="form__login--instructions-background">
+
+                            </div>  
+                            <div className="form__login--instructions">
+                                <ul className="instruction__list">
+                                    <p>Instructions</p>
+                                    <li>
+                                    The students that are from Atharva college register using Atharva G-suit id.
+                                    </li>
+                                    <li>
+                                    Students registered using Atharva email id will only be allowed to play intra-college events.
+                                    </li>
+                                    <li>Instruction for signup 1</li>
+                                    <li>Instruction for signup 1</li>
+                                </ul>
                             </div>
                             
-                            <div className="sign__btn--container">
-                                <a href="#modal-signup" onClick={(e) => this.displaySignup(e)}  className="sign__btn">signup</a>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-                {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+            </div>
+            <Footer />
+            <AuthInstructions />
+            {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
 
             </>
-            ,document.querySelector('#auth')
         );
     }
 

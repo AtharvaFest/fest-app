@@ -29,7 +29,7 @@ import CreateEvent from './admin/event/CreateEvent'
 //////////////////////////////////
 ///// OTHER SECTION
 import history from  '../history'
-import ProtectedUserRoute from '../protectedRoute/protected.userRoute'
+import {ProtectedUserRoute,ProtectedLoginRoute} from '../protectedRoute/protected.userRoute'
 import ProtectedAdminRoute from '../protectedRoute/protected.adminRoute'
 
 
@@ -43,6 +43,8 @@ class App extends Component {
                     <Switch>
                         {/* User Routes */}
                         {/* <Route exact path='/home'  component={Home}  /> */}
+                        <ProtectedLoginRoute exact path='/login'  component={UserLogin}  />
+                        <ProtectedLoginRoute exact path='/signup'  component={Signup}  />
                         <Route exact path='/'  component={Home}  />
                         <Route path='/gallery' exact component={Gallery}  />
                         <ProtectedUserRoute path='/event/registration' exact component={Event}  />
@@ -67,8 +69,6 @@ class App extends Component {
                         <Route path='*' exact component={()=>"404 Page not found"}  />
                     </Switch>
                 </Router>
-                <UserLogin />
-                <Signup />
                 <ForgotPassword />
             </div>
         );

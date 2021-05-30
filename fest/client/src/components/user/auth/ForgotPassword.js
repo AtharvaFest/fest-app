@@ -19,7 +19,7 @@ class ForgotPassword extends React.Component {
 
    
 
-    //on submit hide login form
+    //on submit hide forgotPassword form
     hideModal = () => {
         const modal = document.querySelector('#modal-forgot-password');
         modal.classList.remove('visible')
@@ -28,11 +28,11 @@ class ForgotPassword extends React.Component {
    
 
     //creating input field for Redux form Field component
-    renderEmail = ({input,label,type,meta}) => {
+    renderEmail = ({input,label,type}) => {
         return(
-            <div className="form__group--login">
-                <input {...input} type={type} placeholder={label} className="form__input--login" autoComplete="off" required/>
-                <label htmlFor={label} className="form__label">{label}</label>
+            <div className="form__group--forgot-passwd">
+                <input {...input} type={type} placeholder={label} className="form__input--forgot-passwd" autoComplete="off" required/>
+                <label htmlFor={label} className="form__label--forgot-passwd">{label}</label>
             </div>
         );
     }
@@ -89,14 +89,14 @@ class ForgotPassword extends React.Component {
         return ReactDOM.createPortal(
             <>
                 <div className="modal" id="modal-forgot-password" onClick={this.hideModal}>
-                    <div className="modal__container--login" onClick={(e) => e.stopPropagation()}>
-                        <div className="modal__container--content-login" >
-                            <h4 className="heading--4 form__heading">Forgot Password</h4>
-                            <div className="modal__form--login">
+                    <div className="modal__container" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal__sub-container" >
+                            <h4 className="heading--4 modal__heading">Forgot Password</h4>
+                            <div className="modal__content">
                                 <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                     <div className="error_msg">{this.state.errEmail}</div>
                                     <Field name="email" type="email" component={this.renderEmail} label="Email" />
-                                    <button className="form__button" >Send Reset Instruction</button>
+                                    <button className="form__forgot-password--button" >Send Reset Instruction</button>
                                 </form>
                             </div>           
                         </div>

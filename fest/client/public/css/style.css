@@ -937,7 +937,7 @@ body {
   font-size: 10rem;
   padding: 5rem 0; }
 
-.form__heading {
+.modal__heading {
   background-image: linear-gradient(to bottom right, #6b35a9, #422168);
   background-clip: text;
   -webkit-background-clip: text;
@@ -947,41 +947,18 @@ body {
   padding: 1rem 0;
   border-bottom: 1px solid #bbb; }
 
-.modal__container--login, .modal__container--sign {
+.modal__container {
   background-image: linear-gradient(to bottom right, #6b35a9, #422168);
   display: grid;
   justify-content: center;
   align-content: center;
   border-radius: .5rem; }
 
-.modal__container--content-login, .modal__container--content-sign {
+.modal__sub-container {
   background-color: #eee;
   border-radius: .8rem;
   box-shadow: 0 1rem 4rem #000;
   display: grid; }
-
-.form__label {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-left: 2rem;
-  margin-top: .7rem;
-  display: block;
-  transition: all .3s; }
-
-.form__button {
-  text-transform: uppercase;
-  border: 2px solid #6b35a9;
-  width: 100%;
-  padding: 2rem;
-  font-size: inherit;
-  color: #422168;
-  border-radius: 4rem;
-  cursor: pointer; }
-  .form__button:focus {
-    outline: none; }
-  .form__button:hover {
-    background-color: #6b35a9;
-    color: #fff; }
 
 .visible {
   opacity: 1;
@@ -1014,43 +991,39 @@ body {
 .hide {
   visibility: hidden; }
 
-.modal__form--login {
+.modal__content {
   font-size: 1.6rem;
-  padding: 3rem;
-  border-bottom: 1px solid #bbb; }
+  padding: 3rem; }
   @media only screen and (max-width: 56.25em) {
-    .modal__form--login {
+    .modal__content {
       margin: 2rem 0; } }
   @media only screen and (max-width: 37.5em) {
-    .modal__form--login {
+    .modal__content {
       margin: 2rem 0; } }
 
-.modal__container--login {
+.modal__container {
   width: 70vw;
   padding: 4rem 0; }
   @media only screen and (max-width: 56.25em) {
-    .modal__container--login {
+    .modal__container {
       width: 70vw; } }
   @media only screen and (max-width: 37.5em) {
-    .modal__container--login {
+    .modal__container {
       width: 70vw;
       padding: 0; } }
 
-.modal__container--content-login {
-  width: 40vw;
-  max-height: calc(100vh - 20px);
-  overflow-y: auto; }
-  @media only screen and (max-width: 56.25em) {
-    .modal__container--content-login {
-      width: 60vw; } }
-  @media only screen and (max-width: 37.5em) {
-    .modal__container--content-login {
-      width: 70vw; } }
+@media only screen and (max-width: 56.25em) {
+  .modal__sub-container {
+    width: 60vw; } }
 
-.form__group--login:not(:last-child) {
+@media only screen and (max-width: 37.5em) {
+  .modal__sub-container {
+    width: 70vw; } }
+
+.form__group--forgot-passwd:not(:last-child) {
   margin-bottom: 2rem; }
 
-.form__input--login {
+.form__input--forgot-passwd {
   padding: 1.5rem 2.5rem;
   width: 100%;
   border: none;
@@ -1060,126 +1033,43 @@ body {
   color: inherit;
   display: inline;
   transition: all .3s; }
-  .form__input--login:focus {
+  .form__input--forgot-passwd:focus {
     outline: none;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
     border-bottom: 3px solid #6b35a9; }
-  .form__input--login:required {
+  .form__input--forgot-passwd:required {
     box-shadow: none; }
-  .form__input--login:focus:invalid {
+  .form__input--forgot-passwd:focus:invalid {
     outline: none;
     border-bottom: 3px solid #e3301e; }
 
-.form__input--login:placeholder-shown ~ .form__label {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4rem); }
-
-.forgot-password {
-  text-decoration: none;
-  margin-top: 1rem;
-  display: inline-block;
-  line-height: 1.5rem;
-  color: #6b35a9;
-  border-bottom: 1px solid transparent;
-  cursor: pointer; }
-  .forgot-password:hover {
-    border-bottom: 1px solid #6b35a9; }
-
-.sign__btn--container {
-  font-size: 1.6rem;
-  padding: 2rem 0;
-  display: flex;
-  justify-content: center; }
-
-.sign__btn {
-  text-decoration: none;
+.form__forgot-password--button {
   text-transform: uppercase;
-  background-image: linear-gradient(to bottom right, #6b35a9, #422168);
-  color: #fff;
-  padding: 1.5rem 4rem;
-  display: inline-block;
-  border-radius: .5rem; }
-
-.modal__form--sign {
-  font-size: 1.6rem;
-  padding: 0 3rem;
-  margin: 1rem 0; }
-  @media only screen and (max-width: 56.25em) {
-    .modal__form--sign {
-      margin: 2rem 0; } }
-  @media only screen and (max-width: 37.5em) {
-    .modal__form--sign {
-      margin: 2rem 0; } }
-
-.modal__container--sign {
-  position: relative;
-  width: 70vw;
-  padding: 4rem 0; }
-  @media only screen and (max-width: 56.25em) {
-    .modal__container--sign {
-      width: 70vw;
-      margin: 0; } }
-  @media only screen and (max-width: 37.5em) {
-    .modal__container--sign {
-      padding: 0;
-      width: 70vw; } }
-
-.modal__container--content-sign {
-  width: 40vw;
-  padding-bottom: 1rem;
-  max-height: calc(100vh - 21px);
-  overflow-y: auto; }
-  @media only screen and (max-width: 56.25em) {
-    .modal__container--content-sign {
-      width: 60vw; } }
-  @media only screen and (max-width: 37.5em) {
-    .modal__container--content-sign {
-      width: 70vw; } }
-
-.form__group--sign:not(:last-child) {
-  margin-bottom: .5rem;
-  position: relative; }
-
-.form__input--sign {
-  padding: 1.2rem 2.5rem;
+  border: 2px solid #6b35a9;
   width: 100%;
-  border: none;
-  border-radius: .5rem;
-  font-size: 1.5rem;
-  border-bottom: 3px solid transparent;
-  color: inherit;
-  display: inline;
-  transition: all .3s; }
-  .form__input--sign:focus {
-    outline: none;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-    border-bottom: 3px solid #6b35a9; }
-  .form__input--sign:focus:invalid {
-    border-bottom: 3px solid #e3301e; }
+  padding: 2rem;
+  font-size: inherit;
+  color: #422168;
+  border-radius: 4rem;
+  cursor: pointer; }
+  .form__forgot-password--button:focus {
+    outline: none; }
+  .form__forgot-password--button:hover {
+    background-color: #6b35a9;
+    color: #fff; }
 
-.form__input--sign:placeholder-shown ~ .form__label {
+.form__label--forgot-passwd {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  margin-top: .7rem;
+  display: block;
+  transition: all .3s; }
+
+.form__input--forgot-passwd:placeholder-shown ~ .form__label--forgot-passwd {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4rem); }
-
-.error_msg {
-  color: #e3301e; }
-
-.form__heading--sign {
-  background-image: linear-gradient(to bottom right, #6b35a9, #422168);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #bbb; }
-
-.password__instruction {
-  position: absolute;
-  right: 0;
-  top: 4.8rem;
-  font-size: 1.2rem; }
 
 .horizontal-nav__container {
   position: fixed;
@@ -1201,7 +1091,7 @@ body {
       position: absolute;
       top: 5.8rem;
       right: 8rem;
-      height: 92vh;
+      height: 97vh;
       width: 50%;
       display: grid;
       align-items: center;
@@ -1302,6 +1192,379 @@ body {
 .after-navigation {
   padding-top: 10rem;
   background-color: #f7f7f7; }
+
+.aboutdiv__main {
+  display: grid;
+  grid-template-columns: 4fr 8fr; }
+  @media screen and (max-width: 650px) {
+    .aboutdiv__main {
+      grid-template-columns: auto; } }
+
+.aboutdiv__main_pic_style {
+  background-color: #9664cf;
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 20px; }
+
+.aboutdiv__main_text {
+  padding: 20px; }
+
+.aboutdiv__main__text__heading {
+  background-image: linear-gradient(to bottom right, rgba(107, 53, 169, 0.808), rgba(66, 33, 104, 0.808));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: grid; }
+  .aboutdiv__main__text__heading::after {
+    content: "";
+    height: 1px;
+    background-color: #6b35a9;
+    justify-self: stretch; }
+
+.aboutdiv__main__text__paragraph {
+  font-size: 18px; }
+  @media (max-width: 800px) {
+    .aboutdiv__main__text__paragraph {
+      font-size: 14px; } }
+
+.about-team__section {
+  padding-top: 5rem; }
+
+.aboutteam__heading2 {
+  display: flex;
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+  transition: all 3s; }
+  .aboutteam__heading2--content {
+    font-size: 3.5rem;
+    background-image: linear-gradient(to bottom right, rgba(107, 53, 169, 0.808), rgba(66, 33, 104, 0.808));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    display: grid;
+    line-height: 1.2; }
+    .aboutteam__heading2--content::after {
+      content: "";
+      height: 2px;
+      background-color: #6b35a9;
+      justify-self: stretch; }
+
+.aboutteam__card {
+  display: grid;
+  grid-template-columns: auto auto auto; }
+  @media screen and (max-width: 966px) {
+    .aboutteam__card {
+      grid-template-columns: auto auto; } }
+  @media screen and (max-width: 800px) {
+    .aboutteam__card {
+      grid-template-columns: auto; } }
+
+.aboutteam__card__main {
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  height: 380px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  overflow-y: hidden; }
+  @media screen and (max-width: 800px) {
+    .aboutteam__card__main {
+      margin: 20px 23%; } }
+  @media screen and (max-width: 600px) {
+    .aboutteam__card__main {
+      margin: 20px 20%;
+      height: 340px; } }
+  @media screen and (max-width: 500px) {
+    .aboutteam__card__main {
+      margin: 20px 16%; } }
+  @media screen and (max-width: 400px) {
+    .aboutteam__card__main {
+      margin: 20px 7%; } }
+  .aboutteam__card__main:hover .aboutteam__card__main_photo_style {
+    transform: scale(0.8);
+    transition: all 0.3s ease 0s; }
+  .aboutteam__card__main:hover .aboutteam__card__main_socialicons {
+    bottom: 0;
+    transition: all 0.3s ease 0s; }
+  .aboutteam__card__main:hover .aboutteam__card__main__developer_info {
+    transition: all 0.3s ease 0s;
+    margin-top: -40px; }
+
+.aboutteam__card__main_socialicons {
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  bottom: -30px;
+  transition: all 0.3s ease 0s;
+  background-color: #9664cf;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .aboutteam__card__main_socialicons > div {
+    margin: 0 5px;
+    width: 30px;
+    height: 100%; }
+
+.aboutteam__card__main_socialicons_singleicon {
+  padding: 5px 0;
+  width: 30px;
+  height: 100%;
+  fill: #fff; }
+
+.aboutteam__card__main_socialicons_singleicon:hover {
+  background-color: #fff;
+  fill: #9664cf;
+  cursor: pointer; }
+
+.aboutteam__card__main_photo {
+  margin: 20px;
+  height: 240px;
+  width: 240px; }
+  @media screen and (max-width: 800px) {
+    .aboutteam__card__main_photo {
+      height: 200px;
+      width: 200px; } }
+  @media screen and (max-width: 600px) {
+    .aboutteam__card__main_photo {
+      height: 180px;
+      width: 180px; } }
+
+.aboutteam__card__main_photo_style {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: all 0.3s ease 0s; }
+
+.aboutteam__card__main__developer_info {
+  transition: all 0.3s ease 0s; }
+
+.aboutteam__card__main__developer_name {
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase; }
+
+.aboutteam__card__main__developer_role {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 0.8;
+  margin-bottom: 10px; }
+
+.intruction__model {
+  display: none; }
+  @media only screen and (max-width: 56.25em) {
+    .intruction__model {
+      display: block;
+      position: absolute;
+      top: 4rem;
+      left: 5rem; }
+      .intruction__model a {
+        text-transform: uppercase;
+        font-size: 1.6rem; }
+        .intruction__model a:link, .intruction__model a:active {
+          color: #6b35a9; } }
+
+.form__login--instructions, .form__signup--instructions {
+  display: flex;
+  justify-content: center;
+  background-color: #f7f7f7;
+  width: 70%;
+  grid-row: 1/3;
+  position: relative;
+  border-radius: 8px;
+  background-image: linear-gradient(to bottom right, #6b35a9, #422168); }
+  .form__login--instructions .instruction__list, .form__signup--instructions .instruction__list {
+    margin: 4rem 0;
+    color: #f7f7f7; }
+    .form__login--instructions .instruction__list p, .form__signup--instructions .instruction__list p {
+      font-size: 1.7rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      text-transform: uppercase; }
+    .form__login--instructions .instruction__list li, .form__signup--instructions .instruction__list li {
+      font-size: 1.5rem;
+      max-width: 28rem;
+      line-height: 2; }
+
+.form__login--instructions-background, .form__signup--instructions-background {
+  background-image: linear-gradient(to bottom right, #6b35a9, #422168);
+  width: 40rem;
+  height: 40rem;
+  position: absolute;
+  right: 7rem;
+  clip-path: polygon(100% 0%, 0% 0%, 0% 50%, 16% 50%, 16% 10%, 85% 10%, 85% 91%, 16% 91%, 16% 50%, 0% 50%, 0% 100%, 100% 100%);
+  border-radius: 8px; }
+
+.form__section {
+  position: relative;
+  margin-top: -4rem;
+  background-color: #eee; }
+
+.form__main {
+  padding: 0 3rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 4rem;
+  border-radius: .5rem; }
+  @media only screen and (max-width: 56.25em) {
+    .form__main {
+      padding-top: 5rem; } }
+
+.form__container--form {
+  width: 90%; }
+  @media only screen and (max-width: 56.25em) {
+    .form__container--form {
+      width: 100%; } }
+
+.form__container--instructions {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr); }
+  @media only screen and (max-width: 56.25em) {
+    .form__container--instructions {
+      display: none; } }
+
+.form__content {
+  justify-self: center;
+  padding: 6rem 3rem; }
+
+.form__heading {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #bbb; }
+
+.form__btn {
+  width: 100%;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-image: linear-gradient(to bottom right, #6b35a9, #422168);
+  color: #fff;
+  padding: 1.8rem 4rem;
+  display: inline-block;
+  border-radius: .5rem;
+  border: unset;
+  justify-self: center;
+  font-size: 1.6rem;
+  cursor: pointer; }
+  .form__btn:focus {
+    outline: none; }
+  .form__btn:hover {
+    background-color: #6b35a9;
+    color: #fff; }
+
+.form__group:not(:last-child) {
+  margin-bottom: 2rem;
+  position: relative; }
+
+.form__input {
+  padding: 1.5rem 2.5rem;
+  width: 100%;
+  border: none;
+  border-radius: .5rem;
+  font-size: 1.5rem;
+  border-bottom: 3px solid transparent;
+  color: inherit;
+  display: inline;
+  transition: all .3s; }
+  .form__input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid #6b35a9; }
+  .form__input:required {
+    box-shadow: none; }
+  .form__input:focus:invalid {
+    outline: none;
+    border-bottom: 3px solid #e3301e; }
+
+.form__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  margin-top: .7rem;
+  display: block;
+  transition: all .3s; }
+
+.form__input:placeholder-shown ~ .form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem); }
+
+.error_msg {
+  color: #e3301e; }
+
+.form__login--instructions {
+  margin-bottom: -8rem; }
+
+.form__login--instructions-background {
+  top: 7rem; }
+
+.form--login {
+  font-size: 1.6rem;
+  margin-top: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #bbb; }
+  @media only screen and (max-width: 56.25em) {
+    .form--login {
+      margin: 2rem 0; } }
+  @media only screen and (max-width: 37.5em) {
+    .form--login {
+      margin: 2rem 0; } }
+
+.login__heading {
+  background-image: linear-gradient(to bottom right, #6b35a9, #422168);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; }
+
+.sign__btn--container {
+  font-size: 1.6rem;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center; }
+
+.sign__btn {
+  text-decoration: none;
+  text-transform: uppercase;
+  background-image: linear-gradient(to bottom right, #6b35a9, #422168);
+  color: #fff;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: .5rem; }
+
+.forgot-password {
+  text-decoration: none;
+  margin-top: 1rem;
+  display: inline-block;
+  line-height: 1.5rem;
+  color: #6b35a9;
+  border-bottom: 1px solid transparent;
+  cursor: pointer; }
+  .forgot-password:hover {
+    border-bottom: 1px solid #6b35a9; }
+
+.form__signup--instructions-background {
+  top: 8rem; }
+
+.password__instruction {
+  position: absolute;
+  right: 0;
+  top: 4.8rem;
+  font-size: 1.2rem; }
 
 .email-activation__btn, .home__btn {
   text-transform: uppercase;
@@ -1616,174 +1879,6 @@ body {
 
 .reset-pass__btn {
   font-size: 1.6rem; }
-
-.aboutdiv__main {
-  display: grid;
-  grid-template-columns: 4fr 8fr; }
-  @media screen and (max-width: 650px) {
-    .aboutdiv__main {
-      grid-template-columns: auto; } }
-
-.aboutdiv__main_pic_style {
-  background-color: #9664cf;
-  height: calc(100% - 40px);
-  width: calc(100% - 40px);
-  padding: 20px;
-  margin: 20px;
-  border-radius: 20px; }
-
-.aboutdiv__main_text {
-  padding: 20px; }
-
-.aboutdiv__main__text__heading {
-  background-image: linear-gradient(to bottom right, rgba(107, 53, 169, 0.808), rgba(66, 33, 104, 0.808));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  font-size: 3.5rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  display: grid; }
-  .aboutdiv__main__text__heading::after {
-    content: "";
-    height: 1px;
-    background-color: #6b35a9;
-    justify-self: stretch; }
-
-.aboutdiv__main__text__paragraph {
-  font-size: 18px; }
-  @media (max-width: 800px) {
-    .aboutdiv__main__text__paragraph {
-      font-size: 14px; } }
-
-.about-team__section {
-  padding-top: 5rem; }
-
-.aboutteam__heading2 {
-  display: flex;
-  text-transform: uppercase;
-  justify-content: center;
-  align-items: center;
-  transition: all 3s; }
-  .aboutteam__heading2--content {
-    font-size: 3.5rem;
-    background-image: linear-gradient(to bottom right, rgba(107, 53, 169, 0.808), rgba(66, 33, 104, 0.808));
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    display: grid;
-    line-height: 1.2; }
-    .aboutteam__heading2--content::after {
-      content: "";
-      height: 2px;
-      background-color: #6b35a9;
-      justify-self: stretch; }
-
-.aboutteam__card {
-  display: grid;
-  grid-template-columns: auto auto auto; }
-  @media screen and (max-width: 966px) {
-    .aboutteam__card {
-      grid-template-columns: auto auto; } }
-  @media screen and (max-width: 800px) {
-    .aboutteam__card {
-      grid-template-columns: auto; } }
-
-.aboutteam__card__main {
-  position: relative;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
-  height: 380px;
-  margin: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  overflow-y: hidden; }
-  @media screen and (max-width: 800px) {
-    .aboutteam__card__main {
-      margin: 20px 23%; } }
-  @media screen and (max-width: 600px) {
-    .aboutteam__card__main {
-      margin: 20px 20%;
-      height: 340px; } }
-  @media screen and (max-width: 500px) {
-    .aboutteam__card__main {
-      margin: 20px 16%; } }
-  @media screen and (max-width: 400px) {
-    .aboutteam__card__main {
-      margin: 20px 7%; } }
-  .aboutteam__card__main:hover .aboutteam__card__main_photo_style {
-    transform: scale(0.8);
-    transition: all 0.3s ease 0s; }
-  .aboutteam__card__main:hover .aboutteam__card__main_socialicons {
-    bottom: 0;
-    transition: all 0.3s ease 0s; }
-  .aboutteam__card__main:hover .aboutteam__card__main__developer_info {
-    transition: all 0.3s ease 0s;
-    margin-top: -40px; }
-
-.aboutteam__card__main_socialicons {
-  position: absolute;
-  width: 100%;
-  height: 30px;
-  bottom: -30px;
-  transition: all 0.3s ease 0s;
-  background-color: #9664cf;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .aboutteam__card__main_socialicons > div {
-    margin: 0 5px;
-    width: 30px;
-    height: 100%; }
-
-.aboutteam__card__main_socialicons_singleicon {
-  padding: 5px 0;
-  width: 30px;
-  height: 100%;
-  fill: #fff; }
-
-.aboutteam__card__main_socialicons_singleicon:hover {
-  background-color: #fff;
-  fill: #9664cf;
-  cursor: pointer; }
-
-.aboutteam__card__main_photo {
-  margin: 20px;
-  height: 240px;
-  width: 240px; }
-  @media screen and (max-width: 800px) {
-    .aboutteam__card__main_photo {
-      height: 200px;
-      width: 200px; } }
-  @media screen and (max-width: 600px) {
-    .aboutteam__card__main_photo {
-      height: 180px;
-      width: 180px; } }
-
-.aboutteam__card__main_photo_style {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  transform: scale(1);
-  transition: all 0.3s ease 0s; }
-
-.aboutteam__card__main__developer_info {
-  transition: all 0.3s ease 0s; }
-
-.aboutteam__card__main__developer_name {
-  font-size: 2.5rem;
-  font-weight: 400;
-  line-height: 1.5;
-  text-transform: uppercase; }
-
-.aboutteam__card__main__developer_role {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 0.8;
-  margin-bottom: 10px; }
 
 .gallery_main {
   width: 100%; }

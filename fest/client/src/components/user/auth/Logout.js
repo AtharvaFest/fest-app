@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {logoutAction} from '../../../action'
 import {Alert} from '../../Alert'
+import history from  '../../../history'
 
 class Logout extends React.Component{
 
@@ -15,7 +16,8 @@ class Logout extends React.Component{
         this.props.logoutAction().then(()=>{
             this.props.showAccountMenu();
             this.showAlert = true;
-            this.setState({alertInfo:true,alertErr:false});  
+            this.setState({alertInfo:true,alertErr:false}); 
+            history.push("/login")
         })
     }
 

@@ -17,7 +17,7 @@
     padding: 5rem 0;
 }
 
-.form__heading{
+.modal__heading{
     background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
     background-clip:text;
     -webkit-background-clip:text;
@@ -39,44 +39,13 @@
    
 }
 
-%modal-container-content {
+%modal-sub-container {
     background-color: $color-white--3;
     border-radius: .8rem;
     box-shadow: 0 1rem 4rem $color-black-dark;
     display: grid;
 }
 
-
-.form{
-
-    &__label{
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-left: 2rem;
-        margin-top: .7rem;
-        display: block;
-        transition: all .3s;
-    }
-
-    &__button{
-        text-transform: uppercase;
-        border: 2px solid $color-primary;
-        width: 100%;
-        padding: 2rem;
-        font-size: inherit;
-        color: $color-primary-dark;
-        border-radius: 4rem;
-        cursor: pointer;
-        &:focus{
-            outline: none;
-        }
-
-        &:hover{
-            background-color: $color-primary;
-            color: $color-white--1;
-        }
-    }
-}
 
 .visible{
     opacity: 1;
@@ -110,39 +79,16 @@
     }
 }
 
-// .visible__eye-icon{
-//     margin-left: -2.5rem;
-//     font-size: 2rem;
-// }
-
-// .eye-icon{
-//     display: inline-block;
-//     margin-bottom: -.5rem;
-// }
-
-// .invisible__eye-icon{
-//     margin-left: -2rem;
-//     font-size: 2rem;
-// }
-
-// .eye-off-icon{
-//     display: inline-block;
-//     margin-bottom: -.5rem;
-// }
 
 .hide{
     visibility: hidden;
 }
 
-//////////////////////////////////////////////
-///// LOGIN
-
 .modal{
 
-    &__form--login{
+    &__content{
         font-size: 1.6rem;
         padding:3rem;
-        border-bottom: 1px solid $color-grey-2;
         
         @include respond(tab-port){
             margin: 2rem 0;
@@ -153,7 +99,7 @@
         }
     }
     
-    &__container--login{
+    &__container{
         width: 70vw;
         padding: 4rem 0;
         @extend %modal-container;
@@ -169,11 +115,8 @@
 
     }
 
-    &__container--content-login{
-        width: 40vw;
-        max-height: calc(100vh - 20px);
-        overflow-y: auto;
-        @extend %modal-container-content;
+    &__sub-container{
+        @extend %modal-sub-container;
 
         @include respond(tab-port) {
             width: 60vw;
@@ -188,11 +131,11 @@
 
 
 .form {
-    &__group--login:not(:last-child) {
+    &__group--forgot-passwd:not(:last-child) {
         margin-bottom: 2rem;
     }
 
-    &__input--login{
+    &__input--forgot-passwd{
         padding: 1.5rem 2.5rem;
         width: 100%;
         border:none;
@@ -220,160 +163,43 @@
         
     }
 
-    &__input--login:placeholder-shown ~ &__label{
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-4rem);
-    }
-}
-
-.forgot-password{
-    text-decoration: none;
-    margin-top: 1rem;
-    display: inline-block;
-    line-height: 1.5rem;
-    color: $color-primary;
-    border-bottom: 1px solid transparent;
-    cursor: pointer;
-
-    &:hover{
-        border-bottom: 1px solid $color-primary;
-    }
-    
-}
-
-.sign__btn--container {
-    font-size: 1.6rem;
-    padding: 2rem 0;
-    display: flex;
-    justify-content: center;
-}
-
-.sign__btn {
-    text-decoration: none;
-    text-transform: uppercase;
-    background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark);
-    color: $color-white--1;
-    padding: 1.5rem 4rem;
-    display: inline-block;
-    border-radius: .5rem;
-}
-
-
-
-
-
-//////////////////////////////////////////////////
-///// SIGN UP
-
-.modal{
-
-    &__form--sign{
-        font-size: 1.6rem;
-        padding: 0 3rem;
-        margin: 1rem 0;
-        
-    
-        @include respond(tab-port){
-            margin: 2rem 0;
-        }
-    
-        @include respond(phone){
-            margin: 2rem 0;
-        }
-    }
-    
-    &__container--sign{
-        position: relative;
-        width: 70vw;
-        padding: 4rem 0;
-        @extend %modal-container;
-
-        @include respond(tab-port) {
-            width: 70vw;
-            margin: 0;
-        }
-
-        @include respond(phone){
-            padding: 0;
-            width: 70vw;
-
-        }
-
-    }
-
-    &__container--content-sign{
-        width: 40vw;
-        padding-bottom:1rem ;
-        max-height: calc(100vh - 21px);
-        overflow-y: auto;
-        @extend %modal-container-content;
-
-        @include respond(tab-port) {
-            width: 60vw;
-        }
-        
-        @include respond(phone){
-            width: 70vw;
-        }
-    } 
-
-}
-
-.form {
-    &__group--sign:not(:last-child) {
-        margin-bottom: .5rem;
-        position: relative;
-    }
-
-
-    &__input--sign{
-        padding: 1.2rem 2.5rem;
+    &__forgot-password--button{
+        text-transform: uppercase;
+        border: 2px solid $color-primary;
         width: 100%;
-        border:none;
-        border-radius: .5rem;
-        font-size: 1.5rem;
-        border-bottom: 3px solid transparent;
-        color: inherit;
-        display: inline;
-        transition: all .3s;
-
+        padding: 2rem;
+        font-size: inherit;
+        color: $color-primary-dark;
+        border-radius: 4rem;
+        cursor: pointer;
         &:focus{
             outline: none;
-            box-shadow: 0 1rem 2rem rgba($color-black-dark,.2);
-            border-bottom: 3px solid $color-primary;
         }
 
-        &:focus:invalid{
-            border-bottom: 3px solid #e3301e;
+        &:hover{
+            background-color: $color-primary;
+            color: $color-white--1;
         }
-        
     }
 
-    &__input--sign:placeholder-shown ~ &__label{
+    &__label--forgot-passwd{
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display: block;
+        transition: all .3s;
+    }
+
+    &__input--forgot-passwd:placeholder-shown ~ &__label--forgot-passwd{
         opacity: 0;
         visibility: hidden;
         transform: translateY(-4rem);
     }
 }
 
-.error_msg{
-    color:$color-err-msg;
-}
 
-.form__heading--sign{
-    background-image: linear-gradient(to bottom right, $color-primary,$color-primary-dark); 
-    background-clip:text;
-    -webkit-background-clip:text;
-    color: transparent;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid $color-grey-2;
-}
 
-.password__instruction{
-    position: absolute;
-    right: 0;
-    top: 4.8rem;
-    font-size: 1.2rem;
-}
+
+
+

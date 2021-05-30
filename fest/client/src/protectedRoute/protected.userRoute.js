@@ -3,7 +3,7 @@ import {Route, Redirect} from 'react-router-dom'
 import auth from '../auth'
 
 // MiddleWare, checks authorized user before entering in restricted area.
-const ProtectedUserRoute = ({component: Component,...rest}) => {
+export const ProtectedUserRoute = ({component: Component,...rest}) => {
 
     useEffect(()=>{
         if(!auth.isAuthenticated()){
@@ -21,7 +21,7 @@ const ProtectedUserRoute = ({component: Component,...rest}) => {
                     return (
                         <Redirect
                             to={{
-                                pathname:"/",
+                                pathname:"/login",
                                 state:{
                                     from:props.location
                                 }
@@ -35,5 +35,33 @@ const ProtectedUserRoute = ({component: Component,...rest}) => {
 }
 
 
+export const ProtectedLoginRoute = ({component: Component,...rest}) => {
 
-export default ProtectedUserRoute
+    useEffect(()=>{
+        if(auth.isAuthenticated()){
+            window.alert("You are already logged in")
+        }
+    });
+
+    return(
+        <Route 
+            {...rest}
+            render={props =>{
+                if(!auth.isAuthenticated()){
+                    return <Component {...rest} />
+                } else{
+                    return (
+                        <Redirect
+                            to={{
+                                pathname:"/",
+                                state:{
+                                    from:props.location
+                                }
+                            }}
+                        />
+                    );
+                }
+            }}
+        />
+    );
+}

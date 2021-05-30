@@ -12,9 +12,6 @@
     z-index: 200;
   }
 
-  &__left {
-    // margin-left: -2rem;
-  }
 
   &__right {
     margin-right: -8rem;
@@ -23,7 +20,7 @@
       position: absolute;
       top: 5.8rem;
       right: 8rem;
-      height: 92vh;
+      height: 97vh;
       width: 50%;
       display: grid;
       align-items: center;

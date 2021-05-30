@@ -23,6 +23,9 @@
 @import './layout/user/modal';
 @import './layout/user/navigation';
 
+
+@import './pages/user/aboutus';
+@import './pages/user/auth';
 @import './pages/user/emailActivation';
 @import './pages/user/eventRegistration';
 @import './pages/user/eventDashboard'; 
@@ -30,7 +33,6 @@
 @import './pages/user/home';
 @import './pages/user/profile';
 @import './pages/user/resetPassword';
-@import './pages/user/aboutus';
 @import './pages/user/reactImageGallery';
 
 
