@@ -1,5 +1,8 @@
 client/node_modules/
 client/src/components/user/auth/signUptest2.js
 client/src/components/user/auth/SignUptest.js
+client/src/components/user/auth/MainLogin.js
+client/src/components/user/auth/MainSignup.js
+
 server/node_modules/
 server/config/dev.env

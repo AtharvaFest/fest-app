@@ -73,7 +73,9 @@ router.post('/signup',[
 router.post('/activate_email',async (req,res) => {
     try{
         const {name,email,mobileNumber,username,password} =  jwt.verify(req.body.token.toString(),process.env.TOKEN);
-        const user = await User({name,email,mobileNumber,username,password});
+        const isAtharvites = email.includes('@atharvacoe.ac.in') ? true : false;
+    
+        const user = await User({name,email,mobileNumber,username,password,isAtharvites});
         await user.save();
         const token = await user.generateAuthToken();
         user.isAdmin = undefined;
