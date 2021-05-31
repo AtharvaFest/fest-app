@@ -3,7 +3,7 @@ import {Field,reduxForm,reset} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {resetPasswordAction} from '../../../action'
-import {Alert} from '../../Alert'
+import Toast,{toast} from '../../toast'
 
 class ResetPassword extends React.Component{
 
@@ -82,17 +82,22 @@ class ResetPassword extends React.Component{
     }
 
     onSubmit = (formValue) => {
-        this.props.resetPasswordAction(formValue).then((value)=>{
-            this.showAlert = true
+        this.props.resetPasswordAction(formValue).then(()=>{
             this.emptyError();
-            for(const value in formValue){
-                formValue[value] = "";
-            }
-            this.setState({alertInfo:true,alertErr:false});            
+            this.props.toast({
+                containerId: "toast-resetPassword",
+                toastType: "info",
+                message: "Password changed successfully",
+                showToast:true
+            })  
         }).catch((err)=>{
             if(err?.response?.data.error === "expiredLink"){
-                this.showAlert = true
-                this.setState({alertInfo:false,alertErr:true});                
+                this.props.toast({
+                    containerId: "toast-resetPassword",
+                    toastType: "info",
+                    message: "Password changed successfully",
+                    showToast:true
+                })            
                 return;
             }
             if(err?.response?.data){//Show error message
@@ -106,42 +111,23 @@ class ResetPassword extends React.Component{
         })
     }
 
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo&&this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Password changed successfully" containerId="alert-resetPassword" alertType={"info"} />
-            );
-        }
-        if(alertErr&&this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Incorrect link or it is expired" containerId="alert-resetPassword" alertType={"error"} />
-            );
-        }
-
-        return<></>;
-        
-    }
-
     render(){
         return(
             <>
                 <div className="reset-password__container">
                     <div className="reset-password__content">
-                        <h4 className="heading--4 form__heading--sign">Reset Password</h4>
+                        <h4 className="heading--4 modal__heading">Reset Password</h4>
                         <div className="reset-password__form-content">
                             <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <div className="error_msg paragraph">{this.state.errPassword}</div>
                                 <Field name="newPassword" type={this.state.newPasswordState} component={this.renderPassword} label="New Password" id="new-pass" />
                                 <Field name="confirmPassword" type={this.state.confirmPasswordState} component={this.renderPassword} label="Confirm Password" id="confirm-pass" />
-                                <button className="form__button reset-pass__btn" >Reset Password</button>
+                                <button className="reset-pass__btn" >Reset Password</button>
                             </form>
                         </div>                    
                     </div>
                 </div>
-                {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+                <Toast />
             </>
         );
     }
@@ -162,7 +148,7 @@ const validate = formValue => {
 const  afterSubmit = (_, dispatch) =>
   dispatch(reset('resetPassword'));
 
-export default connect(null,{resetPasswordAction})(reduxForm({
+export default connect(null,{resetPasswordAction,toast})(reduxForm({
     form:'resetPassword',
     validate,
     onSubmitSuccess:afterSubmit

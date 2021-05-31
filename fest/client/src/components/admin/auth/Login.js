@@ -3,8 +3,8 @@ import {Field,reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {adminLoginAction} from '../../../action'
-import {Alert} from '../../Alert'
 import history from '../../../history'
+import Toast,{ toast } from '../../toast'
 
 class Login extends React.Component{
 
@@ -18,7 +18,7 @@ class Login extends React.Component{
     eyeOffRef = React.createRef()
 
     //On eye click making password filed 'password' type.
-    hidePass = (e) => {
+    hidePass = () => {
         this.setState({passwordState:"password"});
         this.setState({alertErr:false,alertInfo:false});
         this.eyeRef.current.classList.add('hide');
@@ -26,7 +26,7 @@ class Login extends React.Component{
     }
 
     //On eye click making password filed 'text' type.
-    showPass = (e) => {
+    showPass = () => {
         this.setState({passwordState:"text"});
         this.setState({alertErr:false,alertInfo:false});
         this.eyeOffRef.current.classList.add('hide');
@@ -48,11 +48,11 @@ class Login extends React.Component{
         return(
             <div className="from__group--admin">
                 <input {...input} type={type} placeholder={label} className="admin-login__input" autoComplete="off" required/>
-                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
-                    <ion-icon name="eye" class="eye-icon"></ion-icon>
+                <span ref={this.eyeOffRef} style={{position:'relative'}}  onClick={this.showPass}>
+                    <span className="eye__invisible__svg"></span>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={(e) => this.showPass(e)}>
-                    <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
+                <span  ref={this.eyeRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
+                    <span className="eye__visible__svg"></span>
                 </span>
                 <label htmlFor={label} className="admin-login__label">{label}</label>
             </div>
@@ -64,30 +64,17 @@ class Login extends React.Component{
                 for(const value in formValue){
                     formValue[value] = "";
                 }
-                this.setState({alertInfo:true,alertErr:false});
                 history.push('/admin')
             }).catch((err) => {
                 if(err?.response?.status === 401){
-                    this.setState({alertErr:true,alertInfo:false});
+                    this.props.toast({
+                        containerId: "toast-adminLogin",
+                        toastType: "error",
+                        message: "Unable to login",
+                        showToast:true
+                    }) 
                 }
             });
-    }
-
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo){
-            return(
-                <Alert message="Login successful" containerId="alert-adminLogin" alertType={"info"} />
-            );
-        }
-        if(alertErr){
-            return(
-                <Alert message="Unable to login" containerId="alert-adminLogin" alertType={"error"} />
-            );
-        }
-
-        return<></>;
-        
     }
 
 
@@ -112,8 +99,7 @@ class Login extends React.Component{
                     </div>
                 </div>
             </div>
-    
-            {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+            <Toast />
         </>
         );
     }
@@ -125,4 +111,4 @@ class Login extends React.Component{
 
 export default reduxForm({
     form:'adminLoginForm'
-})(connect(null,{adminLoginAction})(Login))
+})(connect(null,{adminLoginAction,toast})(Login))

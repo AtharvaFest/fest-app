@@ -7,8 +7,8 @@ import Dropzone from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 
 import {createEventsAction,readEventsAction} from '../../../action'
-import {Alert} from '../../Alert'
 import {extractImageFileExtensionFromBase64} from '../../../utils/imageFileUtils'
+import Toast,{toast} from '../../toast'
 
 import 'react-image-crop/dist/ReactCrop.css'
 
@@ -17,7 +17,6 @@ class CreateEvent extends React.Component {
     imageMaxSize = 2000000 // bytes
     acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif, image/webp'
     acceptedFileTypesArray = this.acceptedFileTypes.split(",").map((item) => {return item.trim()})
-    showAlert = false
     imagePreviewCanvasRef = React.createRef()
 
     state = {
@@ -244,20 +243,14 @@ class CreateEvent extends React.Component {
         formValue.image = this.state.croppedImage;
         let submitFlag = true;
         if(!formValue.image) {
-            this.showAlert = true;
+            console.log("inside");
             submitFlag = false;
-            this.setState({
-                        alertInfo:false,
-                        alertErr:false,
-                        alertEventExist:false,
-                        alertUploadImg:false
-                    });
-            this.setState({
-                alertErr:false,
-                alertInfo:false,
-                alertEventExist:false,
-                alertUploadImg:true
-            }); 
+            this.props.toast({
+                containerId: "toast-create-event",
+                toastType: "warning",
+                message: "Upload/Crop image",
+                showToast:true
+            })
             return
         }
 
@@ -266,19 +259,12 @@ class CreateEvent extends React.Component {
         this.props.allEvents.forEach((event)=>{
             if(event.event.toLowerCase() === formValue.event.toLowerCase()){
                 submitFlag = false;
-                this.showAlert = true;
-                this.setState({
-                    alertInfo:false,
-                    alertErr:false,
-                    alertEventExist:false,
-                    alertUploadImg:false
-                });
-                this.setState({
-                    alertErr:false,
-                    alertInfo:false,
-                    alertEventExist:true,
-                    alertUploadImg:false
-                });                   
+                this.props.toast({
+                    containerId: "toast-create-event",
+                    toastType: "error",
+                    message: "The event has been already added",
+                    showToast:true
+                })                
             }
         })
         
@@ -287,70 +273,23 @@ class CreateEvent extends React.Component {
             //therefore to get always date value in date type we are doing following conversion
             formValue.date = moment(formValue.date, "DD MM YYYY")._d;
  
-            this.props.createEventsAction(formValue).then((value) => {
-                this.showAlert = true;
-                this.setState({
-                        alertInfo:false,
-                        alertErr:false,
-                        alertEventExist:false,
-                        alertUploadImg:false
-                    });  
-                this.setState({
-                    alertInfo:true,
-                    alertErr:false,
-                    alertEventExist:false,
-                    alertUploadImg:false
-                });        
+            this.props.createEventsAction(formValue).then(() => {
+                this.props.toast({
+                    containerId: "toast-create-event",
+                    toastType: "info",
+                    message: "Event added",
+                    showToast:true
+                })     
             }).catch((err) => {
-                this.showAlert = true;
-                this.setState({
-                        alertInfo:false,
-                        alertErr:false,
-                        alertEventExist:false,
-                        alertUploadImg:false
-                    });
-                this.setState({
-                    alertErr:true,
-                    alertInfo:false,
-                    alertEventExist:false,
-                    alertUploadImg:false
-                });                   
+                this.props.toast({
+                    containerId: "toast-create-event",
+                    toastType: "error",
+                    message: "Something went wrong!",
+                    showToast:true
+                })                    
             });
         }
        
-    }
-
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr,alertUploadImg,alertEventExist)=>{
-        if(alertInfo && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Event added" containerId="alert-create-event" alertType={"info"} />
-            );
-        }
-        if(alertErr && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Something went wrong!" containerId="alert-create-event" alertType={"error"} />
-            );
-        }
-        if(alertUploadImg && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Upload image" containerId="alert-create-event" alertType={"warning"} />
-            );
-        }
-        if(alertEventExist && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="The event has been already added" containerId="alert-create-event" alertType={"warning"} />
-            );
-        }
-        
-        
-
-        return<></>;
-        
     }
 
     componentDidMount(){
@@ -427,7 +366,7 @@ class CreateEvent extends React.Component {
                     </div>
                 </div>
             </div>
-            {this.alertPopup(this.state.alertInfo,this.state.alertErr,this.state.alertUploadImg,this.state.alertEventExist)}
+            <Toast />
             </>
         );
     }
@@ -462,7 +401,7 @@ const mapStatetoProps = (state) => {
 }
  
 
-export default connect(mapStatetoProps,{createEventsAction,readEventsAction})(reduxForm({
+export default connect(mapStatetoProps,{createEventsAction,readEventsAction,toast})(reduxForm({
     form:'createEventForm',
     onSubmitSuccess:afterSubmit,
     validate

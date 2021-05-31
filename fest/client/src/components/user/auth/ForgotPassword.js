@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import {Field,reduxForm} from 'redux-form'
-import {Alert} from '../../Alert'
+import {Field,reduxForm,reset} from 'redux-form'
 
 import {forgotPasswordAction} from '../../../action'
+import Toast,{toast} from '../../toast'
 
 class ForgotPassword extends React.Component {
 
@@ -46,44 +46,31 @@ class ForgotPassword extends React.Component {
     }
 
     onSubmit = formValue => {
-        this.showAlert= true;
-        this.setState({alertInfo:true,alertErr:false});
+        this.props.toast({
+            containerId: "toast-forgot-password",
+            toastType: "info",
+            message: "Please wait..",
+            showToast:true
+        }) 
         this.props.forgotPasswordAction(formValue).then(() => {
                 alert("We've sent password reset instructions on your email")
                 this.emptyError();
-                formValue.email = ""
                 this.hideModal();
             }).catch((err) => {
-                this.setState({alertInfo:false,alertErr:false});
+                this.props.toast({
+                    containerId: "toast-forgot-password",
+                    toastType: "error",
+                    message: "Something went wrong!",
+                    showToast:true
+                }) 
                 
                 if(err?.response?.data){//Show error message
                     this.emptyError();
                     this.setState({errEmail:err.response.data.err});          
-                }else{
-                    this.showAlert= true;
-                    this.setState({alertErr:true,alertInfo:false});
                 }
             });
     }
 
-     // TOGGLE BETWEEN INFO AND ERROR ALERTS
-     alertPopup=(alertInfo,alertErr)=>{
-        if(this.showAlert && alertInfo){
-            this.showAlert =false;
-            return(
-                <Alert message="Please wait.." containerId="alert-forgot-password" alertType={"info"} />
-            );
-        }
-        if(this.showAlert && alertErr){
-            this.showAlert =false;
-            return(
-                <Alert message="Something went wrong!" containerId="alert-forgot-password" alertType={"error"} />
-            );
-        }
-
-        return<></>;
-        
-    }
 
     render(){
         return ReactDOM.createPortal(
@@ -102,9 +89,7 @@ class ForgotPassword extends React.Component {
                         </div>
                     </div>
                 </div>
-
-                {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
-
+                <Toast />
             </>
             ,document.querySelector('#auth')
         );
@@ -112,9 +97,12 @@ class ForgotPassword extends React.Component {
 
 }
 
+const  afterSubmit = (_, dispatch) =>
+  dispatch(reset('forgotPasswordForm'));
 
-export default connect(null,{forgotPasswordAction})(reduxForm({
-    form:'forgotPasswordForm'
+export default connect(null,{forgotPasswordAction,toast})(reduxForm({
+    form:'forgotPasswordForm',
+    onSubmitSuccess:afterSubmit
 })(ForgotPassword));
 
 

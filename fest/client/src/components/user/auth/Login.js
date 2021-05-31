@@ -3,12 +3,12 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import {Field,reduxForm,reset} from 'redux-form'
 
-import {Alert} from '../../Alert'
 import Nav from "../nav";
 import Footer from "../footer";
 import AuthInstructions from './AuthInstructions'
 import {loginAction,forgotPasswordAction} from '../../../action'
 import history from  '../../../history'
+import Toast,{toast} from '../../toast'
 
 class Login extends React.PureComponent {
 
@@ -81,38 +81,22 @@ class Login extends React.PureComponent {
        
 
     onSubmit = formValue => {
-        this.props.loginAction(formValue).then((value) => {
-                this.showAlert = true
-                this.setState({alertInfo:false,alertErr:false});  
-                this.setState({alertInfo:true,alertErr:false}); 
+        this.props.loginAction(formValue).then(() => {
                 alert("You are successfully loggedin.\nKnow you can register the events");
                 history.push("/event/registration")     
             }).catch((err) => {
                 if(err?.response?.status === 401){
                     this.showAlert = true
                     this.setState({alertInfo:false,alertErr:false});   
-                    this.setState({alertErr:true,alertInfo:false});                   
+                    this.setState({alertErr:true,alertInfo:false}); 
+                    this.props.toast({
+                        containerId: "toast-login",
+                        toastType: "error",
+                        message: "Unable to login",
+                        showToast:true
+                    })                  
                 }
             });
-    }
-
-     // TOGGLE BETWEEN INFO AND ERROR ALERTS
-     alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Login successful" containerId="alert-login" alertType={"info"} />
-            );
-        }
-        if(alertErr && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Unable to login" containerId="alert-login" alertType={"error"} />
-            );
-        }
-
-        return<></>;
-        
     }
 
     render(){
@@ -168,7 +152,7 @@ class Login extends React.PureComponent {
             </div>
             <Footer />
             <AuthInstructions />
-            {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+            <Toast />
 
             </>
         );
@@ -180,7 +164,7 @@ const  afterSubmit = (_, dispatch) =>
   dispatch(reset('loginForm'));
 
 
-export default connect(null,{loginAction,forgotPasswordAction})(reduxForm({
+export default connect(null,{loginAction,forgotPasswordAction,toast})(reduxForm({
     form:'loginForm',
     onSubmitSuccess:afterSubmit
 })(Login));

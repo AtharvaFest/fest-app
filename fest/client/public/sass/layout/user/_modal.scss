@@ -117,6 +117,7 @@
 
     &__sub-container{
         @extend %modal-sub-container;
+        width: 60vw;
 
         @include respond(tab-port) {
             width: 60vw;

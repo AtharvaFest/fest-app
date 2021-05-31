@@ -3,12 +3,11 @@ import {Field,reduxForm,reset} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {signUpAction} from '../../../action'
-import {Alert} from '../../Alert'
 import Nav from "../nav";
 import Footer from "../footer";
 import AuthInstructions from './AuthInstructions';
+import Toast,{toast} from '../../toast'
 
-//Bug we get error msg after every onChange event on field
 
 class Sign extends React.Component {
     showAlert = false
@@ -89,62 +88,44 @@ class Sign extends React.Component {
     }
 
     onSubmit = (formValue) => {
-        this.showAlert=true
-        this.setState({alertInfo:true,alertErr:false});
+        this.props.toast({
+            containerId: "toast-signup",
+            toastType: "info",
+            message: "Sign up in the process...",
+            showToast:true
+        }) 
         this.emptyError();
         this.props.signUpAction(formValue).then(() => {
             alert("Check your email to activate email account");
         }).catch((err) => {
             if(err?.response?.status !== 200){
-                this.showAlert=true
-                this.setState({alertInfo:false,alertErr:true});
+                this.props.toast({
+                    containerId: "toast-signup",
+                    toastType: "error",
+                    message: "Something went wrong!",
+                    showToast:true
+                })
             }
 
             if(err?.response?.data){//Show error message
                 err.response.data.errors.forEach((value)=>{
                     if(value.param === "mobileNumber"){
-                        this.showAlert=true
                         this.setState({errMobileNo:value.msg});
                     }
                     if(value.param === "password"){
-                        this.showAlert=true
                         this.setState({errPassword:value.msg});
                     }
                     if(value.param === "email"){
-                        this.showAlert=true
                         this.setState({errEmail:value.msg});
                     }
                     if(value.param === "username"){
-                        this.showAlert=true
                         this.setState({errUserName:value.msg});
                     }
                     
                 })
-            }else{
-                this.showAlert=true
-                this.setState({alertInfo:false,alertErr:true});
             }
 
         })
-        
-    }
-
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Sign up in the process..." containerId="alert-signup" alertType={"info"} />
-            );
-        }
-        if(alertErr && this.showAlert){
-            this.showAlert = false
-            return(
-                <Alert message="Something went wrong!" containerId="alert-signup" alertType={"error"} />
-            );
-        }
-
-        return<></>;
         
     }
 
@@ -206,7 +187,7 @@ class Sign extends React.Component {
             </div>
             <Footer />
             <AuthInstructions />
-            {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+            <Toast />
             </>
         );
     }
@@ -216,7 +197,7 @@ class Sign extends React.Component {
 const  afterSubmit = (_, dispatch) =>
   dispatch(reset('signForm'));
 
-export default connect(null,{signUpAction})(reduxForm({
+export default connect(null,{signUpAction,toast})(reduxForm({
     form:'signForm',
     onSubmitSuccess:afterSubmit
 })(Sign));
