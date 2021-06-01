@@ -243,7 +243,6 @@ class CreateEvent extends React.Component {
         formValue.image = this.state.croppedImage;
         let submitFlag = true;
         if(!formValue.image) {
-            console.log("inside");
             submitFlag = false;
             this.props.toast({
                 containerId: "toast-create-event",

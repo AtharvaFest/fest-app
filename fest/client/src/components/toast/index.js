@@ -27,7 +27,6 @@ class Toast extends React.Component {
     componentDidUpdate(){
         const autoshowToast = () => {
                     setTimeout(() => {
-                        console.log("re-render")
                         this.resetToastValue();
                       },5000);
                 }
@@ -38,7 +37,6 @@ class Toast extends React.Component {
     }
 
     render() {
-        console.log(this.props.toastValues.showToast)
         return ReactDOM.createPortal(
             <>
             {
@@ -64,7 +62,6 @@ class Toast extends React.Component {
 }
 
 const mapStatetoProps = (state) => {
-    // console.log(state.toastReducer.toastValues);
     return state.toastReducer
 }
 
