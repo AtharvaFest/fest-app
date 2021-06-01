@@ -7,7 +7,7 @@ import Nav from "../nav";
 import Footer from "../footer";
 import AuthInstructions from './AuthInstructions';
 import Toast,{toast} from '../../toast'
-
+import afterNavigation from '../HOC/afterNavigation'
 
 class Sign extends React.Component {
     showAlert = false
@@ -133,7 +133,7 @@ class Sign extends React.Component {
         return (
         <>
             <Nav />
-            <div className="after-navigation">
+            <div className="after-navigation" style={this.props.minMainContentHeight}>
                 <div className="form__section" >
                     <div className="intruction__model">
                         <a href="#checkout-instruction" onClick={(e) => this.displayInstructions(e)}>
@@ -200,5 +200,5 @@ const  afterSubmit = (_, dispatch) =>
 export default connect(null,{signUpAction,toast})(reduxForm({
     form:'signForm',
     onSubmitSuccess:afterSubmit
-})(Sign));
+})(afterNavigation(Sign)));
 

@@ -30,9 +30,9 @@ class ForgotPassword extends React.Component {
     //creating input field for Redux form Field component
     renderEmail = ({input,label,type}) => {
         return(
-            <div className="form__group--forgot-passwd">
-                <input {...input} type={type} placeholder={label} className="form__input--forgot-passwd" autoComplete="off" required/>
-                <label htmlFor={label} className="form__label--forgot-passwd">{label}</label>
+            <div className="form-model__group">
+                <input {...input} type={type} placeholder={label} className="form-model__input" autoComplete="off" required/>
+                <label htmlFor={label} className="form-model__label">{label}</label>
             </div>
         );
     }
@@ -83,7 +83,7 @@ class ForgotPassword extends React.Component {
                                 <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                     <div className="error_msg">{this.state.errEmail}</div>
                                     <Field name="email" type="email" component={this.renderEmail} label="Email" />
-                                    <button className="form__forgot-password--button" >Send Reset Instruction</button>
+                                    <button className="form-model__btn" >Send Reset Instruction</button>
                                 </form>
                             </div>           
                         </div>

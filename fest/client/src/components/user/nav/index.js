@@ -74,7 +74,7 @@ class Nav extends React.Component {
 
     render(){
         return(
-            <div className="horizontal-nav__container">
+            <div className="horizontal-nav__container" id="horizontal-navigation">
                 <div className="horizontal-nav__left">
                         Brand
                 </div>

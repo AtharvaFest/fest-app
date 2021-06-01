@@ -9,18 +9,20 @@ import AuthInstructions from './AuthInstructions'
 import {loginAction,forgotPasswordAction} from '../../../action'
 import history from  '../../../history'
 import Toast,{toast} from '../../toast'
+import afterNavigation from '../HOC/afterNavigation'
 
 class Login extends React.PureComponent {
 
     state = {
         passwordState:"password",
         alertInfo:false,
-        alertErr:false,
+        alertErr:false
     }
 
     eyeRef = React.createRef()
     eyeOffRef = React.createRef()
     showAlert = false
+
    
 
     //on forgotPassword click, display forgot password form
@@ -99,11 +101,14 @@ class Login extends React.PureComponent {
             });
     }
 
+    
+
     render(){
+        console.log(this.props.navFooterHeight)
         return(
             <>
             <Nav />
-            <div className="after-navigation">
+            <div className="after-navigation" style={this.props.minMainContentHeight}>
                 <div className="form__section" >
                     <div className="intruction__model">
                         <a href="#checkout-instruction" onClick={(e) => this.displayInstructions(e)}>
@@ -167,5 +172,5 @@ const  afterSubmit = (_, dispatch) =>
 export default connect(null,{loginAction,forgotPasswordAction,toast})(reduxForm({
     form:'loginForm',
     onSubmitSuccess:afterSubmit
-})(Login));
+})(afterNavigation(Login)));
 

@@ -2,21 +2,25 @@ import React from "react";
 
 import Nav from "../nav";
 import Footer from "../footer";
+import afterNavigation from '../HOC/afterNavigation';
 
-const Contact = function () {
-  return (
-    <div>
-      <Nav />
-      <div className="after-navigation">
-        <div className="">
+class Contact extends React.Component {
+  render(){
+    return (
+      <div>
+        <Nav />
+        <div className="after-navigation" style={this.props.minMainContentHeight}>
           <div className="">
-            Contact us
+            <div className="">
+              Contact us
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
-  );
+    );
+  }
+  
 };
 
-export default Contact;
+export default afterNavigation(Contact);

@@ -1,20 +1,3 @@
-.intruction__model{
-    display: none;
-    @include respond(tab-port){
-        display: block;
-        position: absolute;
-        top: 4rem;
-        left: 5rem;
-        a{
-            text-transform: uppercase;
-            font-size: 1.6rem;
-            &:link,
-            &:active{
-                color: $color-primary;
-            }
-        }
-    }
-}
 %instructions{
     display: flex;
     justify-content: center;
@@ -50,16 +33,27 @@
     clip-path: polygon(100% 0%, 0% 0%, 0% 50%, 16% 50%, 16% 10%, 85% 10%, 85% 91%, 16% 91%, 16% 50%, 0% 50%, 0% 100%, 100% 100%);
     border-radius: 8px;
 }
+.intruction__model{
+    display: none;
+    @include respond(tab-port){
+        display: block;
+        position: absolute;
+        top: 4rem;
+        left: 5rem;
+        a{
+            text-transform: uppercase;
+            font-size: 1.6rem;
+            &:link,
+            &:active{
+                color: $color-primary;
+            }
+        }
+    }
+}
 .form{
     &__section{
         position: relative;
-        margin-top: -4rem;
-        // padding-bottom: 8rem;
-        // padding: 0;
-        background-color: $color-white--3;
-        // @include respond(tab-port){
-        //     padding-bottom: 0rem;
-        // }
+        height: 100%;
     }
 
     &__main{

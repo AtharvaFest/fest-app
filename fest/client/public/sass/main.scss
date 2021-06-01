@@ -8,6 +8,10 @@
 @import './base/typography';
 @import './base/utilities';
 
+@import './components/form';
+@import './components/svgs';
+
+@import './layout/modal';
 
 ////////////////////////////////////////////////////////
 //// USER
@@ -20,7 +24,6 @@
 @import './layout/user/footer';
 @import './layout/user/header';
 @import './layout/user/homenavigation';
-@import './layout/user/modal';
 @import './layout/user/navigation';
 
 
