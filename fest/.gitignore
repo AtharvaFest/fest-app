@@ -7,3 +7,5 @@ client/src/components/Alert.js
 
 server/node_modules/
 server/config/dev.env
+
+../images/

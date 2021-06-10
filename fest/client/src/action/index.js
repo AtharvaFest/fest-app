@@ -10,7 +10,10 @@ import {
     USER_DELETE_ALL,
     USER_EDIT,
     READ_EVENT,
-    EVENT_DELETE
+    EVENT_DELETE,
+    EVENT_DELETE_ALL,
+    GET_EVENT_TO_UPDATE,
+    EVENT_UPDATE
 } from './type'
 
 ///////////////////////////////////////////////
@@ -118,6 +121,22 @@ export const createEventsAction = (formValue) => {
     }
 }
 
+//To update an event
+export const eventUpdateAction = (id,formValue) => {
+    return async (dispatch) => {
+        const response = await axios.patch(`/admin/event/update/${id}`,{...formValue});
+        dispatch({type:EVENT_UPDATE,payload:response.data});
+    }
+}
+
+// To get data of event to update 
+export const getEventUpdateAction = (id) => {
+    return async (dispatch) => {
+        const response = await axios.get(`/admin/event/toUpdate/${id}`);
+        dispatch({type:GET_EVENT_TO_UPDATE,payload:response.data});
+    }
+}
+
 export const readEventsAction = () => {
     return async (dispatch) => {
         
@@ -130,6 +149,13 @@ export const deleteEventAction = (id) => {
     return async (dispatch) => {
         const response = await axios.delete(`/admin/event/delete/${id}`);
         dispatch({type:EVENT_DELETE,payload:response.data});
+    }
+}
+
+export const deleteAllEventAction = () => {
+    return async (dispatch) => {
+        await axios.delete(`/admin/allEvent`);
+        dispatch({type:EVENT_DELETE_ALL});
     }
 }
 

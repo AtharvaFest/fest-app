@@ -6,18 +6,18 @@ import DatePicker from "react-datepicker";
 import Dropzone from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 
-import {createEventsAction,readEventsAction} from '../../../action'
+import {getEventUpdateAction,eventUpdateAction,readEventsAction} from '../../../action'
 import {extractImageFileExtensionFromBase64} from '../../../utils/imageFileUtils'
 import Toast,{toast} from '../../toast'
 
 import 'react-image-crop/dist/ReactCrop.css'
 
-class CreateEvent extends React.Component {
+class EditEvent extends React.Component {
 
-    
     acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif, image/webp'
     acceptedFileTypesArray = this.acceptedFileTypes.split(",").map((item) => {return item.trim()})
     imagePreviewCanvasRef = React.createRef()
+    urlPathArray = window.location.pathname.split('/');
 
     state = {
             imageFile: [],
@@ -27,9 +27,11 @@ class CreateEvent extends React.Component {
             alertErr:false,
             imgSrc:null,
             imgSrcExt: null,
+            firstRenderImage:true,
             displayImageBlock: null,
             croppedImageUrl:null,
             croppedImage:null,
+            resetImage:false,
             showCropImageOption:false,
             crop: {
                 unit: 'px', // default, can be 'px' or '%'
@@ -116,8 +118,8 @@ class CreateEvent extends React.Component {
     verifyFile = (files) => {
         if (files[0].errors && files.length > 0){
             const currentFile = files[0].file
-            const currentFileType = currentFile.type          
-        
+            const currentFileType = currentFile.type
+            
             if (!this.acceptedFileTypesArray.includes(currentFileType)){
                 alert("This file is not allowed. Only images are allowed.")
                 return false
@@ -168,6 +170,7 @@ class CreateEvent extends React.Component {
     handleImageLoaded = (image) => {
         this.imageRef = image;
         this.setState({showCropImageOption:true})
+
     }
     handleOnCropChange = (crop) => {
         this.setState({crop:crop})
@@ -175,10 +178,9 @@ class CreateEvent extends React.Component {
     handleOnCropComplete =  (crop) =>{
         const canvasRef = this.imagePreviewCanvasRef.current
         this.getCroppedImg(this.imageRef,crop,canvasRef)
-        this.setState({discount:canvasRef.height})
     }
 
-    //Here image is cropped and show in image preview 
+    //Here image is cropped and shown in image preview 
     //(canvas html element is used to show preview)
     getCroppedImg(image, crop,canvasRef) {
         const canvas = canvasRef;
@@ -201,7 +203,7 @@ class CreateEvent extends React.Component {
         );
       }
 
-    //Here image Main image is removed and only croped image is shown on crop click
+    //Here  main image is removed and only croped image is shown on crop click
     handleCropClick = (event) => {
         event.preventDefault()
         const canvasRef = this.imagePreviewCanvasRef.current
@@ -211,8 +213,9 @@ class CreateEvent extends React.Component {
             this.setState({ 
                 croppedImage:imageData64,
                 imgSrc:null,
+                firstRenderImage:false,
                 showCropImageOption:false 
-             });
+            });
         }
    
     }
@@ -226,10 +229,12 @@ class CreateEvent extends React.Component {
 
         this.setState({
             displayImageBlock:null,
+            firstRenderImage:false,
+            showCropImageOption:true,
             imgSrc: null,
             imgSrcExt: null,
-            showCropImageOption:true,
             croppedImage:null,
+            resetImage:true,
             crop: {
                 unit: 'px', // default, can be 'px' or '%'
                 width: 200,
@@ -238,10 +243,17 @@ class CreateEvent extends React.Component {
 
         })
     }
+
+    // Binary data is converted to base64 format
+    toBase64(arr) {
+        return btoa(
+          arr.data.reduce((data, byte) => data + String.fromCharCode(byte), "")
+        );
+      }
    
 
 
-    onSubmit = formValue => {
+    onSubmit = async (formValue) => {
         formValue.image = this.state.croppedImage;
         let submitFlag = true;
         if(!formValue.image) {
@@ -255,32 +267,19 @@ class CreateEvent extends React.Component {
             return
         }
 
-        this.handleClearToDefault()
-        
-        this.props.allEvents.forEach((event)=>{
-            if(event.event.toLowerCase() === formValue.event.toLowerCase()){
-                submitFlag = false;
-                this.props.toast({
-                    containerId: "toast-create-event",
-                    toastType: "error",
-                    message: "The event has been already added",
-                    showToast:true
-                })                
-            }
-        })
-
         if(formValue.prize < formValue.fee){
             if(!window.confirm("Entry fee is less then Prize Worth.\nAre sure?")){
                 submitFlag=false
             }
         }
+
         
         if(submitFlag){
             // sometimes date value we get in string as dd/mm/yyyy. 
             //therefore to get always date value in date type we are doing following conversion
             formValue.date = moment(formValue.date, "DD MM YYYY")._d;
- 
-            this.props.createEventsAction(formValue).then(() => {
+            
+            await this.props.eventUpdateAction(this.urlPathArray[4],formValue).then(() => {
                 this.props.toast({
                     containerId: "toast-create-event",
                     toastType: "info",
@@ -288,6 +287,19 @@ class CreateEvent extends React.Component {
                     showToast:true
                 })     
             }).catch((err) => {
+                if(err.response?.data?.errors){
+                    err.response.data.errors.forEach((event,index) => {
+                        this.props.toast({
+                            containerId: `toast-create-event-${index}`,
+                            toastType: "warning",
+                            message:event.msg,
+                            showToast:true
+                        }) 
+                    })
+                    
+                    return
+                }
+
                 this.props.toast({
                     containerId: "toast-create-event",
                     toastType: "error",
@@ -295,12 +307,55 @@ class CreateEvent extends React.Component {
                     showToast:true
                 })                    
             });
+
+            await this.props.getEventUpdateAction(this.urlPathArray[4]);
         }
        
     }
 
     componentDidMount(){
         this.props.readEventsAction();
+        this.props.getEventUpdateAction(this.urlPathArray[4]);
+        this.setState({displayImageBlock:true})
+    }
+
+    isEventToEmpty() {
+        return this.props.getEventUpdate.getEventUpdate.length === 0
+    }
+
+    componentDidUpdate(){
+        if(this.state.firstRenderImage){
+            const canvasRef = this.imagePreviewCanvasRef.current;
+            if(canvasRef){
+                const ctx = canvasRef.getContext('2d');
+
+                if(!this.isEventToEmpty()){
+                    var image = new Image();
+                    image.onload = function() {
+                        ctx.drawImage(image, 0, 0);
+                    };
+                    image.src = `data:image/jpeg;base64,${this.toBase64(this.props.getEventUpdate.getEventUpdate.image)}`;
+                }
+            }
+        }        
+    }
+
+    static getDerivedStateFromProps(props,state){
+        const toBase64 = (arr) => {
+            return btoa(
+              arr.data.reduce((data, byte) => data + String.fromCharCode(byte), "")
+            );
+        }
+        // the state (croppedImage) will get intial value here as other field get below at mapStatetoProps
+        if(state.croppedImage === null && state.resetImage === false){
+            if(props.getEventUpdate.getEventUpdate.length !== 0){
+                return {
+                    croppedImage:`data:image/jpeg;base64,${toBase64(props.getEventUpdate.getEventUpdate.image)}`
+                }
+            }
+        }
+        
+        return null
     }
 
     render(){
@@ -311,79 +366,67 @@ class CreateEvent extends React.Component {
                     <a href="/admin/event/manage" className="create-event__header--btn">
                         <ion-icon name="chevron-back-outline" class="chevron"></ion-icon>
                     </a>
-                    <h4 className="heading--4 create-event__heading">Add Event</h4>
+                    <h4 className="heading--4 create-event__heading">Edit Event</h4>
                 </div>
                 <div className="create-event__container" >
-                    <div >
+                    <div>
                         <form className="create-event__form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                             <div className="create-event__form--content">
-                        
-                            <Field name="event" type="text" component={this.renderInput} label="Event" />
+                                <Field name="event" type="text" component={this.renderInput} label="Event" />
 
-                            
-                            <Field name="date" component={this.renderDate} label="Date" />
+                                <Field name="date" component={this.renderDate} label="Date" />
 
-                            
-                            <Field 
-                            name="fee" 
-                            type="text" 
-                            component={this.renderInput} 
-                            label="Entry Fee (e.g 100,200,50)Rs" />
+                                <Field name="fee" type="text" component={this.renderInput} label="Entry Fee" />
 
-                            <Field 
-                            name="prize" 
-                            type="text" 
-                            component={this.renderInput} 
-                            label="Prize Worth (e.g 1000,2000,5000)Rs" 
-                            />
+                                <Field name="prize" type="text" component={this.renderInput} label="Prize Worth" />
 
-                            
-                            <Field 
-                            name="discount" 
-                            type="text" 
-                            component={this.renderInput} 
-                            label="Discount (e.g 10,20,5)%"  
-                            />
-                            {
-                                this.state.displayImageBlock ?
-                                <div className="create-event__form--image-container" >
-                                    <div className="create-event__form--image-preview">
-                                        <ReactCrop
-                                            src={this.state.imgSrc}
-                                            crop={this.state.crop}
-                                            onImageLoaded={this.handleImageLoaded}
-                                            onComplete={this.handleOnCropComplete}
-                                            onChange={this.handleOnCropChange}
-                                            minWidth={200}
-                                            minHeight={120}
-                                            maxWidth={200}
-                                            maxHeight={120} 
-                                        />   
-                                        <div>
-                                            <canvas ref={this.imagePreviewCanvasRef}></canvas>  
-                                        </div> 
-                                        <div className="image_btn--container">
-                                            {
-                                            
-                                                this.state.showCropImageOption ?                                                
-                                                <button onClick={this.handleCropClick} className="btn__crop">Crop</button> 
-                                                :
-                                                ''   
-                                            }    
-                                            <button onClick={this.handleClearToDefault} className="btn__reset-image">Reset Image</button>                           
+                                <Field 
+                                name="discount" 
+                                type="text" 
+                                component={this.renderInput} 
+                                label="Discount (e.g 10,20,5)" 
+                                />
+                                {
+                                    this.state.displayImageBlock ?
+                                    <div className="create-event__form--image-container" >
+                                        <div className="create-event__form--image-preview">
+                                            <ReactCrop
+                                                src={this.state.imgSrc}
+                                                crop={this.state.crop}
+                                                onImageLoaded={this.handleImageLoaded}
+                                                onComplete={this.handleOnCropComplete}
+                                                onChange={this.handleOnCropChange}
+                                                minWidth={200}
+                                                minHeight={120}
+                                                maxWidth={200}
+                                                maxHeight={120} 
+                                            />   
+                                            <div>
+                                                <canvas ref={this.imagePreviewCanvasRef} /> 
+                                            </div> 
+                                            <div className="image_btn--container">
+                                                {
+                                                   
+                                                    this.state.showCropImageOption ?                                                
+                                                    <button onClick={this.handleCropClick} className="btn__crop">Crop</button> 
+                                                    :
+                                                    ''   
+                                                }
+                                                <button onClick={this.handleClearToDefault} className="btn__reset-image">Reset Image</button>                           
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                :
-                            <Field name="image" type="file" component={this.renderDropzone} handleOnDrop={this.handleOnDrop} />
-                            }
+                                    :
+                                    <Field name="image" type="file" component={this.renderDropzone} handleOnDrop={this.handleOnDrop} />
+                                }
                             </div>
                             <button className="create-event__btn" >Add Event</button>
                         </form>
-                        <br />
                     </div>
+                    <br />
                 </div>
             </div>
+            
             <Toast />
             </>
         );
@@ -412,15 +455,27 @@ const validate = (formValue) => {
 
 // clear all input field after submiting form.
 const  afterSubmit = (_, dispatch) =>
-  dispatch(reset('createEventForm'));
+  dispatch(reset('editEventForm'));
 
 const mapStatetoProps = (state) => {
-    return state.adminCRUDEventReducer
+    return {
+        events:state.adminCRUDEventReducer,
+        getEventUpdate:state.getEventUpdateReducer,
+        initialValues:{
+            event:state.getEventUpdateReducer.getEventUpdate.event,
+            date:moment(new Date(state.getEventUpdateReducer.getEventUpdate.date)).isValid() ? 
+                 moment(new Date(state.getEventUpdateReducer.getEventUpdate.date), "DD MM YYYY") : '',
+            fee:state.getEventUpdateReducer.getEventUpdate.fee,
+            prize:state.getEventUpdateReducer.getEventUpdate.prize,
+            discount:state.getEventUpdateReducer.getEventUpdate.discount
+        }
+    }
 }
  
 
-export default connect(mapStatetoProps,{createEventsAction,readEventsAction,toast})(reduxForm({
-    form:'createEventForm',
+export default connect(mapStatetoProps,{getEventUpdateAction,eventUpdateAction,readEventsAction,toast})(reduxForm({
+    form:'editEventForm',
     onSubmitSuccess:afterSubmit,
-    validate
-})(CreateEvent));
+    validate,
+    enableReinitialize: true
+})(EditEvent));

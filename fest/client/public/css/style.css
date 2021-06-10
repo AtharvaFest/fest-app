@@ -3631,7 +3631,7 @@ body {
   z-index: 5;
   box-shadow: inset -7px 0 5px -7px rgba(66, 33, 104, 0.5); }
 
-.delete__all-user {
+.delete__all {
   cursor: pointer;
   color: red; }
 

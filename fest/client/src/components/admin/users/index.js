@@ -10,7 +10,7 @@ class User extends React.Component{
     deleteCount = 0;
     state = {editUserData:{},search:'',prePropsAllUsers:'',allUsers:''}
     
-    //on signup click, display signUp form and hide login form
+    //on edit click, display edit form
     displayEditUser = () => {
         const modalEditUser = document.querySelector(`#modal-editUser`);
         modalEditUser.classList.add('visible');
@@ -63,7 +63,7 @@ class User extends React.Component{
                         <th>Mobile No.</th>
                         <th>admin</th>
                         <th>edit</th>
-                        <th><span onClick={this.deleteAllUser} className="delete__all-user">delete all</span></th>
+                        <th><span onClick={this.deleteAllUser} className="delete__all">delete all</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -155,7 +155,6 @@ class User extends React.Component{
                                 </div>  
                             </div>                        
                             <div className="admin-panel__header-section">
-                            {/* <h4 className="heading--4 user__heading">Event Manage</h4>   */}
                                 <div className="search__container"> 
                                     <input  type="text" placeholder="Search" value={this.state.search} onChange={(e)=>this.setState({search:e.target.value})} onKeyPress={this.enterPressed} className="search__box" />
                                     <span className="search__icon" onClick={this.searchHandler} >

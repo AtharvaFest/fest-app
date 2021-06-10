@@ -104,7 +104,6 @@ class Login extends React.PureComponent {
     
 
     render(){
-        console.log(this.props.navFooterHeight)
         return(
             <>
             <Nav />

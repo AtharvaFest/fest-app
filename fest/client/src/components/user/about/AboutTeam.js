@@ -10,9 +10,9 @@ function AboutTeam() {
                 </div>
             </div>
             <div className='aboutteam__card'>
-                <div> <AboutTeamCard /> </div>
-                <div> <AboutTeamCard /> </div>
-                <div> <AboutTeamCard /> </div>
+                <div> <AboutTeamCard photo="../../../img/head--2.webp" developerName="Rahul Gupta" position="Full Stack Developer"/> </div>
+                <div> <AboutTeamCard photo="../../../img/head--1.webp" developerName="Riya Patel" position="Full Stack Developer" /> </div>
+                <div> <AboutTeamCard photo="../../../img/pradeep.webp" developerName="Pradeep Ingle" position="Full Stack Developer" /> </div>
             </div>
         </div>
     )
