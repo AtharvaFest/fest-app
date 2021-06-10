@@ -4,7 +4,6 @@ export const EMAIL_ACTIVATE = "EMAIL_ACTIVATE";
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 
-
 ///////////////////////////////////////////
 //// ADMIN 
 export const ADMIN_LOGIN ="ADMIN_LOGIN";

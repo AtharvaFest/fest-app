@@ -6,6 +6,18 @@ import {
     EVENT_UPDATE
 } from '../action/type'
 
+
+//////////////////////
+//USER
+
+
+
+
+
+
+
+///////////////////////
+//ADMIN
 const INITIAL_STATE ={allEvents:null}
 
 export const adminCRUDEventReducer = (state=INITIAL_STATE,action) => {

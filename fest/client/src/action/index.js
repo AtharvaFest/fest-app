@@ -17,7 +17,9 @@ import {
 } from './type'
 
 ///////////////////////////////////////////////
-////USER ACTION
+////USER 
+
+//AUTH ACTION
 export const signUpAction = (formValue) => {
     return async () => {
         await axios.post('/signup',{...formValue});
@@ -59,10 +61,12 @@ export const forgotPasswordAction = (formValue) => {
 export const resetPasswordAction = (formValue) => {
     return async () => {
         const currentURL = window.location.href.split('/');
-        const token = currentURL[currentURL.length-1]
+        const token = currentURL[currentURL.length-1];
         await axios.patch('/reset_password',{...formValue,token});
     }
 }
+
+
 
 ///////////////////////////////////////////////
 ////ADMIN ACTION

@@ -1,7 +1,6 @@
 const express = require('express');
 
 const Event = require('../../models/admin/event');
-const sharp = require('sharp')
 
 const { body, validationResult } = require('express-validator'); // It is middleware use to validate the data eg (event,prize. etc)
 const router = new express.Router();
@@ -64,8 +63,6 @@ router.get('/admin/event/read',async (req,res) => {
     }
     
 });
-
-
 
 
 

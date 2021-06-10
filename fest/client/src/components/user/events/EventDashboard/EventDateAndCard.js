@@ -1,14 +1,24 @@
 import React from 'react'
+import moment from 'moment'
 
 import EventCards from './EventCards'
 
-function EventDateAndCard() {
+function EventDateAndCard(props) {
+
+  const eventCardComponents = () => {
+    return props.eventArray.map((event) => {
+      return <EventCards key={event._id} event={event}/>
+    })  
+  } 
+
   return (
     <div className="event_date_and_card_main">
-      <div className="event_date_and_card_main__date">20 dec 2021</div>
+      <div className="event_date_and_card_main__date">
+        <div>{moment(props.eventArray[0]?.date).format('LL')}</div>
+        <div>5 days to go</div>
+      </div>
       <div className="event_date_and_card_main__cards">
-        <EventCards />
-        <EventCards />
+        {eventCardComponents()}
       </div>
     </div>
   )
