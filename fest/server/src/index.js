@@ -13,9 +13,7 @@ app.use(cors());
 ////////////////////////////
 //// USER ROUTES
 const userAuthRouter = require('./routers/user/userAuth');
-const eventRouter = require('./routers/user/event')
 app.use(userAuthRouter);
-app.use(eventRouter);
 
 
 //////////////////////////////

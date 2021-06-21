@@ -115,7 +115,7 @@ router.patch('/admin/user/:id',[
             }
         })
 
-        user.save();
+        await user.save();
         res.send(user);
         
     }catch(e){
