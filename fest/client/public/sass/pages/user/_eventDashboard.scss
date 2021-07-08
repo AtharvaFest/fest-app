@@ -1,21 +1,25 @@
 .event_dashboard__main{
   width: 100%; 
-  min-height: 60vh;
 }
 
 .event_date_and_card_main{
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  padding-bottom: 1rem;
+  border-top: 2px solid $color-grey-2;
 }
 
 .event_date_and_card_main__date{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  font-size: 30px;
-  color: black;
-  text-transform: uppercase;
+  font-size: 3.0rem;
+  color: $color-grey;
+  padding: 0 5rem;
+
+  @include respond(phone){
+    padding: unset;
+  }
 }
 
 .event_date_and_card_main__cards{
@@ -24,109 +28,4 @@
   justify-content: center;
 }
 
-.event__card__main_img{
-  width: 200px;
-  height: 120px;
-  clip-path: polygon(0 0, 100% 0, 100% 76%, 0 100%);
-}
-.event__card__main_img_style{
-  width: 100%;
-  height: 100%;
-}
 
-.event__card__main{
-  width: 200px;
-  height: 220px;
-  margin: 10px 20px;
-  perspective: 500px;
-}
-.event__card__main_inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-.event__card__main:hover .event__card__main_inner {
-  transform: rotateY(180deg);
-}
-.event__card__main__front{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  backface-visibility: hidden;
-}
-.event__card__main__back{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.event_game_name{
-  font-size: 12px;
-  font-weight: 350px;  
-}
-.event_game_price{
-  font-size: 20px;
-  font-weight: 300px;  
-}
-.event_game_fee{
-  font-size: 16px;
-  font-weight: 200px;
-}
-
-.event__card__main__back__reg_button {
-  border-radius: 50px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: $color-primary-light;
-  background-color: #fff;
-  color: $color-primary-light;
-  text-align: center;
-  font-size: 23px;
-  padding: 10px;
-  width: 160px;
-  transition: all 0.1s;
-  cursor: pointer;
-  margin: 5px;
-
-  &:hover{
-    background-color: $color-primary-light;
-    color: #fff;
-  }
-}
-
-.event__card__main__back__reg_button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.3s;
-}
-
-.event__card__main__back__reg_button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.3s;
-}
-
-.event__card__main__back__reg_button:hover span {
-  padding-right: 25px;
-}
-
-.event__card__main__back__reg_button:hover span:after {
-  opacity: 1;
-  right: 0;
-}

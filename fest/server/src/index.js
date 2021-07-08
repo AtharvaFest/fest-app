@@ -13,7 +13,6 @@ app.use(cors());
 ////////////////////////////
 //// USER ROUTES
 const userAuthRouter = require('./routers/user/userAuth');
-
 app.use(userAuthRouter);
 
 

@@ -7,7 +7,7 @@ function AboutDiv() {
         <div className="aboutdiv__main_pic">
           <img
             className="aboutdiv__main_pic_style"
-            src="../../../img/atharva_logo.png"
+            src="../../../img/atharva_logo.webp"
             alt="logo"
           ></img>
         </div>

@@ -26,6 +26,7 @@ import AdminGallery from './admin/gallery'
 import AdminNotice from './admin/notice'
 import AdminEvent from  './admin/event'
 import CreateEvent from './admin/event/CreateEvent'
+import EditEvent from './admin/event/EditEvent'
 //////////////////////////////////
 ///// OTHER SECTION
 import history from  '../history'
@@ -64,6 +65,7 @@ class App extends Component {
                         <ProtectedAdminRoute path="/admin/gallery" exact  component={AdminGallery} />
                         <ProtectedAdminRoute path="/admin/event/manage" exact  component={AdminEvent} />
                         <ProtectedAdminRoute path="/admin/event/create" exact  component={CreateEvent} />
+                        <ProtectedAdminRoute path="/admin/event/edit/:id" exact  component={EditEvent} />
                         <ProtectedAdminRoute path="/admin/notice" exact  component={AdminNotice} />
 
                         <Route path='*' exact component={()=>"404 Page not found"}  />

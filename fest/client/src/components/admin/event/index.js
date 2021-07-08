@@ -2,28 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import Sidebar from '../sidebar/Sidebar'
-import {createEventsAction,readEventsAction,deleteEventAction} from '../../../action'
+import {createEventsAction,readEventsAction,deleteEventAction,deleteAllEventAction} from '../../../action'
 import Logout from '../auth/Logout'
 import history from '../../../history'
 
 class Event extends React.Component{
     deleteCount = 0;
-    state = {editUserData:{},search:'',prePropAllEvents:'',allEvents:''}
+    state = {search:'',prePropAllEvents:'',allEvents:''}
     
-    //on signup click, display signUp form and hide login form
-    // displayEditUser = () => {
-    //     const modalEditUser = document.querySelector(`#modal-editUser`);
-    //     modalEditUser.classList.add('visible');
-    // }
-
-    // showEditUserModal = () => {
-    //     return <EditUser editUserData={this.state.editUserData} />
-    // }
-
-    // editUser = (user) => {
-    //     this.setState({editUserData:user});
-    //     this.displayEditUser();
-    // }
 
     deleteEvent = (id) => {
         this.deleteCount += 1;
@@ -37,21 +23,16 @@ class Event extends React.Component{
         
     }
 
-    // deleteAllUser = (id) => {
-    //     if(window.confirm("Delete all events?")){
-    //         this.props.deleteAllUserAction().then(()=>{
+    deleteAllEvents = (id) => {
+        if(window.confirm("Delete all events?")){
+            this.props.deleteAllEventAction().then(()=>{
 
-    //         }).catch((err) =>{
-    //             history.push('/adminlogin')
-    //         })
-    //     }
-    // }
+            }).catch((err) =>{
+                history.push('/adminlogin')
+            })
+        }
+    }
 
-    //on addEvent click, display Create event modal
-    // createEventModal = (e) => {
-    //     const modalCreateEvent = document.querySelector(`#modal__create-event`);
-    //     modalCreateEvent.classList.add('visible');
-    // }
 
     toBase64(arr) {
         return btoa(
@@ -80,7 +61,7 @@ class Event extends React.Component{
                         <th>Prize Worth</th>
                         <th>Discount</th>
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <th><span onClick={this.deleteAllEvents} className="delete__all">delete all</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,20 +77,14 @@ class Event extends React.Component{
                                 <td>{event.discount}%</td>
                                 {/* <td><img src={`data:image/jpeg;base64,${this.toBase64(event.image)}`} /></td> */}
                                 <td>
-                                    {/* <span className="edit-btn" onClick={()=>this.editUser(user)}>
+                                    <a href={`/admin/event/edit/${event._id}`} className="edit-btn">
                                         <ion-icon name="create-outline"></ion-icon>
-                                    </span> */}
-                                    <span className="edit-btn" >
-                                        <ion-icon name="create-outline"></ion-icon>
-                                    </span>
+                                    </a>
                                 </td>
                                 <td>
                                     <span className="delete-btn" onClick={()=>this.deleteEvent(event._id)}>
                                         <ion-icon name="trash-outline"></ion-icon>
                                     </span>
-                                    {/* <span className="delete-btn" >
-                                        <ion-icon name="trash-outline"></ion-icon>
-                                    </span> */}
                                 </td>
                             </tr>
                         );
@@ -130,20 +105,20 @@ class Event extends React.Component{
 
     searchHandler = () => {
         const allEvents = this.state.prePropAllEvents;
-        const searchedUsers = allEvents.filter((user)=>{
-            let userStatus = false;
-            const userKeys = Object.keys(user);
+        const searchedEvents = allEvents.filter((event)=>{
+            let eventStatus = false;
+            const eventKeys = Object.keys(event);
             
-            userKeys.forEach((value)=>{
+            eventKeys.forEach((value)=>{
                 if(value === '_id') return
 
-                if(user[value].toString().toLowerCase().includes(this.state.search.toString().trim().toLowerCase())){
-                    userStatus = true
+                if(event[value].toString().toLowerCase().includes(this.state.search.toString().trim().toLowerCase())){
+                    eventStatus = true
                 }
             })
-            return userStatus === true
+            return eventStatus === true
         })
-        this.setState({allEvents:searchedUsers})
+        this.setState({allEvents:searchedEvents})
     }
 
     componentDidMount(){
@@ -156,7 +131,7 @@ class Event extends React.Component{
 
     static getDerivedStateFromProps(props, state){
         // the state only changes when props value get change with respect to previous props,
-        // and prop value only gets changes when 'user' is edited.
+        // and prop value only gets changes when 'event' is edited.
        if(props.allEvents !== state.prePropAllEvents){
            return {
                prePropAllEvents:props.allEvents,allEvents:props.allEvents
@@ -200,8 +175,6 @@ class Event extends React.Component{
                     </div>
                 </div>
                 
-                {/* {this.showEditUserModal()} */}
-                {/* <CreateEvent /> */}
             </>
         );
     }
@@ -212,4 +185,4 @@ const mapStatetoProps = (state) => {
 }
 
  
-export default connect(mapStatetoProps,{createEventsAction,readEventsAction,deleteEventAction})(Event)
+export default connect(mapStatetoProps,{createEventsAction,readEventsAction,deleteEventAction,deleteAllEventAction})(Event)
