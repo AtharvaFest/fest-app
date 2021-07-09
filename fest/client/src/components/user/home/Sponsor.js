@@ -53,14 +53,8 @@ const Sponsor = function() {
 
     return(
         <section className="sponsors-container">
-            {/* <div className="bg-video">
-                 <video className="bg-video__content" autoPlay loop muted >
-                    <source src="../../../img/video-2.mp4" type="video/mp4" />
-                        Your browser is not supported!
-                </video>
-            </div> */}
             <div className="heading--container">
-                <h3 className="heading--3 section-heading">Sponsors</h3>
+                <h3 className="heading--3 section-heading sponser-header">Sponsors</h3>
             </div>
             <div className="sponsors--box">
                 <div className="sponsor">

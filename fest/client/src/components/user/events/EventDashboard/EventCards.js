@@ -1,24 +1,30 @@
 import React from "react";
 
-import eventCardImg from "../../../../assets/image/head--1.webp";
 
-function EventCards() {
+function EventCards(props) {
+  const toBase64 = (arr) => {
+    return btoa(
+      arr.data.reduce((data, byte) => data + String.fromCharCode(byte), "")
+    );
+  }
   return (
     <div className="event__card__main">
       <div className="event__card__main_inner">
         <div className="event__card__main__front">
           <div className="event__card__main_img">
             <img
-              src={eventCardImg}
+              src={`data:image/jpeg;base64,${toBase64(props.event.image)}`}
               className="event__card__main_img_style"
+              alt="event cards"
             ></img>
           </div>
-          <div className="event_game_name">Game : Valorant</div>
-          <div className="event_game_price">Price : 500 Rs</div>
-          <div className="event_game_fee">Fee : 50 Rs</div>
+          <div className="event_game_name">Game : {props.event.event}</div>
+          <div className="event_game_price">Prize : {props.event.prize} Rs</div>
+          <div className="event_game_fee">Fee : {props.event.fee} Rs</div>
+          <div className="event_game_fee">Discount : {props.event.discount} %</div>
         </div>
         <div className="event__card__main__back">
-          <button class="event__card__main__back__reg_button">
+          <button className="event__card__main__back__reg_button">
             <span>Register</span>
           </button>
         </div>

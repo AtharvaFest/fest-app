@@ -5,22 +5,9 @@ const User = require('../../models/user/userAuth');
 const auth = require('../../middleware/auth');
 const sgMail = require('../../sendgrid/index')
 
-const { body, validationResult } = require('express-validator'); // It is middleware use to validate the date eg (email,mobile no. etc)
+const { body, validationResult } = require('express-validator'); // It is middleware use to validate the data eg (email,mobile no. etc)
 const router = new express.Router();
 
-router.post('/signuptest',async (req,res) => { // hyaala delete ka raicha aahe
-  try{
-
-      const user = await User({...req.body});
-      await user.save();
-      const token = await user.generateAuthToken();
-      user.isAdmin = undefined;
-      res.status(201).send({user,token});
-  } catch(e){
-      res.status(400).send({msg:"Something went wrong!"});
-  }
-
-});
 
 router.post('/signup',[
   body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 chars long'),
@@ -86,7 +73,9 @@ router.post('/signup',[
 router.post('/activate_email',async (req,res) => {
     try{
         const {name,email,mobileNumber,username,password} =  jwt.verify(req.body.token.toString(),process.env.TOKEN);
-        const user = await User({name,email,mobileNumber,username,password});
+        const isAtharvites = email.includes('@atharvacoe.ac.in') ? true : false;
+    
+        const user = await User({name,email,mobileNumber,username,password,isAtharvites});
         await user.save();
         const token = await user.generateAuthToken();
         user.isAdmin = undefined;
@@ -119,7 +108,6 @@ router.get('/logout',auth,async (req,res)=>{
             return token.token !== req.token;
         })
         await req.user.save();
-    
         res.send();
     } catch(e) {
         res.status(500).send()

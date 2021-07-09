@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {emailActivationAction} from '../../../action'
 
-import {Alert} from '../../Alert'
 import history from '../../../history'
+import Toast,{toast} from '../../toast'
 
 class EmailActivation extends React.Component{
 
@@ -12,30 +12,26 @@ class EmailActivation extends React.Component{
         alertErr:false,
     }
 
+
     emailActivate = () => {
         this.props.emailActivationAction().then((value)=>{
-            this.setState({alertInfo:true,alertErr:false});
+            this.props.toast({
+                containerId: "toast-activate-account",
+                toastType: "info",
+                message: "Account successfully activated",
+                showToast:true
+            }) 
         }).catch(()=>{
-            this.setState({alertInfo:false,alertErr:true});
+            this.props.toast({
+                containerId: "toast-activate-account",
+                toastType: "error",
+                message: "Email is already active or Link is expired",
+                showToast:true
+            }) 
         })
     }
 
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo){
-            return(
-                <Alert message="Account successfully activated" containerId="alert-activate-account" alertType={"info"} />
-            );
-        }
-        if(alertErr){
-            return(
-            <Alert message="Email is already active or Link is expired" containerId="alert-activate-account" alertType={"error"} />
-            );
-        }
-
-        return<></>;
         
-    }
 
     render(){
         return(
@@ -50,7 +46,7 @@ class EmailActivation extends React.Component{
                         GO
                     </button>
                 </div>
-                {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+                <Toast />
             </>
         );
     }
@@ -58,5 +54,5 @@ class EmailActivation extends React.Component{
 
 }
 
-export default connect(null,{emailActivationAction})(EmailActivation)
+export default connect(null,{emailActivationAction,toast})(EmailActivation)
 

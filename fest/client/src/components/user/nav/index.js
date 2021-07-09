@@ -38,7 +38,7 @@ class Nav extends React.Component {
     loginOrLogout = () => {
         
         if(!auth.isAuthenticated())
-            return <a href="#modal-login" onClick={(e) => this.displayLogin(e)}  className="horizontal-nav__link">Login</a>
+            return <Link to="/login" className="horizontal-nav__link">Login</Link>
 
         return <a href="#account" ref={this.accountItemRef} onClick={this.showAccountSubMenu} className="horizontal-nav__link nav-link" >
                     Account
@@ -61,11 +61,20 @@ class Nav extends React.Component {
             }
         })
     }
+
+
+    logoutButton(){
+        return(
+            <Logout class_name="horizontal-nav--sub-menu__item"  showAccountMenu={() => this.showAccountSubMenu()} />
+        )
+    }
+
+    
     
 
     render(){
         return(
-            <div className="horizontal-nav__container">
+            <div className="horizontal-nav__container" id="horizontal-navigation">
                 <div className="horizontal-nav__left">
                         Brand
                 </div>
@@ -107,14 +116,13 @@ class Nav extends React.Component {
                             <Link to="/about" className="horizontal-nav__link nav-link">About</Link>
                         </li>
                         <li className="horizontal-nav__item">
-                            {/* <Link to="/" className="horizontal-nav__link">Login</Link> */}
                                 {this.loginOrLogout()}
                                 <ul ref={this.accountSubMenuRef} className="horizontal-nav--sub-menu">
                                     <li>
                                         <Link to="/account/profile" className="horizontal-nav--sub-menu__item nav-link">Profile</Link>
                                     </li>
                                     <li>
-                                        <Logout class_name="horizontal-nav--sub-menu__item" showAccountMenu={() => this.showAccountSubMenu()} />
+                                        {this.logoutButton()}
                                     </li>
                                 </ul>
                         </li>

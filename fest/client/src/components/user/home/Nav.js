@@ -4,7 +4,6 @@ import {connect} from  'react-redux'
 
 import Logout from '../auth/Logout'
 import auth from '../../../auth'
-import {Alert} from '../../Alert'
 
 
 class Nav extends React.Component{
@@ -32,26 +31,10 @@ class Nav extends React.Component{
     loginOrLogout = () => {
         
         if(!auth.isAuthenticated())
-            return <a href="#modal-login" onClick={(e) => this.displayLogin(e)}  className="nav__link">login</a>
+            return <Link to="/login" className="nav__link">Login</Link>
+
 
         return <Link to="#" onClick={(e) => this.showAccountMenu(e)} className="nav__link dropdown__btn" >Account</Link>
-    }
-
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo){
-            return(
-                <div id="alert-login"><Alert message="Login successful" containerId="#alert-login" alertType={"info"} /></div>
-            );
-        }
-        if(alertErr){
-            return(
-                <div id="alert-login"><Alert message="Unable to login" containerId="#alert-login" alertType={"error"} /></div>
-            );
-        }
-
-        return<div id="alert-login"><Alert message="Unable to login" containerId="#alert-login" alertType={"error"} /></div>;
-        
     }
 
 
@@ -115,7 +98,6 @@ class Nav extends React.Component{
                     </nav>
                 </div>
 
-                {this.props.isLogin === false?<Alert message="Logout successful" containerId="alert-logout" alertType={"info"} />:""}
             </>
         );
     }

@@ -1,4 +1,4 @@
-.alert{
+.toast{
     position: fixed;
     top: 3rem;
     left: 1rem;
@@ -46,19 +46,19 @@
     padding: 0 2rem;
 }
 
-.alert--info{
+.toast--info{
     &::after{
-        background-color: $color-alert-info;
+        background-color: $color-toast-info;
     }
 }
 
-.alert--error{
+.toast--error{
     &::after{
-        background-color: $color-alert-error;
+        background-color: $color-toast-error;
     }
 }
 
-.alert--warning{
+.toast--warning{
     &::after{
         background-color: yellow;
     }
@@ -66,12 +66,12 @@
 
 .close--info{
     &:hover{
-        color: $color-alert-info;
+        color: $color-toast-info;
     }
 }
 
 .close--error{
     &:hover{
-        color: $color-alert-error;
+        color: $color-toast-error;
     }
 }

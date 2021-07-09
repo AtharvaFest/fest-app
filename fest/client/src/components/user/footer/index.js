@@ -10,7 +10,7 @@ const openInNewTab = (url) => {
 
 const Footer = function () {
   return (
-    <div className="footer_container">
+    <div className="footer_container" id="footer">
       <footer className="footer">
         <div className="col_sm_12 col_md_12 col_lg_6 footer_about">
           About

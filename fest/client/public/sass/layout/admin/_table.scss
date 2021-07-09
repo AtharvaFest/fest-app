@@ -1,0 +1,29 @@
+.table{
+
+    &__content{
+        margin: 2rem 0;
+        background-color: $color-white--1;
+        padding: 2rem;
+        height: 80vh;
+        overflow: auto;
+    }
+
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.6rem;
+    background-color: $color-white--1;
+    padding-top: 1rem;
+    thead th {
+        border-bottom: 1px solid $color-grey-2;
+        text-align: start;
+        text-transform: uppercase;
+        padding: 1rem 0;
+        padding-right: 3rem;
+    } 
+    tbody td{
+        border-bottom: 1px solid $color-grey-2;
+        padding: .5rem 0;
+        padding-right: 3rem;
+    }
+    
+}

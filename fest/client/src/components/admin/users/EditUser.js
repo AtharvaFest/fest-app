@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {Field,reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 import {editUserAction} from '../../../action'
+import Toast,{ toast } from '../../toast'
 
 class EditUser extends React.Component {
     
@@ -27,9 +28,9 @@ class EditUser extends React.Component {
     //creating input field for Redux form Field component
     renderInput = ({input,label,type,meta}) => {
         return(
-            <div className="form__group--sign">
-                <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
-                <label htmlFor={label} className="form__label">{label}</label>
+            <div className="form-model__group">
+                <input {...input} type={type} placeholder={label} className="form-model__input" autoComplete="off" required/>
+                <label htmlFor={label} className="form-model__label">{label}</label>
             </div>
         );
     }
@@ -53,32 +54,34 @@ class EditUser extends React.Component {
         
         return(
             
-            <div className="form__group--sign">
-                <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off"/>
-                <span ref={this.eyeRef}  className="visible__eye-icon hide" onClick={this.hidePass}>
-                    <ion-icon name="eye" class="eye-icon"></ion-icon>
+            <div className="form-model__group">
+                <input {...input} type={type} placeholder={label} className="form-model__input" autoComplete="off"/>
+                <span ref={this.eyeRef} style={{position:'relative'}}  onClick={this.showPass}>
+                    <span className="eye__invisible__svg"></span>
                 </span>
-                <span  ref={this.eyeOffRef} className="invisible__eye-icon" onClick={this.showPass}>
-                    <ion-icon name="eye-off" class="eye-off-icon"></ion-icon>
+                <span  ref={this.eyeOffRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
+                    <span className="eye__visible__svg"></span>
                 </span>
-                <label htmlFor={label} className="form__label">{label}</label>
+                <label htmlFor={label} className="form-model__label">{label}</label>
                 
             </div>
         );
     }
 
      //On eye click making password filed 'password' type.
-     hidePass = (e) => {
+    hidePass = (e) => {
         this.setState({passwordStateSign:"password"});
-        this.eyeRef.current.classList.add('hide');
-        this.eyeOffRef.current.classList.remove('hide');
+        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
+        this.eyeOffRef.current.classList.add('hide');
+        this.eyeRef.current.classList.remove('hide');
     }
 
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordStateSign:"text"});
-        this.eyeOffRef.current.classList.add('hide');
-        this.eyeRef.current.classList.remove('hide');
+        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
+        this.eyeRef.current.classList.add('hide');
+        this.eyeOffRef.current.classList.remove('hide');
     }
 
 
@@ -97,7 +100,13 @@ class EditUser extends React.Component {
                 this.showAlertOnSubmit = true;
                 this.emptyError();
                 this.hideModal();
-                alert("User successfully edited");
+                // alert("User successfully edited");
+                this.props.toast({
+                    containerId: "toast-admin-edit-user",
+                    toastType: "info",
+                    message: "User successfully edited",
+                    showToast:true
+                }) 
             }).catch((err) => {
 
             if(err?.response?.data){//Show error message
@@ -118,7 +127,13 @@ class EditUser extends React.Component {
                     
                 })
             }else{
-                alert("Something went wrong!");
+                // alert("Something went wrong!");
+                this.props.toast({
+                    containerId: "toast-admin-edit-user",
+                    toastType: "error",
+                    message: "Something went wrong!",
+                    showToast:true
+                }) 
             }
         })
         
@@ -129,10 +144,10 @@ class EditUser extends React.Component {
         return ReactDOM.createPortal(
         <>
             <div className="modal" id="modal-editUser" onClick={this.hideModal}>
-                <div className="modal__container--sign" >
-                    <div className="modal__container--content-sign" onClick={(e) => e.stopPropagation()}>
-                        <h4 className="heading--4 form__heading--sign">Edit</h4>
-                        <div className="modal__form--sign">
+                <div className="modal__container" >
+                    <div className="modal__sub-container model__sub-container--edit-user" onClick={(e) => e.stopPropagation()}>
+                        <h4 className="heading--4 modal__heading">Edit</h4>
+                        <div className="modal__content">
                             <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
                                 <Field name="name" type="text" component={this.renderInput}  label="Name" />
 
@@ -150,12 +165,13 @@ class EditUser extends React.Component {
 
                                 <Field name="isAdmin" type="checkbox" component={this.renderCheckBox} label="isAdmin" />
                                 
-                                <button className="form__button" >edit user</button>
+                                <button className="form-model__btn" >edit user</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <Toast />
             </>,
             document.querySelector('#auth')
         );
@@ -177,7 +193,7 @@ const mapStateToProps = (state,ownProps) => {
 }
 
 
-export default connect(mapStateToProps,{editUserAction})(reduxForm({
+export default connect(mapStateToProps,{editUserAction,toast})(reduxForm({
     form:'editForm',
     enableReinitialize: true
 })(EditUser));

@@ -10,7 +10,7 @@ class User extends React.Component{
     deleteCount = 0;
     state = {editUserData:{},search:'',prePropsAllUsers:'',allUsers:''}
     
-    //on signup click, display signUp form and hide login form
+    //on edit click, display edit form
     displayEditUser = () => {
         const modalEditUser = document.querySelector(`#modal-editUser`);
         modalEditUser.classList.add('visible');
@@ -29,11 +29,7 @@ class User extends React.Component{
         this.deleteCount += 1;
         if(this.deleteCount < 4){
             if(window.confirm("Delete user?")){
-                this.props.deleteUserAction(id).then(()=>{
-
-                }).catch((err) =>{
-                    history.push('/adminlogin')
-                })
+                this.props.deleteUserAction(id);
             }
         }else{
             this.props.deleteUserAction(id);
@@ -43,11 +39,7 @@ class User extends React.Component{
 
     deleteAllUser = (id) => {
         if(window.confirm("Delete all user?")){
-            this.props.deleteAllUserAction().then(()=>{
-
-            }).catch((err) =>{
-                history.push('/adminlogin')
-            })
+            this.props.deleteAllUserAction();
         }
     }
 
@@ -71,7 +63,7 @@ class User extends React.Component{
                         <th>Mobile No.</th>
                         <th>admin</th>
                         <th>edit</th>
-                        <th><span onClick={this.deleteAllUser} className="delete__all-user">delete all</span></th>
+                        <th><span onClick={this.deleteAllUser} className="delete__all">delete all</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -156,23 +148,27 @@ class User extends React.Component{
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
-                        <div className="user__section">
-                            <div className="user__header-section">
-                                <h4 className="heading--4 user__heading">user</h4>
-                                <div className="search__container">   
+                        <div className="admin-panel__content">  
+                            <div className="admin-panel__navbar">
+                                <div className="admin-panel__navbar-right">
+                                    <Logout />
+                                </div>  
+                            </div>                        
+                            <div className="admin-panel__header-section">
+                                <div className="search__container"> 
                                     <input  type="text" placeholder="Search" value={this.state.search} onChange={(e)=>this.setState({search:e.target.value})} onKeyPress={this.enterPressed} className="search__box" />
                                     <span className="search__icon" onClick={this.searchHandler} >
                                         <ion-icon name="search-outline" ></ion-icon>
                                     </span>
                                 </div>
-                                <Logout />
-                            </div>                 
-                            <div className="user__container">
+                            </div>  
+                                        
+                            <div className="shadow__container">
                                     <div id="shadow_overlay_top"></div>
                                     <div id="shadow_overlay_left"></div>
                                     <div id="shadow_overlay_right"></div>
                                     <div id="shadow_overlay_bottom"></div>
-                                <div className="user__content">
+                                <div className="table__content">
                                     {this.getAllUsersData()}
                                 </div>
                             </div>

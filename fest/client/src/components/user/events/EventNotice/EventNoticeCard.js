@@ -7,6 +7,7 @@ function EventNoticeCard(props) {
         <img
           className="event_notice_main__message_icon_style"
           src={props.image}
+          alt="event notice"
         />
       </div>
       <div className="event_notice_main__message_text col_sm_10 col_md_10 col_lg_10">

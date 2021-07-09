@@ -1,12 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {Field,reduxForm} from 'redux-form'
+import {Field,reduxForm,reset} from 'redux-form'
 import {connect} from 'react-redux'
 
 import {signUpAction} from '../../../action'
-import {Alert} from '../../Alert'
+import Nav from "../nav";
+import Footer from "../footer";
+import AuthInstructions from './AuthInstructions';
+import Toast,{toast} from '../../toast'
+import afterNavigation from '../HOC/afterNavigation'
 
 class Sign extends React.Component {
+    showAlert = false
 
     state = {
         passwordStateSign:"password",
@@ -19,34 +23,28 @@ class Sign extends React.Component {
     }
     eyeRef = React.createRef()
     eyeOffRef = React.createRef()
-    showAlert = false
 
-    //Hiding Sign up modal on sucessful signup/submit form
-    hideModal = () => {
-        const modal = document.querySelector('#modal-signup');
-        modal.classList.remove('visible')
-    }
 
     //creating input field for Redux form Field component
-    renderInput = ({input,label,type,meta}) => {
+    renderInput = ({input,label,type}) => {
         return(
-            <div className="form__group--sign">
-                <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
+            <div className="form__group">
+                <input {...input} type={type} placeholder={label} className="form__input" autoComplete="off" required/>
                 <label htmlFor={label} className="form__label">{label}</label>
             </div>
         );
     }
 
     //creating input field for Redux form Field component
-    renderPassword = ({input,label,type,meta}) => {
+    renderPassword = ({input,label,type}) => {
         return(
             
-            <div className="form__group--sign">
-                <input {...input} type={type} placeholder={label} className="form__input--sign" autoComplete="off" required/>
-                <span ref={this.eyeRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
+            <div className="form__group">
+                <input {...input} type={type} placeholder={label} className="form__input" autoComplete="off" required/>
+                <span ref={this.eyeRef} style={{position:'relative'}}  onClick={this.showPass}>
                     <span className="eye__invisible__svg"></span>
                 </span>
-                <span  ref={this.eyeOffRef} style={{position:'relative'}} className="" onClick={this.showPass}>
+                <span  ref={this.eyeOffRef} style={{position:'relative'}} className="hide" onClick={this.hidePass}>
                     <span className="eye__visible__svg"></span>
                 </span>
                 <label htmlFor={label} className="form__label">{label}</label>
@@ -56,20 +54,27 @@ class Sign extends React.Component {
     }
 
      //On eye click making password filed 'password' type.
-     hidePass = (e) => {
+    hidePass = (e) => {
         this.setState({passwordStateSign:"password"});
         this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
-        this.eyeRef.current.classList.add('hide');
-        this.eyeOffRef.current.classList.remove('hide');
+        this.eyeOffRef.current.classList.add('hide');
+        this.eyeRef.current.classList.remove('hide');
     }
 
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordStateSign:"text"});
         this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
-        this.eyeOffRef.current.classList.add('hide');
-        this.eyeRef.current.classList.remove('hide');
+        this.eyeRef.current.classList.add('hide');
+        this.eyeOffRef.current.classList.remove('hide');
     }
+
+     //on Instructions click, display Instruction model
+     displayInstructions = (e) => {
+        const modalInstruction = document.querySelector(`#checkout-instruction`);
+        modalInstruction.classList.add('visible');
+    }
+    
 
 
     // Set error state variable to empty
@@ -83,23 +88,26 @@ class Sign extends React.Component {
     }
 
     onSubmit = (formValue) => {
-        this.showAlert = true;
-        this.setState({alertInfo:true,alertErr:false});
+        this.props.toast({
+            containerId: "toast-signup",
+            toastType: "info",
+            message: "Sign up in the process...",
+            showToast:true
+        }) 
+        this.emptyError();
         this.props.signUpAction(formValue).then(() => {
             alert("Check your email to activate email account");
-            this.emptyError();
-            for(const value in formValue){
-                formValue[value] = "";
-            }
-            this.hideModal();
         }).catch((err) => {
             if(err?.response?.status !== 200){
-                this.showAlert = true;
-                this.setState({alertInfo:false,alertErr:true});
+                this.props.toast({
+                    containerId: "toast-signup",
+                    toastType: "error",
+                    message: "Something went wrong!",
+                    showToast:true
+                })
             }
 
             if(err?.response?.data){//Show error message
-                this.emptyError();
                 err.response.data.errors.forEach((value)=>{
                     if(value.param === "mobileNumber"){
                         this.setState({errMobileNo:value.msg});
@@ -115,75 +123,82 @@ class Sign extends React.Component {
                     }
                     
                 })
-            }else{
-                this.showAlert = true;
-                this.setState({alertInfo:false,alertErr:true});
             }
 
         })
         
     }
 
-    // TOGGLE BETWEEN INFO AND ERROR ALERTS
-    alertPopup=(alertInfo,alertErr)=>{
-        if(alertInfo){
-            this.showAlert = false;
-            return(
-                <Alert message="Sign up in the process..." containerId="alert-signup" alertType={"info"} />
-            );
-        }
-        if(alertErr){
-            this.showAlert = false;
-            return(
-            <Alert message="Something went wrong!" containerId="alert-signup" alertType={"error"} />
-            );
-        }
-
-        return<></>;
-        
-    }
-
     render(){
-        return ReactDOM.createPortal(
+        return (
         <>
-            <div className="modal" id="modal-signup" onClick={this.hideModal}>
-                <div className="modal__container--sign" onClick={(e) => e.stopPropagation()}>
-                    <div className="modal__container--content-sign" >
-                        <h4 className="heading--4 form__heading--sign">sign up</h4>
-                        <div className="modal__form--sign">
-                            <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                                <Field name="name" type="text" component={this.renderInput} label="Name" />
+            <Nav />
+            <div className="after-navigation" style={this.props.minMainContentHeight}>
+                <div className="form__section" >
+                    <div className="intruction__model">
+                        <a href="#checkout-instruction" onClick={(e) => this.displayInstructions(e)}>
+                            Checkout Instructions
+                        </a>
+                    </div>
+                    <div className="form__main">
+                        <div className="form__container--form" >
+                                <div className="form__content">
+                                    <form className="form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                                        <Field name="name" type="text" component={this.renderInput} label="Name" />
 
-                                <div className="error_msg">{this.state.errMobileNo}</div>
-                                <Field name="mobileNumber" type="text" component={this.renderInput} label="Mobile No." />
+                                        <div className="error_msg">{this.state.errMobileNo}</div>
+                                        <Field name="mobileNumber" type="text" component={this.renderInput} label="Mobile No." />
+                                        
+                                        <div className="error_msg">{this.state.errUserName}</div>
+                                        <Field name="username" type="text" component={this.renderInput} label="Username" />
+                                        
+                                        <div className="error_msg">{this.state.errEmail}</div>
+                                        <Field name="email" type="email" component={this.renderInput} label="Email" />
+                                        
+                                        <div className="error_msg">{this.state.errPassword}</div>
+                                        <Field name="password" type={this.state.passwordStateSign} component={this.renderPassword} label="Password" />
+                                        
+                                        <button className="form__btn" >sign up</button>
+                                    </form>
+                                </div>
+                        </div>
+                        <div className="form__container--instructions">
+                            <div className="form__signup--instructions-background">
+
+                            </div>  
+                            <div className="form__signup--instructions">
                                 
-                                <div className="error_msg">{this.state.errUserName}</div>
-                                <Field name="username" type="text" component={this.renderInput} label="Username" />
-                                
-                                <div className="error_msg">{this.state.errEmail}</div>
-                                <Field name="email" type="email" component={this.renderInput} label="Email" />
-                                
-                                <div className="error_msg">{this.state.errPassword}</div>
-                                <Field name="password" type={this.state.passwordStateSign} component={this.renderPassword} label="Password" />
-                                
-                                <button className="form__button" >sign up</button>
-                            </form>
+                                <ul className="instruction__list">
+                                    <p>Instructions</p>
+                                    <li>
+                                        The students that are from Atharva college register using Atharva G-suit id
+                                    </li>
+                                    <li>
+                                        Students registered using Atharva email id will only be allowed to play intra-college events.
+                                    </li>
+                                    <li>Instruction for signup 1</li>
+                                    <li>Instruction for signup 1</li>
+                                </ul>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
             </div>
-            {this.alertPopup(this.state.alertInfo,this.state.alertErr)}
+            <Footer />
+            <AuthInstructions />
+            <Toast />
             </>
-            ,
-            document.querySelector('#auth')
         );
     }
 
 }
 
+const  afterSubmit = (_, dispatch) =>
+  dispatch(reset('signForm'));
 
-
-export default connect(null,{signUpAction})(reduxForm({
+export default connect(null,{signUpAction,toast})(reduxForm({
     form:'signForm',
-})(Sign));
+    onSubmitSuccess:afterSubmit
+})(afterNavigation(Sign)));
 

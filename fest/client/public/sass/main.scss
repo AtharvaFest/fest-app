@@ -8,21 +8,28 @@
 @import './base/typography';
 @import './base/utilities';
 
+@import './components/form';
+@import './components/svgs';
+
+@import './layout/modal';
 
 ////////////////////////////////////////////////////////
 //// USER
 
 @import "./components/user/about";
-@import './components/user/alert';
+@import './components/user/eventcards';
 @import './components/user/eventcarousel';
 @import  './components/user/sponsor';
+@import './components/user/toast';
 
 @import './layout/user/footer';
 @import './layout/user/header';
 @import './layout/user/homenavigation';
-@import './layout/user/modal';
 @import './layout/user/navigation';
 
+
+@import './pages/user/aboutus';
+@import './pages/user/auth';
 @import './pages/user/emailActivation';
 @import './pages/user/eventRegistration';
 @import './pages/user/eventDashboard'; 
@@ -30,7 +37,6 @@
 @import './pages/user/home';
 @import './pages/user/profile';
 @import './pages/user/resetPassword';
-@import './pages/user/aboutus';
 @import './pages/user/reactImageGallery';
 
 
@@ -38,11 +44,14 @@
 //// ADMIN
 
 @import './components/admin/logout';
+@import './components/admin/search';
+@import './components/admin/datepicker';
 
 @import './layout/admin/modal';
 @import './layout/admin/sidebar';
+@import './layout/admin/table';
 
 @import './pages/admin/adminpanel';
+@import './pages/admin/event';
 @import './pages/admin/login';
-@import './pages/admin/user';
 
