@@ -269,7 +269,8 @@ class CreateEvent extends React.Component {
             }
         })
 
-        if(formValue.prize < formValue.fee){
+        
+        if(Number.parseInt(formValue.prize) < Number.parseInt(formValue.fee)){
             if(!window.confirm("Prize Worth is less than Entry Fee.\nAre sure?")){
                 submitFlag=false
             }

@@ -1,13 +1,15 @@
 const express = require('express');
 
 const Event = require('../../models/admin/event');
+const adminAuth = require('../../middleware/adminAuth');
+
 
 const { body, validationResult } = require('express-validator'); // It is middleware use to validate the data eg (event,prize. etc)
 const router = new express.Router();
 
 
 
-router.post('/admin/event/create',[
+router.post('/admin/event/create',adminAuth,[
     body('event').not().isEmpty(), // if it return true then values are valid. therefore we are inverting value. 
     body('date').not().isEmpty(),
     body('fee').not().isEmpty(),
@@ -54,7 +56,7 @@ router.post('/admin/event/create',[
     
 });
 
-router.get('/admin/event/read',async (req,res) => {
+router.get('/admin/event/read',adminAuth,async (req,res) => {
     try{
         const allEvent = await Event.find({});
         res.send(allEvent);
@@ -66,7 +68,7 @@ router.get('/admin/event/read',async (req,res) => {
 
 
 
-router.delete('/admin/event/delete/:id',async (req,res) => {
+router.delete('/admin/event/delete/:id',adminAuth,async (req,res) => {
     try{
         const event = await Event.findByIdAndDelete(req.params.id);
         if (!event) {
@@ -80,7 +82,7 @@ router.delete('/admin/event/delete/:id',async (req,res) => {
 });
 
 // delete ALL events
-router.delete('/admin/allEvent',async(req,res)=>{
+router.delete('/admin/allEvent',adminAuth,async(req,res)=>{
     try{
         const event = await Event.deleteMany();
         if (!event) {
@@ -94,7 +96,7 @@ router.delete('/admin/allEvent',async(req,res)=>{
 });
 
 // get data of before updating event
-router.get('/admin/event/toUpdate/:id',async (req,res) => {
+router.get('/admin/event/toUpdate/:id',adminAuth,async (req,res) => {
     try{
         const event = await Event.findById(req.params.id);
         if (!event) {
@@ -107,7 +109,7 @@ router.get('/admin/event/toUpdate/:id',async (req,res) => {
 })
 
 //update the event
-router.patch('/admin/event/update/:id',[
+router.patch('/admin/event/update/:id',adminAuth,[
     body('event').not().isEmpty(), // if it return true then values are valid. therefore we are inverting value. 
     body('date').not().isEmpty(),
     body('fee').not().isEmpty(),

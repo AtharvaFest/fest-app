@@ -17,3 +17,5 @@ export const EVENT_DELETE = "EVENT_DELETE";
 export const EVENT_DELETE_ALL = "EVENT_DELETE_ALL";
 export const GET_EVENT_TO_UPDATE = "GET_EVENT_TO_UPDATE";
 export const EVENT_UPDATE = "EVENT_UPDATE";
+export const READ_GALLERY = "READ_GALLERY";
+export const ADD_PHOTO = "ADD_PHOTO";

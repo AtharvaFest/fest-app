@@ -1,0 +1,20 @@
+.gallery{
+    &__section{
+        padding: 3rem;
+        // width: 50rem;
+        background-color: $color-white--2;
+    }
+    &__container{
+        display: grid;
+        grid-gap: 4rem;
+        grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    }
+
+}
+
+
+.photo{
+    &__container{
+        width: 30rem;
+    }
+}
