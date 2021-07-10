@@ -14,8 +14,7 @@ import {
     EVENT_DELETE_ALL,
     GET_EVENT_TO_UPDATE,
     EVENT_UPDATE,
-    READ_GALLERY,
-    ADD_PHOTO
+    READ_GALLERY
 } from './type'
 
 ///////////////////////////////////////////////

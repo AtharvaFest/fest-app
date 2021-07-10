@@ -8,13 +8,18 @@ import AddPhoto from './AddPhoto';
 
 class AdminGallery extends React.Component{
 
+
+
     addPhoto = (e) => {
         const modalInstruction = document.querySelector(`#add-photo`);
         modalInstruction.classList.add('visible');
     }
 
     componentDidMount(){
-        this.props.readGalleryAction();
+        this.props.readGalleryAction()
+        .then(() => {
+            console.log("image retrived");
+        })
     }
 
     render(){
@@ -37,58 +42,9 @@ class AdminGallery extends React.Component{
                                         return <Photo photo={photo} key={index} />
                                     })
                                 }
-                                {/* <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div> */}
-                                {/* <div class="quote">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div>
-                                <div class="quote span-2">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div>
-                                <div class="quote">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div>
-                                <div class="quote">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div> */}
+                                {
+                                    console.log("render")
+                                }
                             </div>
                             
                         </div>
