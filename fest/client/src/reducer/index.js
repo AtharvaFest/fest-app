@@ -4,6 +4,7 @@ import {userAuthReducer,adminAuthReducer} from './authReducer';
 import {adminCRUDUserReducer} from './crudUserDataReducer';
 import {adminCRUDGalleryReducer} from './crudGalleryDataReducer';
 import {adminCRUDEventReducer,getEventUpdateReducer} from './crudEventDataReducer';
+import {adminCRUDEventRegReducer} from './crudEventRegDataReducer';
 import {toastReducer} from './toastReducer';
 
 export default combineReducers({
@@ -13,6 +14,7 @@ export default combineReducers({
     adminCRUDUserReducer,
     adminCRUDEventReducer,
     getEventUpdateReducer,
+    adminCRUDEventRegReducer,
     adminCRUDGalleryReducer,
     toastReducer
 });

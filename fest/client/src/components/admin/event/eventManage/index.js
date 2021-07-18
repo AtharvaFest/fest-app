@@ -75,7 +75,6 @@ class EventManage extends React.Component{
                                 <td>{event.fee}</td>
                                 <td>{event.prize}</td>
                                 <td>{event.discount}%</td>
-                                {/* <td><img src={`data:image/jpeg;base64,${this.toBase64(event.image)}`} /></td> */}
                                 <td>
                                     <a href={`/admin/event/edit/${event._id}`} className="edit-btn">
                                         <ion-icon name="create-outline"></ion-icon>

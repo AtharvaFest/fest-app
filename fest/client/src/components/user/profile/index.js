@@ -2,7 +2,7 @@ import React from "react";
 
 import Nav from "../nav";
 
-import mypdfImg from "./mypdf.jpg";
+// import mypdfImg from "./mypdf.jpg";
 
 // import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
@@ -88,7 +88,7 @@ const Profile = function () {
         id="mypdf"
       ></iframe> */}
       <div style={{ width: "500px", height: "500px" }}>
-        <img id="mypdf"/>
+        <img id="mypdf" alt="xyz" />
       </div>
     </div>
   );

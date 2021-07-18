@@ -14,6 +14,7 @@ import {
     EVENT_DELETE_ALL,
     GET_EVENT_TO_UPDATE,
     EVENT_UPDATE,
+    READ_EVENTREG,
     READ_GALLERY
 } from './type'
 
@@ -161,6 +162,15 @@ export const deleteAllEventAction = () => {
     return async (dispatch) => {
         await axios.delete(`/admin/allEvent`);
         dispatch({type:EVENT_DELETE_ALL});
+    }
+}
+
+// EVENT REGISTRATION
+export const readEventsRegAction = () => {
+    return async (dispatch) => {
+        
+        const response = await axios.get('/admin/eventReg/read');
+        dispatch({type:READ_EVENTREG,payload:response.data});
     }
 }
 
