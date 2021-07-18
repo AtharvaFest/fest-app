@@ -6,7 +6,12 @@
         grid-template-rows: 1fr;
     }
     &__content{
-        height: 40vh;
+        height: 60vh;
+
+        @media screen and (max-width: 600px){
+            height: 35vh;
+        }
+
         width: 100%;
         overflow: hidden;
         color: $color-white--1;
@@ -28,7 +33,6 @@
         grid-column: 1/1;
         animation: slide3 12s linear infinite;
     }
-
     &__content4{
         grid-row: 1/1;
         grid-column: 1/1;
@@ -99,7 +103,6 @@
         visibility: hidden;
     }
 }
-
 @keyframes slide3 {
     0%{
         visibility: hidden;
@@ -131,7 +134,7 @@
     }
 
     50%{
-        visibility: hidden;
+        visibility: hidden; 
     }
     
     75%{
@@ -142,38 +145,3 @@
     }
 }
 
-// @keyframes slide2 {
-//     0%{
-//         visibility: hidden;
-//     }
-    
-//     33%{
-//         visibility: hidden;
-//     }
-
-//     66%{
-//         visibility: visible;
-//     }
-    
-//     100%{
-//         visibility: hidden;
-//     }
-// }
-
-// @keyframes slide3 {
-//     0%{
-//         visibility: hidden;
-//     }
-    
-//     33%{
-//         visibility: hidden;
-//     }
-
-//     66%{
-//         visibility: hidden;
-//     }
-    
-//     100%{
-//         visibility: visible;
-//     }
-// }
