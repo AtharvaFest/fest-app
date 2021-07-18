@@ -61,6 +61,10 @@
             }
     }
 
+    &__select-input{
+        background-color: $color-white--1;
+    }
+
     &__input{
         padding: 1.2rem 2.5rem;
         width: 100%;
@@ -142,6 +146,16 @@
         display: grid;
         grid-template-columns:repeat(4,1fr);
         grid-template-rows: repeat(5,1fr);
+        @include respond(tab-port){
+            grid-template-columns:unset;
+            grid-template-rows: unset;
+        }
+    }
+
+    &__edit-form--content{
+        display: grid;
+        grid-template-columns:repeat(4,1fr);
+        grid-template-rows: repeat(6,1fr);
         @include respond(tab-port){
             grid-template-columns:unset;
             grid-template-rows: unset;

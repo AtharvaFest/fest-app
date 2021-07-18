@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
-import Sidebar from '../sidebar/Sidebar'
-import {createEventsAction,readEventsAction,deleteEventAction,deleteAllEventAction} from '../../../action'
-import Logout from '../auth/Logout'
-import history from '../../../history'
+import Sidebar from '../../sidebar/Sidebar'
+import {createEventsAction,readEventsAction,deleteEventAction,deleteAllEventAction} from '../../../../action'
+import Logout from '../../auth/Logout'
+import history from '../../../../history'
 
-class Event extends React.Component{
+class EventManage extends React.Component{
     deleteCount = 0;
     state = {search:'',prePropAllEvents:'',allEvents:''}
     
@@ -185,4 +185,4 @@ const mapStatetoProps = (state) => {
 }
 
  
-export default connect(mapStatetoProps,{createEventsAction,readEventsAction,deleteEventAction,deleteAllEventAction})(Event)
+export default connect(mapStatetoProps,{createEventsAction,readEventsAction,deleteEventAction,deleteAllEventAction})(EventManage)

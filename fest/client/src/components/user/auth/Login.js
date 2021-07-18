@@ -7,8 +7,8 @@ import Nav from "../nav";
 import Footer from "../footer";
 import AuthInstructions from './AuthInstructions'
 import {loginAction,forgotPasswordAction} from '../../../action'
-import history from  '../../../history'
-import Toast,{toast} from '../../toast'
+import history from  '../../../history';
+import Toast,{toast} from '../../toast';
 import afterNavigation from '../HOC/afterNavigation'
 
 class Login extends React.PureComponent {
@@ -67,7 +67,6 @@ class Login extends React.PureComponent {
     //On eye click making password filed 'password' type.
     hidePass = (e) => {
         this.setState({passwordState:"password"});
-        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }
@@ -75,7 +74,6 @@ class Login extends React.PureComponent {
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordState:"text"});
-        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
         this.eyeRef.current.classList.add('hide');
         this.eyeOffRef.current.classList.remove('hide');
     }
@@ -88,9 +86,6 @@ class Login extends React.PureComponent {
                 history.push("/event/registration")     
             }).catch((err) => {
                 if(err?.response?.status === 401){
-                    this.showAlert = true
-                    this.setState({alertInfo:false,alertErr:false});   
-                    this.setState({alertErr:true,alertInfo:false}); 
                     this.props.toast({
                         containerId: "toast-login",
                         toastType: "error",

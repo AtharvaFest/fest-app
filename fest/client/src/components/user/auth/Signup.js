@@ -10,8 +10,7 @@ import Toast,{toast} from '../../toast'
 import afterNavigation from '../HOC/afterNavigation'
 
 class Sign extends React.Component {
-    showAlert = false
-
+    
     state = {
         passwordStateSign:"password",
         alertInfo:false,
@@ -56,7 +55,6 @@ class Sign extends React.Component {
      //On eye click making password filed 'password' type.
     hidePass = (e) => {
         this.setState({passwordStateSign:"password"});
-        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
         this.eyeOffRef.current.classList.add('hide');
         this.eyeRef.current.classList.remove('hide');
     }
@@ -64,7 +62,6 @@ class Sign extends React.Component {
     //On eye click making password filed 'text' type.
     showPass = (e) => {
         this.setState({passwordStateSign:"text"});
-        this.setState({alertInfo:false,alertErr:false}); // before re-rendering setting it to initial state
         this.eyeRef.current.classList.add('hide');
         this.eyeOffRef.current.classList.remove('hide');
     }

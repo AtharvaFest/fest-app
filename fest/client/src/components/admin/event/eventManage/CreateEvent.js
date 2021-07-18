@@ -6,9 +6,9 @@ import DatePicker from "react-datepicker";
 import Dropzone from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 
-import {createEventsAction,readEventsAction} from '../../../action'
-import {extractImageFileExtensionFromBase64} from '../../../utils/imageFileUtils'
-import Toast,{toast} from '../../toast'
+import {createEventsAction,readEventsAction} from '../../../../action'
+import {extractImageFileExtensionFromBase64} from '../../../../utils/imageFileUtils'
+import Toast,{toast} from '../../../toast'
 
 import 'react-image-crop/dist/ReactCrop.css'
 

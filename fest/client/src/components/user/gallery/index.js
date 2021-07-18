@@ -11,10 +11,12 @@ class Gallery extends React.Component {
     return (
       <div>
         <Nav />
-        <div className="gallery_main after-navigation" style={this.props.minMainContentHeight}>
+        <div className="after-navigation" style={this.props.minMainContentHeight}>
+          <div className="gallery_photos_space"></div>
           <div className="gallery_photos_body">
             <ReactImageGallery />
           </div>
+          <div className="gallery_photos_space"></div>
           <Footer />
         </div>
       </div>
