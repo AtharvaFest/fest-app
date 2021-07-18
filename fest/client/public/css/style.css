@@ -757,7 +757,6 @@ body {
   0% {
     visibility: hidden; }
   25% {
-<<<<<<< HEAD
     visibility: hidden; }
   50% {
     visibility: hidden; }
@@ -773,23 +772,6 @@ body {
     visibility: hidden; }
   50% {
     visibility: hidden; }
-=======
-    visibility: hidden; }
-  50% {
-    visibility: hidden; }
-  75% {
-    visibility: visible; }
-  100% {
-    visibility: hidden; } }
-
-@keyframes slide4 {
-  0% {
-    visibility: hidden; }
-  25% {
-    visibility: hidden; }
-  50% {
-    visibility: hidden; }
->>>>>>> a6eb0dd09c49206d4565420d4d8568933ce30904
   75% {
     visibility: hidden; }
   100% {
@@ -2033,6 +2015,34 @@ body {
 
 .profile__registered_events {
   margin: 20px 0; }
+
+.certificate__container {
+  position: relative;
+  margin: 20px;
+  width: 740px;
+  height: 520px;
+  font-family: 'Playfair Display'; }
+
+.certificate__winner_name {
+  position: absolute;
+  color: #d99468;
+  font-size: 80px;
+  top: 108px;
+  left: 25px; }
+
+.certificate__winner_game {
+  position: absolute;
+  color: #d99468;
+  font-size: 17px;
+  top: 235px;
+  left: 297px; }
+
+.certificate__coordinator_name {
+  position: absolute;
+  color: #d99468;
+  font-size: 17px;
+  top: 429px;
+  left: 448px; }
 
 .reset-password__container {
   height: 100vh;
@@ -4132,9 +4142,6 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
 
 .photo__container {
-<<<<<<< HEAD
-  width: 20rem; }
-=======
   width: 20rem;
   height: 20rem; }
 
@@ -4218,7 +4225,6 @@ body {
 input:hover + label,
 input:focus + label {
   transform: scale(1.02); }
->>>>>>> develop
 
 .admin-login__background {
   height: 100vh;
