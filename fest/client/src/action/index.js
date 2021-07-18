@@ -13,7 +13,9 @@ import {
     EVENT_DELETE,
     EVENT_DELETE_ALL,
     GET_EVENT_TO_UPDATE,
-    EVENT_UPDATE
+    EVENT_UPDATE,
+    READ_GALLERY,
+    ADD_PHOTO
 } from './type'
 
 ///////////////////////////////////////////////
@@ -163,6 +165,22 @@ export const deleteAllEventAction = () => {
     }
 }
 
+// GALLERY ACTION
+export const readGalleryAction = () => {
+    return async (dispatch) => {
+        
+        const response = await axios.get('/admin/gallery/read');
+        dispatch({type:READ_GALLERY,payload:response.data});
+    }
+}
+
+export const addPhotoAction = (formData) => {
+    return async (dispatch) => {
+        
+        const response = await axios.post('/admin/gallery/add',formData);
+        dispatch({type:READ_GALLERY,payload:response.data});
+    }
+}
 
 ////////////////////////////////////////////////////////////
 //////// OTHER ACTTIONS

@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fileupload = require("express-fileupload");
 
 require('./db/mongoose')
 
@@ -9,6 +10,7 @@ const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
+app.use(fileupload());
 
 ////////////////////////////
 //// USER ROUTES
@@ -21,10 +23,12 @@ app.use(userAuthRouter);
 const adminAuthRouter = require('./routers/admin/adminAuth');
 const crudUsersRouter = require('./routers/admin/crudUsers');
 const crudEventRouter = require('./routers/admin/crudEvent');
+const crudGalleryRouter = require('./routers/admin/crudGallery');
 
 app.use(adminAuthRouter);
 app.use(crudUsersRouter);
 app.use(crudEventRouter);
+app.use(crudGalleryRouter);
 
 app.listen(port,() => {
     console.log(`Server is up on port ${port}`);

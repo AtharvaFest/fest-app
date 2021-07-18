@@ -4090,6 +4090,18 @@ body {
   font-size: 1.4rem !important;
   border: none; }
 
+.gallery__section {
+  padding: 3rem;
+  background-color: #f7f7f7; }
+
+.gallery__container {
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); }
+
+.photo__container {
+  width: 30rem; }
+
 .admin-login__background {
   height: 100vh;
   background-color: #eee;
