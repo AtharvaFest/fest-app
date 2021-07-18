@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 
 
 const gallerySchema = mongoose.Schema({
+	name:{
+		type:String
+	},
 	photo:{
 		type:Buffer
 	}
