@@ -82,7 +82,7 @@ class Sidebar extends React.Component{
                                     </Link>
                                 </div>
                                 <div className="event-item--sub-menu__item">
-                                    <Link to="/event/reg" className="item">
+                                    <Link to="/admin/event/reg" className="item">
                                         <span>event reg.</span>
                                     </Link>
                                 </div>

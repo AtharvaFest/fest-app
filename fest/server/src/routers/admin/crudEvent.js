@@ -8,7 +8,6 @@ const { body, validationResult } = require('express-validator'); // It is middle
 const router = new express.Router();
 
 
-
 router.post('/admin/event/create',adminAuth,[
     body('event').not().isEmpty(), // if it return true then values are valid. therefore we are inverting value. 
     body('date').not().isEmpty(),

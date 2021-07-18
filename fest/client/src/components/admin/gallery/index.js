@@ -5,92 +5,71 @@ import Sidebar from '../sidebar/Sidebar';
 import Photo from './Photo';
 import {readGalleryAction} from '../../../action';
 import AddPhoto from './AddPhoto';
+import Logout from '../auth/Logout';
 
 class AdminGallery extends React.Component{
+
+
 
     addPhoto = (e) => {
         const modalInstruction = document.querySelector(`#add-photo`);
         modalInstruction.classList.add('visible');
     }
 
+    getAllGalleryData = () =>{
+
+        
+
+        if(this.props.photos === null) {
+            return (<div className="no-content">Loading...</div>);
+        }
+
+
+        if(this.props.photos.length === 0) {
+            return (<div className="no-content">No Photos</div>);
+        }
+
+        return(
+            this.props.photos.map((photo,index) => {
+                return <Photo photo={photo} key={index} />
+            })
+        );
+    }
+
     componentDidMount(){
-        this.props.readGalleryAction();
+        this.props.readGalleryAction()
+        .then(() => {
+            console.log("image retrived");
+        })
     }
 
     render(){
         return(
             <>
-                {/* {console.log(this.props.photos)} */}
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
-                        <div>
-                        <a href="#add-photo" onClick={(e) => this.addPhoto(e)}>
-                            Add Photo
-                        </a>
-                        </div>
-                        <div className="gallery__section">
-                            <div className="gallery__container">
-                                { 
-                                    this.props.photos === null ? '' :
-                                    this.props.photos.map((photo,index) => {
-                                        return <Photo photo={photo} key={index} />
-                                    })
-                                }
-                                {/* <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div>
-                                <div className="photo__container">
-                                    <img src="../../../img/head--2.webp" style={{width:'100%',height:'100%'}} alt='dj' />
-                                </div> */}
-                                {/* <div class="quote">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div>
-                                <div class="quote span-2">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div>
-                                <div class="quote">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div>
-                                <div class="quote">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nesciunt ullam itaque! Consequuntur, asperiores modi!</p>
-                                    <span>John Doe</span>
-                                </div> */}
+                        <div className="admin-panel__content">
+                            <div className="admin-panel__navbar">
+                                <div className="admin-panel__navbar-left">
+                                    <a href="#add-photo" className="add__photo" onClick={(e) => this.addPhoto(e)}>
+                                        Add Photo
+                                    </a>                                    
+                                </div> 
+                                <div className="admin-panel__navbar-right">                                   
+                                    <Logout />
+                                </div>  
                             </div>
-                            
+
+                            <div className="gallery__section">
+                                <div className="gallery__container">
+                                    { 
+                                        
+                                        this.getAllGalleryData()
+                                    }
+                                </div>
+                                
+                            </div>
                         </div>
                     </div>
                 </div>

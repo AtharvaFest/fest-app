@@ -6,9 +6,9 @@ import DatePicker from "react-datepicker";
 import Dropzone from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 
-import {getEventUpdateAction,eventUpdateAction,readEventsAction} from '../../../action'
-import {extractImageFileExtensionFromBase64} from '../../../utils/imageFileUtils'
-import Toast,{toast} from '../../toast'
+import {getEventUpdateAction,eventUpdateAction,readEventsAction} from '../../../../action'
+import {extractImageFileExtensionFromBase64} from '../../../../utils/imageFileUtils'
+import Toast,{toast} from '../../../toast'
 
 import 'react-image-crop/dist/ReactCrop.css'
 
@@ -63,6 +63,22 @@ class EditEvent extends React.Component {
             </div>
         );
     }
+
+    renderSelectInput = ({input,label,meta}) => {
+        return(
+            <div className="create-event__input--group">
+                {this.renderError(meta)}
+                {/* <input {...input} type={type} placeholder={label} className="create-event__input" autoComplete="off" required/> */}
+                <select {...input}  className="create-event__input create-event__select-input">
+                    <option value="true">Allow Registration</option>
+                    <option value="false">Don't Allow Registration</option>
+                </select>
+                <label htmlFor={label} className="create-event__label">{label}</label>
+            </div>
+        );
+    }
+
+    
 
     renderDate = ({input,label,meta}) => {
         return(
@@ -254,6 +270,7 @@ class EditEvent extends React.Component {
 
 
     onSubmit = async (formValue) => {
+        // console.log(formValue);
         formValue.image = this.state.croppedImage;
         let submitFlag = true;
         if(!formValue.image) {
@@ -283,7 +300,7 @@ class EditEvent extends React.Component {
                 this.props.toast({
                     containerId: "toast-create-event",
                     toastType: "info",
-                    message: "Event added",
+                    message: "Event updated",
                     showToast:true
                 })     
             }).catch((err) => {
@@ -371,14 +388,33 @@ class EditEvent extends React.Component {
                 <div className="create-event__container" >
                     <div>
                         <form className="create-event__form" onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                            <div className="create-event__form--content">
-                                <Field name="event" type="text" component={this.renderInput} label="Event" />
+                            <div className="create-event__edit-form--content">
+                                <Field 
+                                name="event" 
+                                type="text" 
+                                component={this.renderInput} 
+                                label="Event" 
+                                />
 
-                                <Field name="date" component={this.renderDate} label="Date" />
+                                <Field 
+                                name="date" 
+                                component={this.renderDate} 
+                                label="Date" 
+                                />
 
-                                <Field name="fee" type="text" component={this.renderInput} label="Entry Fee" />
+                                <Field 
+                                name="fee" 
+                                type="text" 
+                                component={this.renderInput} 
+                                label="Entry Fee" 
+                                />
 
-                                <Field name="prize" type="text" component={this.renderInput} label="Prize Worth" />
+                                <Field 
+                                name="prize" 
+                                type="text" 
+                                component={this.renderInput} 
+                                label="Prize Worth" 
+                                />
 
                                 <Field 
                                 name="discount" 
@@ -386,6 +422,18 @@ class EditEvent extends React.Component {
                                 component={this.renderInput} 
                                 label="Discount (e.g 10,20,5)" 
                                 />
+
+                                <Field 
+                                name="allowRegistration"
+                                component={this.renderSelectInput} 
+                                label="Registration status" 
+                                />      
+
+                                {/* <Field name="allowRegistration" className="create-event__input--group create-event__select-input" component="select">
+                                    <option value="true">Allow Registration</option>
+                                    <option value="false">Don't Allow Registration</option>
+                                </Field> */}
+
                                 {
                                     this.state.displayImageBlock ?
                                     <div className="create-event__form--image-container" >
@@ -467,7 +515,8 @@ const mapStatetoProps = (state) => {
                  moment(new Date(state.getEventUpdateReducer.getEventUpdate.date), "DD MM YYYY") : '',
             fee:state.getEventUpdateReducer.getEventUpdate.fee,
             prize:state.getEventUpdateReducer.getEventUpdate.prize,
-            discount:state.getEventUpdateReducer.getEventUpdate.discount
+            discount:state.getEventUpdateReducer.getEventUpdate.discount,
+            allowRegistration:state.getEventUpdateReducer.getEventUpdate.allowRegistration
         }
     }
 }

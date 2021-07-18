@@ -4,14 +4,14 @@ import Nav from "../nav";
 
 import mypdfImg from "./mypdf.jpg";
 
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+// import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
-const createPDF = async (name) => {
-    const existingPdfBytes = await fetch("./mypdf.pdf").then((res) =>
-      res.arrayBuffer()
-    );
+// const createPDF = async (name) => {
+//     const existingPdfBytes = await fetch("./mypdf.pdf").then((res) =>
+//       res.arrayBuffer()
+//     );
 
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    // const pdfDoc = await PDFDocument.load(existingPdfBytes);
   //   pdfDoc.registerFontkit(fontkit);
 
   //   //get font
@@ -28,9 +28,9 @@ const createPDF = async (name) => {
   // ctx.drawImage(mypdfImg, 0, 0);
   // const urii = await canvas.toDataURL("image/jpeg");
 
-  const uri = await pdfDoc.saveAsBase64({ dataUri: true });
+  // const uri = await pdfDoc.saveAsBase64({ dataUri: true });
 
-  document.querySelector("mypdf").src = uri;
+  // document.querySelector("mypdf").src = uri;
   //   // Embed our custom font in the document
   //   const SanChezFont = await pdfDoc.embedFont(fontBytes);
 
@@ -46,7 +46,7 @@ const createPDF = async (name) => {
   //     font: SanChezFont,
   //     color: rgb(217, 148, 104),
   //   });
-};
+// };
 
 const Profile = function () {
   return (
@@ -81,7 +81,7 @@ const Profile = function () {
           </div>
         </section>
       </div>
-      <button onClick={() => createPDF("rahul")}>button</button>
+      <button >button</button>
       {/* <iframe
         title="pdf"
         style={{ width: "500px", height: "500px" }}

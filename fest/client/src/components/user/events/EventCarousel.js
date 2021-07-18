@@ -22,6 +22,10 @@ const EventCarousel = function() {
                     <img src="../../../img/football.webp" alt="Event-4"  className="event-img"/>
                     <div className="image-shade">&nbsp;</div>
                 </div>
+                <div className="image__content image__content4">
+                    <img src="../../../img/head--1.webp" alt="Event-4"  className="event-img"/>
+                    <div className="image-shade">&nbsp;</div>
+                </div>
             </div>            
         </>
     );
