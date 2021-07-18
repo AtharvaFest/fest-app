@@ -49,24 +49,6 @@ class AdminGallery extends React.Component{
                 <div className="admin-panel__container">
                     <Sidebar />
                     <div className="admin-panel__section">
-<<<<<<< HEAD
-                        <div>
-                        <a href="#add-photo" onClick={(e) => this.addPhoto(e)}>
-                            Add Photo
-                        </a>
-                        </div>
-                        <div className="gallery__section">
-                            <div className="gallery__container">
-                                { 
-                                    this.props.photos === null ? '' :
-                                    this.props.photos.map((photo,index) => {
-                                        return <Photo photo={photo} key={index} />
-                                    })
-                                }
-                                {
-                                    console.log("render")
-                                }
-=======
                         <div className="admin-panel__content">
                             <div className="admin-panel__navbar">
                                 <div className="admin-panel__navbar-left">
@@ -87,7 +69,6 @@ class AdminGallery extends React.Component{
                                     }
                                 </div>
                                 
->>>>>>> develop
                             </div>
                         </div>
                     </div>
