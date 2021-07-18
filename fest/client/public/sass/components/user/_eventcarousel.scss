@@ -6,7 +6,12 @@
         grid-template-rows: 1fr;
     }
     &__content{
-        height: 40vh;
+        height: 60vh;
+
+        @media screen and (max-width: 600px){
+            height: 35vh;
+        }
+
         width: 100%;
         overflow: hidden;
         color: $color-white--1;
@@ -16,17 +21,22 @@
     &__content1{
         grid-row: 1/1;
         grid-column: 1/1;
-        animation: slide1 9s linear infinite;
+        animation: slide1 12s linear infinite;
     }
     &__content2{
         grid-row: 1/1;
         grid-column: 1/1;
-        animation: slide2 9s linear infinite;
+        animation: slide2 12s linear infinite;
     }
     &__content3{
         grid-row: 1/1;
         grid-column: 1/1;
-        animation: slide3 9s linear infinite;
+        animation: slide3 12s linear infinite;
+    }
+    &__content4{
+        grid-row: 1/1;
+        grid-column: 1/1;
+        animation: slide4 12s linear infinite;
     }
 }
 
@@ -57,16 +67,19 @@
         visibility: visible;
     }
     
-    33%{
-        visibility: hidden;
+    25%{
+        visibility: visible;
     }
 
-    66%{
+    50%{
         visibility: hidden;
     }
     
+    75%{
+        visibility: hidden;
+    }
     100%{
-        visibility: visible;
+        visibility: hidden;
     }
 }
 
@@ -75,32 +88,58 @@
         visibility: hidden;
     }
     
-    33%{
+    25%{
         visibility: hidden;
     }
 
-    66%{
+    50%{
         visibility: visible;
     }
     
+    75%{
+        visibility: hidden;
+    }
     100%{
         visibility: hidden;
     }
 }
-
 @keyframes slide3 {
     0%{
         visibility: hidden;
     }
     
-    33%{
+    25%{
         visibility: hidden;
     }
 
-    66%{
+    50%{
         visibility: hidden;
     }
     
+    75%{
+        visibility: visible;
+    }
+    100%{
+        visibility: hidden;
+    }
+}
+
+@keyframes slide4 {
+    0%{
+        visibility: hidden;
+    }
+    
+    25%{
+        visibility: hidden;
+    }
+
+    50%{
+        visibility: hidden; 
+    }
+    
+    75%{
+        visibility: hidden;
+    }
     100%{
         visibility: visible;
     }
