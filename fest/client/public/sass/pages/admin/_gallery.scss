@@ -1,10 +1,6 @@
 .gallery{
     &__section{
-<<<<<<< HEAD
-        padding: 3rem;
-=======
         padding: 3rem 0;
->>>>>>> develop
         background-color: $color-white--2;
     }
     &__container{
@@ -12,18 +8,15 @@
         grid-row-gap: 2rem;
         grid-column-gap: 1rem;
         grid-template-columns: repeat(auto-fit,minmax(20rem,1fr));
-    }
+    } 
 
-}
+} 
 
 
 .photo{
     &__container{
         width: 20rem;
-<<<<<<< HEAD
-=======
         height: 20rem;
->>>>>>> develop
     }
 }
 .add{

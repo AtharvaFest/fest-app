@@ -1,6 +1,6 @@
 const express = require('express');
-const cors = require('cors');
-const fileupload = require("express-fileupload");
+// const cors = require('cors');
+// const fileupload = require("express-fileupload");
 
 require('./db/mongoose')
 
@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 // app.use(fileupload());
 app.use(express.static('public'));  
 app.use('/photos',express.static('photos'));

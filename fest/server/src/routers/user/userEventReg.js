@@ -7,22 +7,24 @@ const sgMail = require('../../sendgrid/index');
 
 const router = new express.Router();
 
-router.post('/eventReg/register',async (req,res) => {
+router.post('/eventReg/register',auth,async (req,res) => {
 
     try{
         const events = req.body.events;
-        const {user,userName,email,mobileNumber,discountedFee} = req.body
+        
+        const {name:user,username,email,mobileNumber} = req.user
 
         // Checking before register where registration is allowed or not
         // also check is user already register in event or not.
         for(let event of events){
 
             // is registration allowed check
-            let eventExist = await Event.findOne({event});
+            let eventExist = await Event.findOne({event:event});
+            // console.log(typeof(event));
+            console.log(!eventExist);
             const eventExistInRegistration = await EventRegistration.findOne({event});
 
             if(!eventExist) return res.status(400).send({error_message:'Something went wrong!'});
-            if(!eventExistInRegistration) return res.status(400).send({error_message:'Something went wrong!'});
 
             if(eventExist.allowRegistration === false){
                 return res.status(400).send({error_message:`Registration is full for ${event}. Try other events`})
@@ -37,23 +39,30 @@ router.post('/eventReg/register',async (req,res) => {
                 return res.status(400).send({error_message:`Registration is full for the ${event}. Try other events`});
             }
 
-            // Is user registered check
-            for(let existingUser of eventExistInRegistration.users){
-                if(existingUser.user.userName === userName){
-                    return res.status(400).send({error_message:`You have already registered for the ${event} event.\n Retry registration with other events`});
-                }
-            };
+            if(eventExistInRegistration) {
+                // Is user registered check
+                for(let existingUser of eventExistInRegistration.users){
+                    if(existingUser.user.username === username){
+                        return res.status(400).send({error_message:`You have already registered for the ${event} event.\n Retry registration with other events`});
+                    }
+                };
+            }
 
         }
 
         
-        //Registration is done over here.
+        // //Registration is done over here.
+        console.log(events);
         for(let event of events){
+
             let eventExistInRegistration = await EventRegistration.findOne({event});
+            let eventExist = await Event.findOne({event});
+            let singleEventFee = ((eventExist.discount/100) * eventExist.fee);
+            const discountedFee = eventExist.fee - singleEventFee;
 
             const userDetails = {
                 user,
-                userName,
+                username,
                 email,
                 mobileNumber,
                 discountedFee
@@ -72,7 +81,7 @@ router.post('/eventReg/register',async (req,res) => {
         }
 
         const msg = {
-            to: req.body.email,
+            to: req.user.email,
             from: process.env.FROM_EMAIL,
             subject: 'Event Registration',
             html: `<p>You have successfully registered for all the following events</p>
@@ -83,7 +92,8 @@ router.post('/eventReg/register',async (req,res) => {
 
         sgMail.send(msg).then(()=>{
             return res.status(201).send({info_message:"You have successfully registered"});
-        }).catch(()=>{
+        }).catch((error)=>{
+            console.log(error)
             return res.status(400).send({error_message:"Something went wrong! Retry after some time."});
         })
     }catch(e){
@@ -92,7 +102,7 @@ router.post('/eventReg/register',async (req,res) => {
     
 })
 
-router.get('/eventReg/read',async (req,res) => {
+router.get('/eventReg/read',auth,async (req,res) => {
     try{
         let allEvent = await Event.find({});
         allEvent.forEach((event) => {

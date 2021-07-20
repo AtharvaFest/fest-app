@@ -15,6 +15,8 @@ import {
     GET_EVENT_TO_UPDATE,
     EVENT_UPDATE,
     READ_EVENTREG,
+    READ_EVENT_FOR_REG,
+    REG_EVENT,
     READ_GALLERY
 } from './type'
 
@@ -65,6 +67,21 @@ export const resetPasswordAction = (formValue) => {
         const currentURL = window.location.href.split('/');
         const token = currentURL[currentURL.length-1];
         await axios.patch('/reset_password',{...formValue,token});
+    }
+}
+
+// EVENT ACTION
+export const getEventsForReg = () => {
+    return async (dispatch) => {
+        const response = await axios.get('/eventReg/read');
+        dispatch({type:READ_EVENT_FOR_REG,payload:response.data});
+    }
+}
+
+export const registerEventAction = (events) => {
+    return async (dispatch) => {
+        const response = await axios.post('/eventReg/register',{events});
+        dispatch({type:REG_EVENT,payload:response.data});
     }
 }
 

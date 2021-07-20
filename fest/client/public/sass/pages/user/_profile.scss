@@ -33,3 +33,37 @@
 .profile__registered_events{
     margin: 20px 0;
 }
+
+//certificate design
+
+.certificate__container{
+    position: relative;
+    margin: 20px;
+    width: 740px;
+    height: 520px;
+    font-family: 'Playfair Display';
+}
+
+.certificate__winner_name{
+    position: absolute;
+    color: rgb(217, 148, 104);
+    font-size: 80px;
+    top: 108px;
+    left: 25px;
+}
+
+.certificate__winner_game{
+    position: absolute;
+    color: rgb(217, 148, 104);
+    font-size: 17px;
+    top: 235px;
+    left: 297px;
+}
+
+.certificate__coordinator_name{
+    position: absolute;
+    color: rgb(217, 148, 104);
+    font-size: 17px;
+    top: 429px;
+    left: 448px;    
+}

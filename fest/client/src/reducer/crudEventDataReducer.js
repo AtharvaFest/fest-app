@@ -3,13 +3,24 @@ import {
     EVENT_DELETE,
     EVENT_DELETE_ALL,
     GET_EVENT_TO_UPDATE,
-    EVENT_UPDATE
+    EVENT_UPDATE,
+    READ_EVENT_FOR_REG
 } from '../action/type'
 
 
 //////////////////////
 //USER
+const INITIAL_STATE ={allEventsForReg:null};
+export const userGetEventsReducer = (state=INITIAL_STATE,action) => {
 
+    switch(action.type){
+        case READ_EVENT_FOR_REG:
+            return {...state,allEventsForReg:action.payload}
+        default:
+            return state
+    }
+
+}
 
 
 
@@ -18,9 +29,9 @@ import {
 
 ///////////////////////
 //ADMIN
-const INITIAL_STATE ={allEvents:null}
+const INITIAL_EVENT_STATE ={allEvents:null}
 
-export const adminCRUDEventReducer = (state=INITIAL_STATE,action) => {
+export const adminCRUDEventReducer = (state=INITIAL_EVENT_STATE,action) => {
 
     switch(action.type){
         case READ_EVENT:

@@ -82,7 +82,7 @@ class EventReg extends React.Component{
                                    <strong>{eventReg.event}</strong><br/>
                                 </td>
                                 <td>{eventReg.users[0].user.user}</td>
-                                <td>{eventReg.users[0].user.userName}</td>
+                                <td>{eventReg.users[0].user.username}</td>
                                 <td>{eventReg.users[0].user.email}</td>
                                 <td>{eventReg.users[0].user.mobileNumber}</td>
                                 <td>{eventReg.users[0].user.discountedFee}</td>
