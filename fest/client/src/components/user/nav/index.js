@@ -40,10 +40,7 @@ class Nav extends React.Component {
         if(!auth.isAuthenticated())
             return <Link to="/login" className="horizontal-nav__link">Login</Link>
 
-        return <a href="#account" ref={this.accountItemRef} onClick={this.showAccountSubMenu} className="horizontal-nav__link nav-link" >
-                    Account
-                    <ion-icon name="chevron-down-outline"></ion-icon>
-                </a>
+        return <Logout class_name="horizontal-nav__link nav-link"  showAccountMenu={() => this.showAccountSubMenu()} />
     }
 
     componentDidMount(){
@@ -65,7 +62,7 @@ class Nav extends React.Component {
 
     logoutButton(){
         return(
-            <Logout class_name="horizontal-nav--sub-menu__item"  showAccountMenu={() => this.showAccountSubMenu()} />
+            <Logout class_name="horizontal-nav__link nav-link"  showAccountMenu={() => this.showAccountSubMenu()} />
         )
     }
 
@@ -118,9 +115,6 @@ class Nav extends React.Component {
                         <li className="horizontal-nav__item">
                                 {this.loginOrLogout()}
                                 <ul ref={this.accountSubMenuRef} className="horizontal-nav--sub-menu">
-                                    <li>
-                                        <Link to="/account/profile" className="horizontal-nav--sub-menu__item nav-link">Profile</Link>
-                                    </li>
                                     <li>
                                         {this.logoutButton()}
                                     </li>

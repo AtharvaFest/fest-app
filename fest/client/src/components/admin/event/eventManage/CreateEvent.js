@@ -13,8 +13,6 @@ import Toast,{toast} from '../../../toast'
 import 'react-image-crop/dist/ReactCrop.css'
 
 class CreateEvent extends React.Component {
-
-    
     acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif, image/webp'
     acceptedFileTypesArray = this.acceptedFileTypes.split(",").map((item) => {return item.trim()})
     imagePreviewCanvasRef = React.createRef()

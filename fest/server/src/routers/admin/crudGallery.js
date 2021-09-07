@@ -69,8 +69,6 @@ router.post('/admin/gallery/add',adminAuth,upload,async (req,res) => {
     }
 
 },(error, req, res, next) => {
-
-  console.log(error.message)
   if (error.message === 'File too large') {
     res.status(400).send({error: 'File too large. The file must be below 2MB!'});
   }

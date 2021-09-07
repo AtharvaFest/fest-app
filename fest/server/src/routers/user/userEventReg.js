@@ -5,14 +5,51 @@ const Event = require('../../models/admin/event');
 const auth = require('../../middleware/auth');
 const sgMail = require('../../sendgrid/index');
 
+const stripe = require("stripe")(
+    "sk_test_51JQTVkSEfiwwi2lnsj5BV8S9i8UYf8R4FuZQMWkxDL7VKwjVStGX7FpmqGNs12T3NVxvQvM6p9ahdmEYLOylMOb0002OMzUE6R"
+  );
+
+const { v4: uuid } = require("uuid");
+
 const router = new express.Router();
 
 router.post('/eventReg/register',auth,async (req,res) => {
 
-    try{
-        const events = req.body.events;
+    // try{
         
         const {name:user,username,email,mobileNumber} = req.user
+
+        const { price,token,events } = req.body;
+
+        const idempotencyKey = uuid();
+
+        await stripe.customers
+            .create({
+            email: token.email,
+            source: token.id,
+            })
+            .then((customer) => {
+            stripe.charges.create(
+                {
+                amount: price * 100,
+                currency: "inr",
+                customer: customer.id,
+                receipt_email: token.email,
+                shipping: {
+                    name: token.card.name,
+                    address: {
+                    country: token.card.address_country,
+                    },
+                },
+                },
+                { idempotencyKey }
+            );
+            })
+            .then((result) => {
+            })
+            .catch((error) => {
+                throw new Error(error);
+            });
 
         // Checking before register where registration is allowed or not
         // also check is user already register in event or not.
@@ -20,8 +57,6 @@ router.post('/eventReg/register',auth,async (req,res) => {
 
             // is registration allowed check
             let eventExist = await Event.findOne({event:event});
-            // console.log(typeof(event));
-            console.log(!eventExist);
             const eventExistInRegistration = await EventRegistration.findOne({event});
 
             if(!eventExist) return res.status(400).send({error_message:'Something went wrong!'});
@@ -52,7 +87,6 @@ router.post('/eventReg/register',auth,async (req,res) => {
 
         
         // //Registration is done over here.
-        console.log(events);
         for(let event of events){
 
             let eventExistInRegistration = await EventRegistration.findOne({event});
@@ -80,6 +114,8 @@ router.post('/eventReg/register',auth,async (req,res) => {
             }
         }
 
+        
+
         const msg = {
             to: req.user.email,
             from: process.env.FROM_EMAIL,
@@ -93,12 +129,11 @@ router.post('/eventReg/register',auth,async (req,res) => {
         sgMail.send(msg).then(()=>{
             return res.status(201).send({info_message:"You have successfully registered"});
         }).catch((error)=>{
-            console.log(error)
             return res.status(400).send({error_message:"Something went wrong! Retry after some time."});
         })
-    }catch(e){
-        return res.status(400).send({error_message:"Something went wrong! Retry after some time."});
-    }
+    // }catch(e){
+    //     return res.status(400).send({error_message:"Something went wrong! Retry after some time."});
+    // }
     
 })
 

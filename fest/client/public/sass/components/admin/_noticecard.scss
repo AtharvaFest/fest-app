@@ -1,0 +1,56 @@
+.notice__section{
+    padding: 5rem;
+    padding-top: 3rem;
+}
+
+.add__notice{
+    &--btn{
+        border: none;
+        background-color: $color-primary;
+        color: $color-white--1;
+        padding: 1rem;
+        border-radius: 5px;
+        font-size: 1.4rem;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    &--container{
+        padding: 0 5rem;
+        padding-top: 3rem;
+    }
+}
+
+.card__{
+    &container{
+        border: 1px solid $color-grey-2;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    &heading{
+        border-bottom: 1px solid $color-grey-2;
+        padding: .7rem .5rem;
+        background-color: #ececec;
+        border-radius: 1rem 1rem 0 0;
+        font-size: 2rem;
+        color: $color-primary;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &description{
+        padding: 1rem;
+        font-size: 1.4rem;
+    }
+}
+
+.delete_notice{
+    background-color: $color-toast-error;
+    border: none;
+    color: $color-white--1;
+    border-radius: 2px;
+    padding: 1rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+}

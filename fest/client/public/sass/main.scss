@@ -45,6 +45,7 @@
 //// ADMIN
 
 @import './components/admin/logout';
+@import './components/admin/noticecard';
 @import './components/admin/search';
 @import './components/admin/datepicker';
 
@@ -53,6 +54,7 @@
 @import './layout/admin/table';
 
 @import './pages/admin/adminpanel';
+@import './pages/admin/certificateForm';
 @import './pages/admin/event';
 @import './pages/admin/gallery';
 @import './pages/admin/login';

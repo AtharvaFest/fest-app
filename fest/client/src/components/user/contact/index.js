@@ -18,11 +18,20 @@ class Contact extends React.Component {
               <div className="contactus__main_form">
                 <div className="contactus__main_form_div">
                   <div className="contactus__main_form_heading">Contact Us</div>
-                  <input type="text" placeholder="Name" className="contactus__form_input"/>
-                  <input type="text" placeholder="Email" className="contactus__form_input"/>
-                  <input type="text" placeholder="Feedback" className="contactus__form_input"/>
+                  <div className="form__group">
+                    <input type="text" placeholder="Name" className="form__input"/>
+                    <label htmlFor="Name" className="form__label">Name</label>
+                  </div>
+                  <div className="form__group">
+                    <input type="text" placeholder="Email" className="form__input"/>
+                    <label htmlFor="Email" className="form__label">Email</label>
+                  </div>
+                  <div className="form__group">
+                    <input type="text" placeholder="Feedback" className="form__input"/>
+                    <label htmlFor="Feedback" className="form__label">Feedback</label>
+                  </div>
                   <div className="contactus__form_button">
-                    <button type="button"> Submit </button>
+                    <button type="button" className="form__btn"> Submit </button>
                   </div>
                 </div>
               </div>

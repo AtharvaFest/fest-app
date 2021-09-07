@@ -88,7 +88,6 @@ class AddPhoto extends React.Component {
                             <div className="modal__content">
                                 <div>
                                     <form onSubmit={this.onSubmit}>
-                                        {/* <input type="file" ref={this.fileRef} onChange={this.onFileChange} /> */}
                                         <div className="upload-photo__container">
                                             <div className="file-input__container">
                                                 <div className="file-input">

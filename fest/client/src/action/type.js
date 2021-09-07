@@ -22,3 +22,4 @@ export const ADD_PHOTO = "ADD_PHOTO";
 export const READ_EVENTREG = "READ_EVENTREG";
 export const READ_EVENT_FOR_REG = "READ_EVENT_FOR_REG";
 export const REG_EVENT = "REG_EVENT";
+export const READ_NOTICE = "READ_NOTICE";

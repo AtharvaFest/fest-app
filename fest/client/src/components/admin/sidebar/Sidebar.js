@@ -96,6 +96,12 @@ class Sidebar extends React.Component{
                             <span>notice</span>
                         </Link>
                     </div>
+                    <div className="sidebar__nav--items">
+                        <Link to="/admin/certificate" className="item">
+                            <span className="nav__icon"><ion-icon name="trophy-outline" /></span>
+                            <span>certificate</span>
+                        </Link>
+                    </div>
                 </div>
                 
                 

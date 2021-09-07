@@ -37,10 +37,7 @@ class AdminGallery extends React.Component{
     }
 
     componentDidMount(){
-        this.props.readGalleryAction()
-        .then(() => {
-            console.log("image retrived");
-        })
+        this.props.readGalleryAction();
     }
 
     render(){

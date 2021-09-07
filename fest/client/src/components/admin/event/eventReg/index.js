@@ -58,7 +58,7 @@ class EventReg extends React.Component{
         if(this.state.eventRegData.length === 0) {
             return (<div className="no-content">no event found</div>);
         }
-
+        // regDataExcludingFist = eventReg.users.splice
         return(
             <table className="table">
                 <thead>
@@ -78,7 +78,7 @@ class EventReg extends React.Component{
                         return(
                             <React.Fragment key={eventReg._id}>
                             <tr>
-                                <td rowSpan={eventReg.users.length+1} >
+                                <td rowSpan={eventReg.users.length} >
                                    <strong>{eventReg.event}</strong><br/>
                                 </td>
                                 <td>{eventReg.users[0].user.user}</td>
@@ -87,19 +87,21 @@ class EventReg extends React.Component{
                                 <td>{eventReg.users[0].user.mobileNumber}</td>
                                 <td>{eventReg.users[0].user.discountedFee}</td>
                             </tr>
+                            
                             {
-                                eventReg.users.map((user,index) => {
+
+                                eventReg.users.slice(1).map((user,index) => {
                                     return(
                                         <tr key={`${eventReg._id}${index}`} >
                                             <td>{user.user.user}</td>
-                                            <td>{user.user.userName}</td>
+                                            <td>{user.user.username}</td>
                                             <td>{user.user.email}</td>
                                             <td>{user.user.mobileNumber}</td>
                                             <td>{user.user.discountedFee}</td>
                                         </tr>
                                     )
                                     
-                                })
+                                }) 
                             }
                             
                             </React.Fragment>

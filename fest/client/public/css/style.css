@@ -2468,6 +2468,52 @@ body {
     background-color: #6b35a9;
     color: #fff; }
 
+.notice__section {
+  padding: 5rem;
+  padding-top: 3rem; }
+
+.add__notice--btn {
+  border: none;
+  background-color: #6b35a9;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  text-decoration: none;
+  cursor: pointer; }
+
+.add__notice--container {
+  padding: 0 5rem;
+  padding-top: 3rem; }
+
+.card__container {
+  border: 1px solid #bbb;
+  border-radius: 1rem;
+  margin-bottom: 2rem; }
+
+.card__heading {
+  border-bottom: 1px solid #bbb;
+  padding: .7rem .5rem;
+  background-color: #ececec;
+  border-radius: 1rem 1rem 0 0;
+  font-size: 2rem;
+  color: #6b35a9;
+  display: flex;
+  justify-content: space-between; }
+
+.card__description {
+  padding: 1rem;
+  font-size: 1.4rem; }
+
+.delete_notice {
+  background-color: #f22;
+  border: none;
+  color: #fff;
+  border-radius: 2px;
+  padding: 1rem;
+  font-size: 1.4rem;
+  cursor: pointer; }
+
 .search__container {
   grid-column: 2/2; }
 
@@ -3897,6 +3943,21 @@ body {
 .edit-btn {
   cursor: pointer;
   color: blue; }
+
+.cert_form_lable {
+  font-size: 1.6rem; }
+
+.cert-form {
+  width: 50rem; }
+
+.generate_btn {
+  background-color: #6b35a9;
+  color: #fff;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.6rem; }
 
 .create-event__section {
   background-image: linear-gradient(to bottom, #eee, #eee);

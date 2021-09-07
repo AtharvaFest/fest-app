@@ -17,7 +17,8 @@ import {
     READ_EVENTREG,
     READ_EVENT_FOR_REG,
     REG_EVENT,
-    READ_GALLERY
+    READ_GALLERY,
+    READ_NOTICE
 } from './type'
 
 ///////////////////////////////////////////////
@@ -80,7 +81,7 @@ export const getEventsForReg = () => {
 
 export const registerEventAction = (events) => {
     return async (dispatch) => {
-        const response = await axios.post('/eventReg/register',{events});
+        const response = await axios.post('/eventReg/register',{...events});
         dispatch({type:REG_EVENT,payload:response.data});
     }
 }
@@ -211,6 +212,28 @@ export const deletePhotoAction = (imagename) => {
     return async (dispatch) => {
         const response = await axios.delete(`/admin/gallery/delete/${imagename}`);
         dispatch({type:READ_GALLERY,payload:response.data});
+    }
+}
+
+export const addNoticeAction = (formData) => {
+    return async (dispatch) => {
+        const response = await axios.post('/admin/addNotice',formData);
+       dispatch({type:READ_NOTICE,payload:response.data});
+    }
+}
+
+export const readNoticeAction = () => {
+    return async (dispatch) => {
+        
+        const response = await axios.get('/admin/getNotice');
+        dispatch({type:READ_NOTICE,payload:response.data});
+    }
+}
+
+export const deleteNoticeAction = (id) => {
+    return async (dispatch) => {
+        const response = await axios.delete(`/admin/deleteNotice/${id}`);
+        dispatch({type:READ_NOTICE,payload:response.data});
     }
 }
 

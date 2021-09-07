@@ -11,10 +11,8 @@ function EventNoticeCard(props) {
         />
       </div>
       <div className="event_notice_main__message_text col_sm_10 col_md_10 col_lg_10">
-        {props.message}
-      </div>
-      <div className="event_notice_main__message_time">
-        {props.date_time}
+        <h3>{props.heading}</h3>
+        {props.description}
       </div>
     </div>
   );

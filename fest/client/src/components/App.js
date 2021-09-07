@@ -12,7 +12,7 @@ import EventDashboard from './user/events/EventDashboard';
 import EventNotice from './user/events/EventNotice';
 import About from './user/about';
 import Contact from './user/contact';
-import Profile from './user/profile';
+import Profile from './admin/certificate';
 import UserLogin from './user/auth/Login';
 import Signup from './user/auth/Signup';
 import EmailActivation from './user/auth/EmailActivation';
@@ -54,7 +54,6 @@ class App extends Component {
                         <Route path='/event/notice' exact component={EventNotice}  />
                         <Route path='/about' exact component={About}  />
                         <Route path='/contact' exact component={Contact}  />
-                        <ProtectedUserRoute path='/account/profile' exact component={Profile}  />
                         <Route path='/activate_email/:token' exact component={EmailActivation} />
                         <Route path='/reset_password/:token' exact component={ResetPassword} />
                         
@@ -69,7 +68,7 @@ class App extends Component {
                         <ProtectedAdminRoute path="/admin/event/edit/:id" exact  component={EditEvent} />
                         <ProtectedAdminRoute path="/admin/event/reg" exact  component={AdminEventReg} />
                         <ProtectedAdminRoute path="/admin/notice" exact  component={AdminNotice} />
-
+                        <Route path='/admin/certificate' exact component={Profile}  />
                         <Route path='*' exact component={()=>"404 Page not found"}  />
                     </Switch>
                 </Router>

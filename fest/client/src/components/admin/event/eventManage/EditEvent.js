@@ -270,7 +270,6 @@ class EditEvent extends React.Component {
 
 
     onSubmit = async (formValue) => {
-        // console.log(formValue);
         formValue.image = this.state.croppedImage;
         let submitFlag = true;
         if(!formValue.image) {

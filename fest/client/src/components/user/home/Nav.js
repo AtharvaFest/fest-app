@@ -34,7 +34,8 @@ class Nav extends React.Component{
             return <Link to="/login" className="nav__link">Login</Link>
 
 
-        return <Link to="#" onClick={(e) => this.showAccountMenu(e)} className="nav__link dropdown__btn" >Account</Link>
+        return <Logout class_name="nav__link dropdown__btn" showAccountMenu={() => this.showAccountMenu()} />
+
     }
 
 
@@ -89,7 +90,6 @@ class Nav extends React.Component{
                                 {this.loginOrLogout()}
                                 <div className="dropdown__container disappear" ref={this.dropdownAccountContainer}>
                                     <div className="dropdown__menu">
-                                        <Link to="/account/profile" className="dropdown__menu--list">Profile</Link>
                                         <Logout class_name="dropdown__menu--list" showAccountMenu={() => this.showAccountMenu()} />
                                     </div>
                                 </div>
